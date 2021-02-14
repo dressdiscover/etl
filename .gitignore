@@ -1,5 +1,6 @@
-/config/*.cfg
-!/config/tcmuseum.cfg
+/config/aws_site/*.cfg
+/config/pipeline/*.cfg
+!/config/pipeline/tcmuseum.cfg
 /data/ardensandbox/
 /data/costume_core_template/
 /data/costume_core_ontology/extracted/
