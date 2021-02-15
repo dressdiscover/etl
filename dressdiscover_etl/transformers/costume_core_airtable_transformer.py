@@ -7,12 +7,13 @@ from paradicms_etl.models.image_dimensions import ImageDimensions
 from paradicms_etl.models.object import Object
 from paradicms_etl.models.property import Property
 from paradicms_etl.models.rights import Rights
+from paradicms_etl.transformers._airtable_transformer import _AirtableTransformer
 from rdflib import URIRef
 
 from dressdiscover_etl.costume_core import CostumeCore
 
 
-class CostumeCoreAirtableTransformer(_Transformer):
+class CostumeCoreAirtableTransformer(_AirtableTransformer):
     # __IGNORE_FEATURE_RECORD_IDS = {
     #     # feature display
     #     "recI7sxKzQwM5YKhT",
@@ -39,11 +40,8 @@ class CostumeCoreAirtableTransformer(_Transformer):
     #     record: Dict
     #     term_records: Tuple[Dict, ...]
 
-    def __init__(
-        self, base_id: str, costume_core: Optional[CostumeCore] = None, **kwds
-    ):
-        _Transformer.__init__(self, **kwds)
-        self.__base_id = base_id
+    def __init__(self, costume_core: Optional[CostumeCore] = None, **kwds):
+        _AirtableTransformer.__init__(self, **kwds)
         self.__costume_core = (
             costume_core if costume_core is not None else CostumeCore()
         )
@@ -144,7 +142,7 @@ class CostumeCoreAirtableTransformer(_Transformer):
 
         for object_record in object_records:
             object_uri = URIRef(
-                AirtableExtractor.record_url(
+                self._record_url(
                     base_id=self.__base_id,
                     table=self.__OBJECTS_TABLE,
                     record_id=object_record["id"],
