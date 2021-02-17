@@ -17,5 +17,6 @@
 /data/uc_daap_vac/
 /data/union/
 /data/vccc/
+/data/vra_cams/
 *.pyc
 /venv/
