@@ -5,13 +5,17 @@ from typing import Dict, Generator, Tuple
 from paradicms_etl._model import _Model
 from paradicms_etl._transformer import _Transformer
 from paradicms_etl.models.collection import Collection
+from paradicms_etl.models.creative_commons_licenses import CreativeCommonsLicenses
+from paradicms_etl.models.dublin_core_property_definitions import (
+    DublinCorePropertyDefinitions,
+)
 from paradicms_etl.models.institution import Institution
 from paradicms_etl.models.object import Object
 from paradicms_etl.models.property import Property
-from paradicms_etl.models.property_definitions import PropertyDefinitions
 from paradicms_etl.models.rights import Rights
-from paradicms_etl.models.rights_value import RightsValue
-from paradicms_etl.utils.csv_utils import strip_csv_row
+from paradicms_etl.models.vra_core_property_definitions import (
+    VraCorePropertyDefinitions,
+)
 from rdflib import URIRef
 
 
@@ -31,16 +35,15 @@ class PennMuseumTransformer(_Transformer):
     )
 
     def transform(self, *, file_path: Path):
-        yield from PropertyDefinitions.as_tuple()
+        yield CreativeCommonsLicenses.BY
+        yield from DublinCorePropertyDefinitions.as_tuple()
+        yield from VraCorePropertyDefinitions.as_tuple()
 
         institution = Institution(
             name="Penn Museum",
             rights=Rights(
-                license=RightsValue(
-                    text="Creative Commons Attribution 3.0",
-                    uri="http://creativecommons.org/licenses/by/3.0/",
-                ),
-                statement=RightsValue(text="Copyright Penn Museum"),
+                license=URIRef("http://creativecommons.org/licenses/by/3.0/"),
+                statement="Copyright Penn Museum",
             ),
             uri=URIRef("http://penn.museum"),
         )
@@ -88,8 +91,9 @@ class PennMuseumTransformer(_Transformer):
         institution: Institution,
     ) -> Generator[_Model, None, None]:
         csv_row = {
-            key.encode("ascii", "ignore").decode("ascii"): value
-            for key, value in strip_csv_row(csv_row).items()
+            key.strip().encode("ascii", "ignore").decode("ascii"): value.strip()
+            for key, value in csv_row.items()
+            if key.strip() and value.strip()
         }
 
         def pop_multiple_values(key: str) -> Tuple[str, ...]:
@@ -112,22 +116,24 @@ class PennMuseumTransformer(_Transformer):
 
         properties = set()
         if description:
-            properties.add(Property(PropertyDefinitions.DESCRIPTION, description))
-        properties.add(Property(PropertyDefinitions.TITLE, object_name))
+            properties.add(
+                Property(DublinCorePropertyDefinitions.DESCRIPTION, description)
+            )
+        properties.add(Property(DublinCorePropertyDefinitions.TITLE, object_name))
 
         for key, property_definition in (
-            ("accession_credit_line", PropertyDefinitions.CONTRIBUTOR),
-            ("creator", PropertyDefinitions.CREATOR),
-            ("culture", PropertyDefinitions.CULTURAL_CONTEXT),
-            ("culture_area", PropertyDefinitions.SPATIAL),
-            ("date_made", PropertyDefinitions.DATE_CREATED),
-            ("date_made_early", PropertyDefinitions.EARLIEST_DATE),
-            ("date_made_late", PropertyDefinitions.LATEST_DATE),
-            ("material", PropertyDefinitions.MATERIAL),
-            ("object_number", PropertyDefinitions.IDENTIFIER),
-            ("period", PropertyDefinitions.TEMPORAL),
-            ("provenience", PropertyDefinitions.PROVENANCE),
-            ("technique", PropertyDefinitions.TECHNIQUE),
+            ("accession_credit_line", DublinCorePropertyDefinitions.CONTRIBUTOR),
+            ("creator", DublinCorePropertyDefinitions.CREATOR),
+            ("culture", DublinCorePropertyDefinitions.CULTURAL_CONTEXT),
+            ("culture_area", DublinCorePropertyDefinitions.SPATIAL),
+            ("date_made", DublinCorePropertyDefinitions.DATE_CREATED),
+            ("date_made_early", VraCorePropertyDefinitions.EARLIEST_DATE),
+            ("date_made_late", VraCorePropertyDefinitions.LATEST_DATE),
+            ("material", VraCorePropertyDefinitions.MATERIAL),
+            ("object_number", DublinCorePropertyDefinitions.IDENTIFIER),
+            ("period", DublinCorePropertyDefinitions.TEMPORAL),
+            ("provenience", DublinCorePropertyDefinitions.PROVENANCE),
+            ("technique", VraCorePropertyDefinitions.TECHNIQUE),
         ):
             for value in pop_multiple_values(key):
                 properties.add(Property(property_definition, value))
