@@ -24,9 +24,16 @@ class AntConcTxtLoader(_Loader):
                 for property_ in object_.properties:
                     if not isinstance(property_.value, Literal):
                         continue
-                    if property_.uri in (DublinCorePropertyDefinitions.DESCRIPTION,):
+                    if property_.uri in (
+                        DublinCorePropertyDefinitions.DESCRIPTION.uri,
+                    ):
                         descriptions.add(str(property_.value.toPython()))
                 if not descriptions:
+                    self._logger.warn("object %s has no description", object_.uri)
                     continue
 
-                txt_file.writelines([object_.uri] + list(descriptions) + [""])
+                lines = [str(object_.uri), object_.title]
+                lines.extend(descriptions)
+                lines.append("")
+                lines.append("")
+                txt_file.write("\n".join(lines))
