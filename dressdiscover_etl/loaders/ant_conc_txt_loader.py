@@ -9,7 +9,10 @@ from rdflib import Literal
 class AntConcTxtLoader(_Loader):
     def load(self, *, models):
         with open(
-            self._loaded_data_dir_path / "AntConc.txt", "w+", newline="\n"
+            self._loaded_data_dir_path / "AntConc.txt",
+            "w+",
+            encoding="utf-8",
+            newline="\n",
         ) as txt_file:
             for model in models:
                 if not isinstance(model, Object):
@@ -17,7 +20,7 @@ class AntConcTxtLoader(_Loader):
                 object_ = model
                 descriptions = set()
                 if object_.abstract is not None:
-                    descriptions.add(object.abstract)
+                    descriptions.add(object_.abstract)
                 for property_ in object_.properties:
                     if not isinstance(property_.value, Literal):
                         continue

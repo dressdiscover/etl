@@ -8,7 +8,7 @@ from paradicms_etl.transformers.luna_transformer import LunaTransformer
 class UcDaapVacTransformer(LunaTransformer):
     def transform(self, **kwds):
         yield CreativeCommonsLicenses.BY_NC_ND
-        yield from LunaTransformer.transform(**kwds)
+        yield from LunaTransformer.transform(self, **kwds)
 
     def _transform_institution(self, **kwds):
         institution = LunaTransformer._transform_institution(self, **kwds)

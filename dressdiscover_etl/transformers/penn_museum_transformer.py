@@ -124,7 +124,7 @@ class PennMuseumTransformer(_Transformer):
         for key, property_definition in (
             ("accession_credit_line", DublinCorePropertyDefinitions.CONTRIBUTOR),
             ("creator", DublinCorePropertyDefinitions.CREATOR),
-            ("culture", DublinCorePropertyDefinitions.CULTURAL_CONTEXT),
+            ("culture", VraCorePropertyDefinitions.CULTURAL_CONTEXT),
             ("culture_area", DublinCorePropertyDefinitions.SPATIAL),
             ("date_made", DublinCorePropertyDefinitions.DATE_CREATED),
             ("date_made_early", VraCorePropertyDefinitions.EARLIEST_DATE),

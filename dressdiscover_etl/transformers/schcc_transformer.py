@@ -39,7 +39,7 @@ class SchccTransformer(_Transformer):
             for csv_row in csv.DictReader(csv_file):
                 csv_row = {
                     key.strip(): value.strip()
-                    for key, value in csv_row
+                    for key, value in csv_row.items()
                     if key.strip() and value.strip()
                 }
                 if not csv_row:

@@ -48,7 +48,7 @@ class CostumeCoreOmekaClassicTransformer(OmekaClassicTransformer):
 
         for key, property_definition in (
             ("Category", DublinCorePropertyDefinitions.SUBJECT),
-            ("Culture", DublinCorePropertyDefinitions.CULTURAL_CONTEXT),
+            ("Culture", VraCorePropertyDefinitions.CULTURAL_CONTEXT),
             ("Date Earliest", VraCorePropertyDefinitions.EARLIEST_DATE),
             ("Date Latest", VraCorePropertyDefinitions.LATEST_DATE),
             ("Description Main", DublinCorePropertyDefinitions.DESCRIPTION),
