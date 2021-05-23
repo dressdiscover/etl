@@ -4,14 +4,17 @@ from typing import Dict, Generator, Optional
 
 from paradicms_etl._transformer import _Transformer
 from paradicms_etl.models.collection import Collection
+from paradicms_etl.models.dublin_core_property_definitions import (
+    DublinCorePropertyDefinitions,
+)
 from paradicms_etl.models.institution import Institution
 from paradicms_etl.models.object import Object
 from paradicms_etl.models.property import Property
 from paradicms_etl.models.property_definition import PropertyDefinition
-from paradicms_etl.models.property_definitions import PropertyDefinitions
 from paradicms_etl.models.rights import Rights
-from paradicms_etl.models.rights_value import RightsValue
-from paradicms_etl.utils.csv_utils import strip_csv_row
+from paradicms_etl.models.vra_core_property_definitions import (
+    VraCorePropertyDefinitions,
+)
 from rdflib import URIRef
 
 from dressdiscover_etl.costume_core import CostumeCore
@@ -25,15 +28,20 @@ class SchccTransformer(_Transformer):
         self.__costume_core = CostumeCore()
 
     def transform(self, *, file_path: Path):
-        yield from PropertyDefinitions.as_tuple()
+        yield from DublinCorePropertyDefinitions.as_tuple()
         yield from self.__costume_core.property_definitions
+        yield from VraCorePropertyDefinitions.as_tuple()
 
         collection = None
         institution = None
 
         with open(file_path, "r", encoding="utf-8") as csv_file:
             for csv_row in csv.DictReader(csv_file):
-                csv_row = strip_csv_row(csv_row)
+                csv_row = {
+                    key.strip(): value.strip()
+                    for key, value in csv_row
+                    if key.strip() and value.strip()
+                }
                 if not csv_row:
                     continue
 
@@ -120,7 +128,7 @@ class SchccTransformer(_Transformer):
         transform_csv_column(
             multi=False,
             csv_column_key="Alternative Title",
-            property_definition=PropertyDefinitions.ALTERNATIVE_TITLE,
+            property_definition=DublinCorePropertyDefinitions.ALTERNATIVE_TITLE,
         )
         csv_row.pop("Cataloguer With Date", None)  # Ignore
         transform_csv_column(
@@ -151,7 +159,7 @@ class SchccTransformer(_Transformer):
         transform_csv_column(
             multi=False,
             csv_column_key="Creator",
-            property_definition=PropertyDefinitions.CREATOR,
+            property_definition=DublinCorePropertyDefinitions.CREATOR,
         )
         transform_csv_column(
             multi=True,
@@ -161,11 +169,11 @@ class SchccTransformer(_Transformer):
         transform_csv_column(
             multi=False,
             csv_column_key="Date",
-            property_definition=PropertyDefinitions.DATE,
+            property_definition=DublinCorePropertyDefinitions.DATE,
         )
         for (date_csv_column_key, date_property_definition) in (
-            ("Date Earliest", PropertyDefinitions.EARLIEST_DATE),
-            ("Date Latest", PropertyDefinitions.LATEST_DATE),
+            ("Date Earliest", VraCorePropertyDefinitions.EARLIEST_DATE),
+            ("Date Latest", VraCorePropertyDefinitions.LATEST_DATE),
         ):
             date_value = csv_row.pop(date_csv_column_key, None)
             if not date_value:
@@ -175,7 +183,7 @@ class SchccTransformer(_Transformer):
         transform_csv_column(
             multi=False,
             csv_column_key="Description",
-            property_definition=PropertyDefinitions.DESCRIPTION,
+            property_definition=DublinCorePropertyDefinitions.DESCRIPTION,
         )
         csv_row.pop("Description Autofill", None)  # Created from other columns
         transform_csv_column(
@@ -202,7 +210,7 @@ class SchccTransformer(_Transformer):
         transform_csv_column(
             multi=False,
             csv_column_key="Identifier",
-            property_definition=PropertyDefinitions.IDENTIFIER,
+            property_definition=DublinCorePropertyDefinitions.IDENTIFIER,
         )
         # Skip Label
         transform_csv_column(
@@ -215,7 +223,7 @@ class SchccTransformer(_Transformer):
         transform_csv_column(
             multi=True,
             csv_column_key="Medium",
-            property_definition=PropertyDefinitions.MEDIUM,
+            property_definition=DublinCorePropertyDefinitions.MEDIUM,
         )
         transform_csv_column(
             multi=False,
@@ -230,7 +238,7 @@ class SchccTransformer(_Transformer):
         transform_csv_column(
             multi=True,
             csv_column_key="Region",
-            property_definition=PropertyDefinitions.SPATIAL,
+            property_definition=DublinCorePropertyDefinitions.SPATIAL,
         )
         # Shared Shelf fields
         csv_row.pop("SSID")
@@ -262,17 +270,17 @@ class SchccTransformer(_Transformer):
         transform_csv_column(
             multi=True,
             csv_column_key="Style Period",
-            property_definition=PropertyDefinitions.TEMPORAL,
+            property_definition=DublinCorePropertyDefinitions.TEMPORAL,
         )
         transform_csv_column(
             multi=False,
             csv_column_key="Subject",
-            property_definition=PropertyDefinitions.SUBJECT,
+            property_definition=DublinCorePropertyDefinitions.SUBJECT,
         )
         transform_csv_column(
             multi=False,
             csv_column_key="Title",
-            property_definition=PropertyDefinitions.TITLE,
+            property_definition=DublinCorePropertyDefinitions.TITLE,
         )
         type_ = csv_row.pop("Type")
         assert type_ == "Physical object", type_
@@ -295,13 +303,12 @@ class SchccTransformer(_Transformer):
 
         holding_institution = csv_row.pop("Holding Institution", None)
         rights = Rights(
-            holder=RightsValue(text=holding_institution)
-            if holding_institution is not None
-            else None,
-            statement=RightsValue(
-                text=csv_row.pop("Rights Holder"),
-                uri=URIRef(csv_row.pop("Rights")),
-            ),
+            holder=holding_institution if holding_institution is not None else None,
+            # statement=RightsValue(
+            #     text=csv_row.pop("Rights Holder"),
+            #     uri=URIRef(csv_row.pop("Rights")),
+            # ),
+            statement=csv_row.pop("Rights Holder"),
         )
 
         for key, value in csv_row.items():
@@ -315,13 +322,15 @@ class SchccTransformer(_Transformer):
                 return None
             return property_definition_uri_properties[0].value
 
-        object_title = get_first_property_value(PropertyDefinitions.TITLE.uri)
+        object_title = get_first_property_value(DublinCorePropertyDefinitions.TITLE.uri)
         if object_title is None:
             self._logger.warn("object %s has no title, ignoring", object_uri)
             return
 
         yield Object(
-            abstract=get_first_property_value(PropertyDefinitions.DESCRIPTION.uri),
+            abstract=get_first_property_value(
+                DublinCorePropertyDefinitions.DESCRIPTION.uri
+            ),
             collection_uris=(collection.uri,),
             institution_uri=institution.uri,
             properties=tuple(properties),
