@@ -1,7 +1,12 @@
 from typing import Tuple
 
+from paradicms_etl.models.dublin_core_property_definitions import (
+    DublinCorePropertyDefinitions,
+)
 from paradicms_etl.models.property import Property
-from paradicms_etl.models.property_definitions import PropertyDefinitions
+from paradicms_etl.models.vra_core_property_definitions import (
+    VraCorePropertyDefinitions,
+)
 from paradicms_etl.transformers.omeka_classic_transformer import OmekaClassicTransformer
 from rdflib import URIRef
 
@@ -20,6 +25,7 @@ class CostumeCoreOmekaClassicTransformer(OmekaClassicTransformer):
     def transform(self, **kwds):
         yield from self.__costume_core.property_definitions
         yield from OmekaClassicTransformer.transform(self, **kwds)
+        yield from VraCorePropertyDefinitions.as_tuple()
         for (
             costume_core_predicate_id,
             costume_core_terms,
@@ -41,13 +47,13 @@ class CostumeCoreOmekaClassicTransformer(OmekaClassicTransformer):
         properties = set()
 
         for key, property_definition in (
-            ("Category", PropertyDefinitions.SUBJECT),
-            ("Culture", PropertyDefinitions.CULTURAL_CONTEXT),
-            ("Date Earliest", PropertyDefinitions.EARLIEST_DATE),
-            ("Date Latest", PropertyDefinitions.LATEST_DATE),
-            ("Description Main", PropertyDefinitions.DESCRIPTION),
-            ("Source Identifier", PropertyDefinitions.IDENTIFIER),
-            ("Technique", PropertyDefinitions.TECHNIQUE),
+            ("Category", DublinCorePropertyDefinitions.SUBJECT),
+            ("Culture", DublinCorePropertyDefinitions.CULTURAL_CONTEXT),
+            ("Date Earliest", VraCorePropertyDefinitions.EARLIEST_DATE),
+            ("Date Latest", VraCorePropertyDefinitions.LATEST_DATE),
+            ("Description Main", DublinCorePropertyDefinitions.DESCRIPTION),
+            ("Source Identifier", DublinCorePropertyDefinitions.IDENTIFIER),
+            ("Technique", VraCorePropertyDefinitions.TECHNIQUE),
         ):
             for value in itm_element_text_tree.pop(key, []):
                 properties.add(Property(property_definition.uri, value))

@@ -1,14 +1,19 @@
+from itertools import chain
 from typing import Dict, Optional, Tuple
 
+from paradicms_etl.models.dublin_core_property_definitions import (
+    DublinCorePropertyDefinitions,
+)
 from paradicms_etl.models.property_definition import PropertyDefinition
-from paradicms_etl.models.property_definitions import PropertyDefinitions
+from paradicms_etl.models.vra_core_property_definitions import (
+    VraCorePropertyDefinitions,
+)
 from rdflib import URIRef
 
 from dressdiscover_etl.models.costume_core_predicate import CostumeCorePredicate
 from dressdiscover_etl.models.costume_core_predicates import COSTUME_CORE_PREDICATES
 from dressdiscover_etl.models.costume_core_term import CostumeCoreTerm
 from dressdiscover_etl.models.costume_core_terms import COSTUME_CORE_TERMS
-from dressdiscover_etl.namespace import CC
 
 
 class CostumeCore:
@@ -45,7 +50,10 @@ class CostumeCore:
 
         paradicms_property_definition_uris = {
             str(property_definition.uri)
-            for property_definition in PropertyDefinitions.as_tuple()
+            for property_definition in chain(
+                DublinCorePropertyDefinitions.as_tuple(),
+                VraCorePropertyDefinitions.as_tuple(),
+            )
         }
         # Exclude properties already defined by paradicms
         self.__property_definitions = tuple(
