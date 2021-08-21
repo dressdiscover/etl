@@ -34,8 +34,13 @@ class CostumeCoreOntologyPyLoader(_BufferingLoader):
             )
 
         with open(
-            models_dir_path / "costume_core_terms.py", "w+", encoding="ascii"
+            models_dir_path / "costume_core_terms.py",
+            "w+",
+            encoding="utf-8",
+            newline="\n",
         ) as terms_py_file:
+            print("# -*- coding: utf-8 -*-", file=terms_py_file)
+            print(file=terms_py_file)
             print(
                 "from .costume_core_description import CostumeCoreDescription",
                 file=terms_py_file,
@@ -49,10 +54,7 @@ class CostumeCoreOntologyPyLoader(_BufferingLoader):
                 filter(lambda model: isinstance(model, CostumeCoreTerm), models)
             )
             for term in terms:
-                try:
-                    print(f"{term.id} = {term}", file=terms_py_file)
-                except UnicodeEncodeError:
-                    pass
+                print(f"{term.id} = {term}", file=terms_py_file)
             print(
                 f"COSTUME_CORE_TERMS = ({', '.join(term.id for term in terms)})",
                 file=terms_py_file,

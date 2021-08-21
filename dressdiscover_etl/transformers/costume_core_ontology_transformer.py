@@ -1,6 +1,5 @@
 from itertools import chain
 from typing import Dict, List, Optional, Set, Tuple, Union
-from urllib.parse import quote
 
 from paradicms_etl._transformer import _Transformer
 from paradicms_etl.models.collection import Collection
@@ -90,8 +89,12 @@ class CostumeCoreOntologyTransformer(_Transformer):
         )
 
     def __parse_terms(
-        self, *, feature_records, feature_value_records
+        self, *, feature_records, feature_value_records, image_records
     ) -> Tuple[CostumeCoreTerm, ...]:
+        image_records_by_id = {
+            image_record["id"]: image_record for image_record in image_records
+        }
+
         terms = []
         for feature_value_record in feature_value_records:
             fields = feature_value_record["fields"]
@@ -121,6 +124,25 @@ class CostumeCoreOntologyTransformer(_Transformer):
                         break
             features = tuple(features)
 
+            image_record_id = fields.get("image_filename")
+            if image_record_id:
+                image_record_id = image_record_id[0]
+                assert image_record_id
+
+                image_record = image_records_by_id[image_record_id]
+                image_filename = image_record["fields"]["filename"]
+
+                image_rights = self.__parse_rights(
+                    feature_value_record["fields"], "image"
+                )
+            else:
+                self._logger.debug(
+                    "feature value record %s has no image_filename",
+                    feature_value_record["fields"]["id"],
+                )
+                image_filename = None
+                image_rights = None
+
             cc_uri = fields.get("CC_URI")
             inferred_uri = str(CC[fields["id"]])
             if cc_uri is None:
@@ -137,6 +159,8 @@ class CostumeCoreOntologyTransformer(_Transformer):
                 display_name_en=fields["display_name_en"],
                 features=features,
                 id=fields["id"],
+                image_filename=image_filename,
+                image_rights=image_rights,
                 uri=inferred_uri,
                 wikidata_id=fields.get("WikidataID"),
             )
@@ -169,6 +193,7 @@ class CostumeCoreOntologyTransformer(_Transformer):
 
         terms = self.__parse_terms(
             feature_records=feature_records,
+            image_records=image_records,
             feature_value_records=feature_value_records,
         )
         yield from terms
@@ -194,9 +219,6 @@ class CostumeCoreOntologyTransformer(_Transformer):
                 print(predicate_id, ", ".join(term.id for term in predicate_terms))
 
         yield from self.__transform_to_paradicms_models(
-            feature_records=feature_records,
-            feature_value_records=feature_value_records,
-            image_records=image_records,
             predicates=predicates,
             rights_licenses_records=rights_licenses_records,
             terms=terms,
@@ -205,9 +227,6 @@ class CostumeCoreOntologyTransformer(_Transformer):
     def __transform_to_paradicms_models(
         self,
         *,
-        feature_records,
-        feature_value_records,
-        image_records,
         predicates: Tuple[CostumeCorePredicate, ...],
         rights_licenses_records,
         terms: Tuple[CostumeCoreTerm, ...],
@@ -227,17 +246,6 @@ class CostumeCoreOntologyTransformer(_Transformer):
             uri=URIRef("http://www.ardenkirkland.com/costumecore/costumeCoreLogo.jpg"),
         )
 
-        feature_records_by_id = {
-            feature_record["fields"]["id"]: feature_record
-            for feature_record in feature_records
-        }
-        feature_value_records_by_id = {
-            feature_value_record["fields"]["id"]: feature_value_record
-            for feature_value_record in feature_value_records
-        }
-        image_records_by_id = {
-            image_record["id"]: image_record for image_record in image_records
-        }
         predicates_by_id = {predicate.id: predicate for predicate in predicates}
 
         available_licenses_by_uri = {
@@ -319,9 +327,10 @@ class CostumeCoreOntologyTransformer(_Transformer):
         for term in terms:
             # A term can belong to multiple predicates/collections, so yield them separately
             if not term.features:
+                self._logger.debug(
+                    "term %s does not belong to any features, skipping", term.id
+                )
                 continue  # Doesn't belong to any predicates/collections
-
-            feature_value_record = feature_value_records_by_id[term.id]
 
             term_predicates = tuple(
                 predicates_by_id[feature_id] for feature_id in term.features
@@ -370,29 +379,16 @@ class CostumeCoreOntologyTransformer(_Transformer):
             )
             yield object_
 
-            image_record_id = feature_value_record["fields"].get("image_filename")
-            if not image_record_id:
-                self._logger.debug(
-                    "feature value record %s has no image_filename",
-                    feature_value_record["fields"]["id"],
-                )
+            if term.image_filename is None:
                 continue
-            image_record_id = image_record_id[0]
-            assert image_record_id
+            assert term.image_rights is not None
 
-            image_record = image_records_by_id[image_record_id]
-            image_filename = image_record["fields"]["filename"]
-
-            image_rights = transform_to_paradicms_rights(
-                self.__parse_rights(feature_value_record["fields"], "image")
-            )
+            image_rights = transform_to_paradicms_rights(term.image_rights)
 
             original_image = Image(
                 depicts_uri=object_.uri,
                 rights=image_rights,
-                uri=URIRef(
-                    f"https://worksheet.dressdiscover.org/img/worksheet/full_size/{quote(image_filename)}"
-                ),
+                uri=URIRef(term.full_size_image_url),
             )
             yield original_image
 
@@ -401,9 +397,7 @@ class CostumeCoreOntologyTransformer(_Transformer):
                 exact_dimensions=ImageDimensions(height=200, width=200),
                 original_image_uri=original_image.uri,
                 rights=image_rights,
-                uri=URIRef(
-                    f"https://worksheet.dressdiscover.org/img/worksheet/thumbnail/{quote(image_filename)}"
-                ),
+                uri=URIRef(term.thumbnail_url),
             )
 
         # Yield only the licenses and rights statements we use
