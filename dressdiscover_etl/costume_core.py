@@ -66,6 +66,8 @@ class CostumeCore:
             if costume_core_predicate.uri not in paradicms_property_definition_uris
         )
 
+        costume_core
+
     @property
     def predicates(self) -> Tuple[CostumeCorePredicate, ...]:
         return self.__predicates
