@@ -15,6 +15,16 @@
         "type": "StringPropertyValue"
       },
       {
+        "label": "Color (main)",
+        "propertyUri": "https://w3id.org/costumeCore/ontology/colorMain",
+        "type": "StringPropertyValue"
+      },
+      {
+        "label": "Color (secondary)",
+        "propertyUri": "https://w3id.org/costumeCore/ontology/colorSecondary",
+        "type": "StringPropertyValue"
+      },
+      {
         "label": "Medium",
         "propertyUri": "http://purl.org/dc/terms/medium",
         "type": "StringPropertyValue"
