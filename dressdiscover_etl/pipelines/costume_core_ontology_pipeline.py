@@ -4,10 +4,7 @@ from configargparse import ArgParser
 from paradicms_etl._loader import _Loader
 from paradicms_etl._pipeline import _Pipeline
 from paradicms_etl.extractors.airtable_extractor import AirtableExtractor
-from paradicms_etl.image_archivers.s3_image_archiver import S3ImageArchiver
 from paradicms_etl.loaders.composite_loader import CompositeLoader
-from paradicms_etl.loaders.gui.gui_loader import GuiLoader
-from paradicms_etl.loaders.gui.s3_gui_deployer import S3GuiDeployer
 
 from dressdiscover_etl.loaders.costume_core_ontology_py_loader import (
     CostumeCoreOntologyPyLoader,
@@ -42,18 +39,18 @@ class CostumeCoreOntologyPipeline(_Pipeline):
                     CostumeCoreOntologyRdfFileLoader(
                         format="xml", pipeline_id=self.ID, **kwds
                     ),
-                    GuiLoader(
-                        gui="material-ui-union",
-                        deployer=S3GuiDeployer(
-                            s3_bucket_name="costumecoreontology.dressdiscover.org",
-                            **kwds,
-                        ),
-                        image_archiver=S3ImageArchiver(
-                            s3_bucket_name="dressdiscover-images", **kwds
-                        ),
-                        pipeline_id=self.ID,
-                        **kwds,
-                    ),
+                    # GuiLoader(
+                    #     gui="material-ui-union",
+                    #     deployer=S3GuiDeployer(
+                    #         s3_bucket_name="costumecoreontology.dressdiscover.org",
+                    #         **kwds,
+                    #     ),
+                    #     image_archiver=S3ImageArchiver(
+                    #         s3_bucket_name="dressdiscover-images", **kwds
+                    #     ),
+                    #     pipeline_id=self.ID,
+                    #     **kwds,
+                    # ),
                 ),
             )
 

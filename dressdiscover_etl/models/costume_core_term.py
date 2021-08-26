@@ -1,12 +1,14 @@
 from dataclasses import dataclass
+from typing import Optional, Tuple
+from urllib.parse import quote
+
 from paradicms_etl._model import _Model
 from rdflib import BNode, Graph, Literal, RDF, RDFS, URIRef
 from rdflib.namespace import DCTERMS, OWL
 from rdflib.resource import Resource
-from typing import Optional, Tuple
 
 from dressdiscover_etl.models.costume_core_description import CostumeCoreDescription
-from dressdiscover_etl.models.quote_repr_string import quote_repr_string
+from dressdiscover_etl.models.costume_core_rights import CostumeCoreRights
 
 
 @dataclass(frozen=True)
@@ -17,19 +19,29 @@ class CostumeCoreTerm(_Model):
     uri: str
     aat_id: Optional[str] = None
     features: Optional[Tuple[str, ...]] = None
+    image_filename: Optional[str] = None
+    image_rights: Optional[CostumeCoreRights] = None
     wikidata_id: Optional[str] = None
+
+    @property
+    def full_size_image_url(self) -> Optional[str]:
+        return (
+            f"https://worksheet.dressdiscover.org/img/worksheet/full_size/{quote(self.image_filename)}"
+            if self.image_filename
+            else None
+        )
 
     @property
     def label(self):
         return self.display_name_en
 
-    def __repr__(self):
-        if self.features:
-            features = f"({', '.join(quote_repr_string(feature) for feature in self.features)},)"
-        else:
-            features = None
-
-        return f"{self.__class__.__name__}(aat_id={quote_repr_string(self.aat_id)}, description={repr(self.description)}, display_name_en='''{self.display_name_en.encode('unicode-escape').decode('ascii')}''', features={features}, id='{self.id}', uri='{self.uri}', wikidata_id={quote_repr_string(self.wikidata_id)})"
+    @property
+    def thumbnail_url(self) -> Optional[str]:
+        return (
+            f"https://worksheet.dressdiscover.org/img/worksheet/thumbnail/{quote(self.image_filename)}"
+            if self.image_filename
+            else None
+        )
 
     def to_rdf(self, *, graph: Graph, **kwds) -> Resource:
         resource = graph.resource(URIRef(self.uri))
