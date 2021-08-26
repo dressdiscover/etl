@@ -1,3 +1,4 @@
+from pathlib import Path
 from typing import Optional
 
 from paradicms_etl._loader import _Loader
@@ -112,13 +113,26 @@ class VcccHighQualityPipeline(_Pipeline):
                 return None
             return object_
 
-    def __init__(self, *, omeka_api_key: str, loader: Optional[_Loader] = None, **kwds):
+    def __init__(
+        self,
+        *,
+        data_dir_path: Path,
+        omeka_api_key: str,
+        loader: Optional[_Loader] = None,
+        **kwds
+    ):
         if loader is None:
             loader = CompositeLoader(
                 loaders=(
-                    RdfFileLoader(pipeline_id=self.__ID, **kwds),
+                    RdfFileLoader(
+                        data_dir_path=data_dir_path, pipeline_id=self.__ID, **kwds
+                    ),
                     GuiLoader(
                         app="bootstrap-search",
+                        configuration_json_file_path=(
+                            data_dir_path / self.__ID / "configuration.json"
+                        ).absolute(),
+                        data_dir_path=data_dir_path,
                         deployer=S3Deployer(
                             s3_bucket_name="vccc.dressdiscover.org",
                             **kwds,
@@ -138,6 +152,7 @@ class VcccHighQualityPipeline(_Pipeline):
             self,
             extractor=OmekaClassicExtractor(
                 api_key=omeka_api_key,
+                data_dir_path=data_dir_path,
                 endpoint_url="https://vcomeka.com/vccc/",
                 pipeline_id=self.__ID,
                 **kwds,
