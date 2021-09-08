@@ -101,17 +101,13 @@ class VcccHighQualityPipeline(_Pipeline):
             work = VcccTransformer._transform_item(self, item=item, **kwds)
             if work is None:
                 return work
-            identifier_properties = [
-                property_
-                for property_ in work.properties
-                if property_.uri == DCTERMS.identifier
-            ]
-            if not identifier_properties:
-                return work
-            identifier = str(identifier_properties[0].value).rsplit("/", 1)[-1]
-            if identifier not in HIGH_QUALITY_OBJECT_DC_IDENTIFIERS:
-                return None
-            return work
+            for identifier in work.resource.objects(DCTERMS.identifier):
+                identifier = str(identifier.toPython()).rsplit("/", 1)[-1]
+                if identifier in HIGH_QUALITY_OBJECT_DC_IDENTIFIERS:
+                    return work
+                else:
+                    return None
+            return None
 
     def __init__(
         self,
