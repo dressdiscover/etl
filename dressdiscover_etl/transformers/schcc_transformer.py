@@ -8,7 +8,7 @@ from paradicms_etl.models.dublin_core_property_definitions import (
     DublinCorePropertyDefinitions,
 )
 from paradicms_etl.models.institution import Institution
-from paradicms_etl.models.object import Object
+from paradicms_etl.models.work import Work
 from paradicms_etl.models.property import Property
 from paradicms_etl.models.property_definition import PropertyDefinition
 from paradicms_etl.models.rights import Rights
@@ -73,7 +73,7 @@ class SchccTransformer(_Transformer):
         collection: Collection,
         csv_row: Dict[str, str],
         institution: Institution,
-    ) -> Generator[Object, None, None]:
+    ) -> Generator[Work, None, None]:
         int(csv_row["SSID"])
         object_uri = URIRef("urn:sharedshelf:schcc:" + csv_row["SSID"])
 
@@ -327,7 +327,7 @@ class SchccTransformer(_Transformer):
             self._logger.warn("object %s has no title, ignoring", object_uri)
             return
 
-        yield Object(
+        yield Work(
             abstract=get_first_property_value(
                 DublinCorePropertyDefinitions.DESCRIPTION.uri
             ),

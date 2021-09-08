@@ -8,7 +8,7 @@ from paradicms_etl.models.collection import Collection
 from paradicms_etl.models.image import Image
 from paradicms_etl.models.image_dimensions import ImageDimensions
 from paradicms_etl.models.institution import Institution
-from paradicms_etl.models.object import Object
+from paradicms_etl.models.work import Work
 from paradicms_etl.models.property import Property
 from paradicms_etl.models.property_definitions import PropertyDefinitions
 from paradicms_etl.models.rights import Rights
@@ -245,7 +245,7 @@ class VraCamsTransformer(_AirtableTransformer):
                 work_uri=work_uri,
             )
 
-        yield Object(
+        yield Work(
             abstract=work_abstract,
             collection_uris=(collection_uri,),
             institution_uri=institution_uri,

@@ -2,7 +2,7 @@ from paradicms_etl._loader import _Loader
 from paradicms_etl.models.dublin_core_property_definitions import (
     DublinCorePropertyDefinitions,
 )
-from paradicms_etl.models.object import Object
+from paradicms_etl.models.work import Work
 from rdflib import Literal
 
 
@@ -15,13 +15,13 @@ class AntConcTxtLoader(_Loader):
             newline="\n",
         ) as txt_file:
             for model in models:
-                if not isinstance(model, Object):
+                if not isinstance(model, Work):
                     continue
-                object_ = model
+                work = model
                 descriptions = set()
-                if object_.abstract is not None:
-                    descriptions.add(object_.abstract)
-                for property_ in object_.properties:
+                if work.abstract is not None:
+                    descriptions.add(work.abstract)
+                for property_ in work.properties:
                     if not isinstance(property_.value, Literal):
                         continue
                     if property_.uri in (
@@ -29,10 +29,10 @@ class AntConcTxtLoader(_Loader):
                     ):
                         descriptions.add(str(property_.value.toPython()))
                 if not descriptions:
-                    self._logger.warn("object %s has no description", object_.uri)
+                    self._logger.warn("work %s has no description", work.uri)
                     continue
 
-                lines = [str(object_.uri), object_.title]
+                lines = [str(work.uri), work.title]
                 lines.extend(descriptions)
                 lines.append("")
                 lines.append("")

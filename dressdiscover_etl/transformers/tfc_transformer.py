@@ -5,7 +5,7 @@ from xml.etree.ElementTree import ElementTree
 from paradicms_etl.models.collection import Collection
 from paradicms_etl.models.image import Image
 from paradicms_etl.models.institution import Institution
-from paradicms_etl.models.object import Object
+from paradicms_etl.models.work import Work
 from paradicms_etl.namespace import CMS, DCMITYPE, PROV
 from paradicms_etl.pipelines._transformer import _Transformer
 from rdflib import Graph, Literal, URIRef
@@ -48,7 +48,7 @@ class TfcTransformer(_Transformer):
     def _parse_record_metadata_collection_element(self, element, **kwds):
         assert element.text == "TXFC", element.text
 
-    def _parse_record_metadata_description_element(self, element, object_, **kwds):
+    def _parse_record_metadata_description_element(self, element, work, **kwds):
         text = element.text.strip()
         if not text:
             return
@@ -63,14 +63,14 @@ class TfcTransformer(_Transformer):
         #     else:
         #         object_builder.logger.warn(object_builder.log_marker, "unknown description qualifier '{}'", qualifier)
 
-        object_.resource.add(DCTERMS.description, Literal(text))
+        work.resource.add(DCTERMS.description, Literal(text))
 
     def _parse_record_metadata_format_element(self, element, **kwds):
         # WorkType will be picked up by resourceType
         assert element.text in ("image", "video"), element.text
 
     def _parse_record_metadata_identifier_element(
-        self, element, graph, object_, record_identifier, **kwds
+        self, element, graph, work, record_identifier, **kwds
     ):
         text = element.text.strip()
         if not text:
@@ -80,7 +80,7 @@ class TfcTransformer(_Transformer):
         if qualifier in ("ARK", "LOCAL-CONT-NO", "OTHER"):
             pass
         elif qualifier == "itemURL":
-            # Already used to derive object_.uri
+            # Already used to derive work.uri
             pass
         elif qualifier == "thumbnailURL":
             high_res_image = Image.create(
@@ -91,8 +91,8 @@ class TfcTransformer(_Transformer):
                     + "/m1/1/high_res/"
                 ),
             )
-            object_.resource.add(FOAF.depiction, high_res_image.uri)
-            high_res_image.resource.add(FOAF.depicts, object_.uri)
+            work.resource.add(FOAF.depiction, high_res_image.uri)
+            high_res_image.resource.add(FOAF.depicts, work.uri)
 
             med_res_image = Image.create(
                 graph=graph,
@@ -130,7 +130,7 @@ class TfcTransformer(_Transformer):
     def _parse_record_metadata_institution_element(self, element, **kwds):
         assert element.text == "UNTCVA", element.text
 
-    def _parse_record_metadata_language_element(self, element, object_, **kwds):
+    def _parse_record_metadata_language_element(self, element, work, **kwds):
         text = element.text.strip()
         if not text:
             return
@@ -138,7 +138,7 @@ class TfcTransformer(_Transformer):
         if text == "nol":
             return
 
-        object_.resource.add(DCTERMS.language, Literal(text))
+        work.resource.add(DCTERMS.language, Literal(text))
 
     def _parse_record_metadata_meta_element(self, element, record_identifier, **kwds):
         text = element.text.strip()
@@ -170,12 +170,12 @@ class TfcTransformer(_Transformer):
                 record_identifier,
             )
 
-    def _parse_record_metadata_note_element(self, element, object_, **kwds):
+    def _parse_record_metadata_note_element(self, element, work, **kwds):
         text = element.text.strip()
         if not text:
             return
 
-        object_.resource.add(RDFS.comment, Literal(text))
+        work.resource.add(RDFS.comment, Literal(text))
 
         # qualifier = element.attrib.get('qualifier', None)
         # if qualifier == 'digitalPreservation':
@@ -204,7 +204,7 @@ class TfcTransformer(_Transformer):
 
     #             object_builder.logger.warn(object_builder.log_marker, "ignoring unknown note qualifier '{}' on record {}", qualifier, object_builder.record_identifier)
 
-    def _parse_record_metadata_primarySource_element(self, element, object_, **kwds):
+    def _parse_record_metadata_primarySource_element(self, element, work, **kwds):
         text = element.text.strip()
         if not text:
             return
@@ -212,9 +212,9 @@ class TfcTransformer(_Transformer):
         value = int(text)
 
         if value == 1:  # Boolean
-            object_.resource.add(DCTERMS.type, Literal("Primary Source"))
+            work.resource.add(DCTERMS.type, Literal("Primary Source"))
 
-    def _parse_record_metadata_resourceType_element(self, element, object_, **kwds):
+    def _parse_record_metadata_resourceType_element(self, element, work, **kwds):
         text = element.text.strip()
         if not text:
             return
@@ -226,10 +226,10 @@ class TfcTransformer(_Transformer):
             "video": "MovingImage",
         }[text]
 
-        object_.resource.add(DCTERMS.type, getattr(DCMITYPE, dcmi_type))
+        work.resource.add(DCTERMS.type, getattr(DCMITYPE, dcmi_type))
 
     def _parse_record_metadata_rights_element(
-        self, element, object_, record_identifier, **kwds
+        self, element, work, record_identifier, **kwds
     ):
         text = element.text.strip()
         if not text:
@@ -246,7 +246,7 @@ class TfcTransformer(_Transformer):
             assert text == "public", text
         elif qualifier == "license":
             if text == "by-nc-nd":
-                object_.resource.add(DCTERMS.license, URIRef(self._LICENSE_URI))
+                work.resource.add(DCTERMS.license, URIRef(self._LICENSE_URI))
             else:
                 self._logger.warn(
                     "ignoring unknown license text '%s' on record %s",
@@ -254,9 +254,9 @@ class TfcTransformer(_Transformer):
                     record_identifier,
                 )
 
-            object_.resource.add(DCTERMS.rightsHolder, Literal(self._RIGHTS_HOLDER))
+            work.resource.add(DCTERMS.rightsHolder, Literal(self._RIGHTS_HOLDER))
         elif qualifier == "statement":
-            object_.resource.add(DCTERMS.rights, Literal(text))
+            work.resource.add(DCTERMS.rights, Literal(text))
         else:
             self._logger.warning(
                 "ignoring unknown rights qualifier '%s' on record %s",
@@ -264,7 +264,7 @@ class TfcTransformer(_Transformer):
                 record_identifier,
             )
 
-    def _parse_record_metadata_subject_element(self, element, object_, **kwds):
+    def _parse_record_metadata_subject_element(self, element, work, **kwds):
         text = element.text.strip()
         if not text:
             return
@@ -277,13 +277,13 @@ class TfcTransformer(_Transformer):
         #     else:
         #         if qualifier not in ('named_person', 'UNTL-BS',):
         #             self._logger.warning("unknown subject vocabulary '%s'", qualifier)
-        #     object_.resource.add(DCTERMS.subject, Literal(text))
+        #     work.resource.add(DCTERMS.subject, Literal(text))
         # else:
-        #     object_.resource.add(DCTERMS.subject, Literal(text))
-        object_.resource.add(DCTERMS.subject, Literal(text))
+        #     work.resource.add(DCTERMS.subject, Literal(text))
+        work.resource.add(DCTERMS.subject, Literal(text))
 
     def _parse_record_metadata_title_element(
-        self, element, object_, record_identifier, **kwds
+        self, element, work, record_identifier, **kwds
     ):
         text = element.text.strip()
         if not text:
@@ -301,7 +301,7 @@ class TfcTransformer(_Transformer):
                 "sorttitle": DCTERMS.alternative,
             }.get(qualifier)
             if predicate is not None:
-                object_.resource.add(predicate, Literal(text))
+                work.resource.add(predicate, Literal(text))
                 return
             self._logger.warn(
                 "unknown title qualifier '%s' on record {}",
@@ -309,7 +309,7 @@ class TfcTransformer(_Transformer):
                 record_identifier,
             )
 
-        object_.resource.add(DCTERMS.title, Literal(text))
+        work.resource.add(DCTERMS.title, Literal(text))
 
     def transform(self, record_etrees: Tuple[ElementTree, ...]) -> Graph:
         graph = Graph()
@@ -348,11 +348,11 @@ class TfcTransformer(_Transformer):
                 self._logger.warning("record %s has no itemURL", record_identifier)
                 continue
 
-            object_ = Object(graph=graph, uri=URIRef(item_url))
+            work = Work(graph=graph, uri=URIRef(item_url))
             # if record_etree_i + 1 == len(record_etrees):
-            #     object_.owner = URIRef("urn:example:nonextant")
+            #     work.owner = URIRef("urn:example:nonextant")
             # else:
-            object_.owner = CMS.inherit
+            work.owner = CMS.inherit
 
             for etree in metadata_etree:
                 assert etree.tag.startswith(self._UNTL_NS)
@@ -371,11 +371,11 @@ class TfcTransformer(_Transformer):
                 method(
                     element=etree,
                     graph=graph,
-                    object_=object_,
+                    work=work,
                     record_identifier=record_identifier,
                 )
 
-            collection.add_object(object_)
+            collection.add_object(work)
 
         institution.add_collection(collection)
 
