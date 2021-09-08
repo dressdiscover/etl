@@ -1,7 +1,4 @@
-import dataclasses
 from typing import Collection, Optional
-
-from rdflib import Graph
 
 from dressdiscover_etl.transformers.costume_core_omeka_classic_transformer import (
     CostumeCoreOmekaClassicTransformer,
@@ -35,4 +32,6 @@ class VcccTransformer(CostumeCoreOmekaClassicTransformer):
 
     def _transform_file(self, **kwds):
         images = CostumeCoreOmekaClassicTransformer._transform_file(self, **kwds)
-        return tuple(dataclasses.replace(image, copyable=False) for image in images)
+        for image in images:
+            image.copyable = False
+        return images

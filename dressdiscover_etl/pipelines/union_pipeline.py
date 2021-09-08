@@ -10,8 +10,8 @@ from paradicms_etl.models.collection import Collection
 from paradicms_etl.models.gui_metadata import GuiMetadata
 from paradicms_etl.models.image import Image
 from paradicms_etl.models.institution import Institution
-from paradicms_etl.models.object import Object
 from paradicms_etl.models.property_definition import PropertyDefinition
+from paradicms_etl.models.work import Work
 from paradicms_etl.pipelines._composite_pipeline import _CompositePipeline
 from paradicms_etl.pipelines.past_perfect_online_pipeline import (
     PastPerfectOnlinePipeline,
@@ -86,7 +86,7 @@ class UnionPipeline(_CompositePipeline):
                     institution_name="Iowa State University",
                     institution_rights="Copyright Iowa State University. All rights reserved.",
                     institution_uri="https://iastate.edu/",
-                    object_uri_prefix="https://www.aeshm.hs.iastate.edu/tc-museum/object/",
+                    work_uri_prefix="https://www.aeshm.hs.iastate.edu/tc-museum/object/",
                     subdomain="tcmuseum",
                     **kwds,
                 ),
@@ -133,7 +133,7 @@ class UnionPipeline(_CompositePipeline):
         def filter_models(models: Generator[_Model, None, None]):
             for model in models:
                 if isinstance(
-                    model, (Collection, Image, Institution, Object, PropertyDefinition)
+                    model, (Collection, Image, Institution, Work, PropertyDefinition)
                 ):
                     yield model
                 elif model.__class__.__name__ not in excluded_model_class_names:

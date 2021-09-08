@@ -3,8 +3,8 @@ from typing import Generator, Optional
 
 from paradicms_etl._loader import _Loader
 from paradicms_etl._model import _Model
-from paradicms_etl.models.object import Object
 from paradicms_etl.models.property_definitions import PropertyDefinitions
+from paradicms_etl.models.work import Work
 
 from dressdiscover_etl.costume_core import CostumeCore
 from dressdiscover_etl.namespace import CC
@@ -38,31 +38,29 @@ class CostumeCorePropertyExtractorCsvFileLoader(_Loader):
             csv_writer.writeheader()
 
             for model in models:
-                if not isinstance(model, Object):
+                if not isinstance(model, Work):
                     continue
 
-                object_ = model
+                work = model
                 description_properties = tuple(
                     property_
-                    for property_ in object_.properties
+                    for property_ in work.properties
                     if property_.property_definition_uri
                     == PropertyDefinitions.DESCRIPTION.uri
                 )
                 if not description_properties:
-                    self._logger.info(
-                        "object %s has no description, skipping", object_.uri
-                    )
+                    self._logger.info("work %s has no description, skipping", work.uri)
                     continue
                 if len(description_properties) > 1:
                     self._logger.info(
-                        "object %s has more than one description, skipping", object_.uri
+                        "work %s has more than one description, skipping", work.uri
                     )
                     continue
 
                 description = description_properties[0].value.strip()
                 if not description:
                     self._logger.info(
-                        "object %s description is empty, skipping", object_.uri
+                        "work %s description is empty, skipping", work.uri
                     )
                     continue
 
@@ -76,7 +74,7 @@ class CostumeCorePropertyExtractorCsvFileLoader(_Loader):
                         csv_writer.writerow(
                             {
                                 "object_description": description,
-                                "object_uri": str(object_.uri),
+                                "object_uri": str(work.uri),
                                 "extracted_candidate": candidate,
                             }
                         )
@@ -85,7 +83,7 @@ class CostumeCorePropertyExtractorCsvFileLoader(_Loader):
                         csv_writer.writerow(
                             {
                                 "object_description": description,
-                                "object_uri": str(object_.uri),
+                                "object_uri": str(work.uri),
                                 "extracted_candidate": candidate,
                                 "predicate": str(
                                     extracted_property.property_definition_uri
@@ -93,7 +91,7 @@ class CostumeCorePropertyExtractorCsvFileLoader(_Loader):
                                 "value": extracted_property.value,
                             }
                         )
-                for assigned_property in object_.properties:
+                for assigned_property in work.properties:
                     if not str(assigned_property.property_definition_uri).startswith(
                         str(CC)
                     ):
@@ -103,7 +101,7 @@ class CostumeCorePropertyExtractorCsvFileLoader(_Loader):
                             "object_description": description.encode(
                                 "ascii", "replace"
                             ).decode("ascii"),
-                            "object_uri": str(object_.uri),
+                            "object_uri": str(work.uri),
                             "predicate": str(assigned_property.property_definition_uri),
                             "value": assigned_property.value.encode(
                                 "ascii", "replace"

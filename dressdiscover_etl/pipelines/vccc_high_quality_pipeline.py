@@ -98,20 +98,16 @@ class VcccHighQualityPipeline(_Pipeline):
 
     class __VcccHighQualityTransformer(VcccTransformer):
         def _transform_item(self, *, item, **kwds):
-            object_ = VcccTransformer._transform_item(self, item=item, **kwds)
-            if object_ is None:
-                return object_
-            identifier_properties = [
-                property_
-                for property_ in object_.properties
-                if property_.uri == DCTERMS.identifier
-            ]
-            if not identifier_properties:
-                return object_
-            identifier = str(identifier_properties[0].value).rsplit("/", 1)[-1]
-            if identifier not in HIGH_QUALITY_OBJECT_DC_IDENTIFIERS:
-                return None
-            return object_
+            work = VcccTransformer._transform_item(self, item=item, **kwds)
+            if work is None:
+                return work
+            for identifier in work.resource.objects(DCTERMS.identifier):
+                identifier = str(identifier.toPython()).rsplit("/", 1)[-1]
+                if identifier in HIGH_QUALITY_OBJECT_DC_IDENTIFIERS:
+                    return work
+                else:
+                    return None
+            return None
 
     def __init__(
         self,

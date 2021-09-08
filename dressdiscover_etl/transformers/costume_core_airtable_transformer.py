@@ -1,12 +1,10 @@
 from typing import Optional
 
-from paradicms_etl._transformer import _Transformer
-from paradicms_etl.extractors.airtable_extractor import AirtableExtractor
 from paradicms_etl.models.image import Image
 from paradicms_etl.models.image_dimensions import ImageDimensions
-from paradicms_etl.models.object import Object
 from paradicms_etl.models.property import Property
 from paradicms_etl.models.rights import Rights
+from paradicms_etl.models.work import Work
 from paradicms_etl.transformers._airtable_transformer import _AirtableTransformer
 from rdflib import URIRef
 
@@ -141,7 +139,7 @@ class CostumeCoreAirtableTransformer(_AirtableTransformer):
         }
 
         for object_record in object_records:
-            object_uri = URIRef(
+            work_uri = URIRef(
                 self._record_url(
                     base_id=self.__base_id,
                     table=self.__OBJECTS_TABLE,
@@ -161,7 +159,7 @@ class CostumeCoreAirtableTransformer(_AirtableTransformer):
                         yield from self.__transform_object_images(
                             institution_uri=institution_uri,
                             object_images=field_value,
-                            object_uri=object_uri,
+                            work_uri=work_uri,
                         )
                         continue
 
@@ -204,21 +202,21 @@ class CostumeCoreAirtableTransformer(_AirtableTransformer):
                     else:
                         properties.append(Property(URIRef(predicate.uri), field_value))
 
-            yield Object(
+            yield Work(
                 institution_uri=institution_uri,
                 collection_uris=(collection_uri,),
                 properties=tuple(properties),
                 rights=Rights.from_properties(properties),
                 title=object_record["fields"]["Title"],
-                uri=object_uri,
+                uri=work_uri,
             )
 
     def __transform_object_images(
-        self, *, institution_uri: URIRef, object_images, object_uri: URIRef
+        self, *, institution_uri: URIRef, object_images, work_uri: URIRef
     ):
         for object_image in object_images:
             original_image = Image.create(
-                depicts_uri=object_uri,
+                depicts_uri=work_uri,
                 institution_uri=institution_uri,
                 uri=URIRef(object_image["url"]),
             )
@@ -226,7 +224,7 @@ class CostumeCoreAirtableTransformer(_AirtableTransformer):
 
             for thumbnail in object_image["thumbnails"].values():
                 yield Image.create(
-                    depicts_uri=object_uri,
+                    depicts_uri=work_uri,
                     exact_dimensions=ImageDimensions(
                         height=thumbnail["height"],
                         width=thumbnail["width"],

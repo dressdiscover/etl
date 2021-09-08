@@ -14,12 +14,12 @@ from paradicms_etl.models.image import Image
 from paradicms_etl.models.image_dimensions import ImageDimensions
 from paradicms_etl.models.institution import Institution
 from paradicms_etl.models.license import License
-from paradicms_etl.models.object import Object
 from paradicms_etl.models.property import Property
 from paradicms_etl.models.rights import Rights
 from paradicms_etl.models.rights_statements_dot_org_rights_statements import (
     RightsStatementsDotOrgRightsStatements,
 )
+from paradicms_etl.models.work import Work
 from rdflib import Graph, URIRef
 
 from dressdiscover_etl.models.costume_core_description import CostumeCoreDescription
@@ -350,22 +350,22 @@ class CostumeCoreOntologyTransformer(_Transformer):
                 yield collection
                 yielded_collection_uris.add(collection_uri)
 
-            object_properties = []
+            work_properties = []
             if term.description:
-                object_properties.append(
+                work_properties.append(
                     Property(
                         DublinCorePropertyDefinitions.DESCRIPTION,
                         term.description.text_en,
                     )
                 )
-                object_properties.append(
+                work_properties.append(
                     property(
                         DublinCorePropertyDefinitions.CREATOR,
                         term.description.rights.author,
                     )
                 )
 
-            object_ = Object(
+            work = Work(
                 abstract=term.description.text_en if term.description else None,
                 collection_uris=tuple(
                     URIRef(term_predicate.uri) for term_predicate in term_predicates
@@ -377,7 +377,7 @@ class CostumeCoreOntologyTransformer(_Transformer):
                 title=term.label,
                 uri=URIRef(term.uri),
             )
-            yield object_
+            yield work
 
             if term.image_filename is None:
                 continue
@@ -386,14 +386,14 @@ class CostumeCoreOntologyTransformer(_Transformer):
             image_rights = transform_to_paradicms_rights(term.image_rights)
 
             original_image = Image(
-                depicts_uri=object_.uri,
+                depicts_uri=work.uri,
                 rights=image_rights,
                 uri=URIRef(term.full_size_image_url),
             )
             yield original_image
 
             yield Image(
-                depicts_uri=object_.uri,
+                depicts_uri=work.uri,
                 exact_dimensions=ImageDimensions(height=200, width=200),
                 original_image_uri=original_image.uri,
                 rights=image_rights,

@@ -10,7 +10,7 @@ from paradicms_etl.models.dublin_core_property_definitions import (
     DublinCorePropertyDefinitions,
 )
 from paradicms_etl.models.institution import Institution
-from paradicms_etl.models.object import Object
+from paradicms_etl.models.work import Work
 from paradicms_etl.models.property import Property
 from paradicms_etl.models.rights import Rights
 from paradicms_etl.models.vra_core_property_definitions import (
@@ -73,7 +73,7 @@ class PennMuseumTransformer(_Transformer):
                 for model in self.__transform_csv_row(
                     collection=collection, csv_row=csv_row, institution=institution
                 ):
-                    if isinstance(model, Object):
+                    if isinstance(model, Work):
                         if new_collection:
                             # Ensure the collection is referenced before yielding it
                             collections_by_curatorial_section[
@@ -138,7 +138,7 @@ class PennMuseumTransformer(_Transformer):
             for value in pop_multiple_values(key):
                 properties.add(Property(property_definition, value))
 
-        yield Object(
+        yield Work(
             abstract=description,
             collection_uris=(collection.uri,),
             institution_uri=institution.uri,

@@ -1,23 +1,23 @@
 import csv
 from collections import Counter
 from pathlib import Path
-from typing import Dict, Optional
+from typing import Dict
 
 from paradicms_etl._transformer import _Transformer
 from paradicms_etl.models.collection import Collection
 from paradicms_etl.models.image import Image
 from paradicms_etl.models.institution import Institution
-from paradicms_etl.models.object import Object
 from paradicms_etl.models.property import Property
 from paradicms_etl.models.property_definition import PropertyDefinition
 from paradicms_etl.models.property_definitions import PropertyDefinitions
 from paradicms_etl.models.rights import Rights
 from paradicms_etl.models.rights_value import RightsValue
+from paradicms_etl.models.work import Work
 from paradicms_etl.utils.csv_utils import strip_csv_row
 from rdflib import URIRef
 
-from dressdiscover_etl.models import costume_core_predicates, costume_core_terms
 from dressdiscover_etl.costume_core import CostumeCore
+from dressdiscover_etl.models import costume_core_predicates, costume_core_terms
 
 
 class IastateAmd354Transformer(_Transformer):
@@ -211,7 +211,7 @@ class IastateAmd354Transformer(_Transformer):
                     )
                 )
 
-        object_ = Object(
+        work = Work(
             # abstract=image_description,
             collection_uris=(self.__COLLECTION.uri,),
             institution_uri=self.__INSTITUTION.uri,
@@ -224,10 +224,10 @@ class IastateAmd354Transformer(_Transformer):
             title=image_title,
             uri=URIRef(csv_row.pop("Object URL")),
         )
-        yield object_
+        yield work
 
         image = Image.create(
-            depicts_uri=object_.uri,
+            depicts_uri=work.uri,
             institution_uri=self.__INSTITUTION.uri,
             rights=Rights(
                 holder=image_source,
