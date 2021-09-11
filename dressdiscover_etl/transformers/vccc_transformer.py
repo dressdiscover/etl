@@ -31,7 +31,9 @@ class VcccTransformer(CostumeCoreOmekaClassicTransformer):
         )
 
     def _transform_file(self, **kwds):
-        images = CostumeCoreOmekaClassicTransformer._transform_file(self, **kwds)
-        for image in images:
-            image.copyable = False
-        return images
+        return tuple(
+            image.replace(copyable=False)
+            for image in CostumeCoreOmekaClassicTransformer._transform_file(
+                self, **kwds
+            )
+        )
