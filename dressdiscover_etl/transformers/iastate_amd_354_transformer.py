@@ -1,5 +1,4 @@
 import csv
-from collections import Counter
 from pathlib import Path
 from typing import Dict
 
@@ -132,11 +131,11 @@ class IastateAmd354Transformer(_Transformer):
         if not image_file_path.is_file():
             raise ValueError(f"{image_file_path} does not exist")
 
-        image_description = csv_row.pop("Image Description")
+        # image_description = csv_row.pop("Image Description")
         image_license = csv_row.pop("Image License")
         image_source = csv_row.pop("Image Source")
         image_title = csv_row.pop("Image Title")
-        image_url = csv_row.pop("Image URL")
+        # image_url = csv_row.pop("Image URL")
         object_source = csv_row.pop("Object Source")
         if object_source == "Same":
             object_source = image_source
@@ -177,7 +176,7 @@ class IastateAmd354Transformer(_Transformer):
 
         # CC components
         component_i = 1
-        costume_component_counts = Counter()
+        # costume_component_counts = Counter()
         while True:
             try:
                 value = csv_row.pop(f"Costume Component {component_i}")

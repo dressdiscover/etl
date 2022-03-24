@@ -1,9 +1,7 @@
 from paradicms_etl._pipeline import _Pipeline
 from paradicms_etl.extractors.existing_file_extractor import ExistingFileExtractor
-from paradicms_etl.extractors.omeka_classic_extractor import OmekaClassicExtractor
 
 from dressdiscover_etl.transformers.penn_museum_transformer import PennMuseumTransformer
-from dressdiscover_etl.transformers.vccc_transformer import VcccTransformer
 
 
 class PennMuseumPipeline(_Pipeline):

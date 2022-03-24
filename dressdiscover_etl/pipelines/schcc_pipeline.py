@@ -1,5 +1,3 @@
-from pathlib import Path
-
 from paradicms_etl._pipeline import _Pipeline
 from paradicms_etl.extractors.existing_file_extractor import ExistingFileExtractor
 

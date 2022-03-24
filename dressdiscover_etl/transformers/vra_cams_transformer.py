@@ -2,11 +2,8 @@ import re
 from pprint import pprint
 from typing import Dict, List, Tuple
 
-import stringcase
-from paradicms_etl.extractors.airtable_extractor import AirtableExtractor
 from paradicms_etl.models.collection import Collection
 from paradicms_etl.models.image import Image
-from paradicms_etl.models.image_dimensions import ImageDimensions
 from paradicms_etl.models.institution import Institution
 from paradicms_etl.models.work import Work
 from paradicms_etl.models.property import Property
@@ -68,7 +65,7 @@ class VraCamsTransformer(_AirtableTransformer):
                 key_suffix = key[len(key_prefix) :]
                 assert key_suffix
                 key_suffix_parts = []
-                for key_suffix_part in re.split("(\d+)", key_suffix):
+                for key_suffix_part in re.split(r"(\d+)", key_suffix):
                     if not key_suffix_part:
                         continue
                     try:

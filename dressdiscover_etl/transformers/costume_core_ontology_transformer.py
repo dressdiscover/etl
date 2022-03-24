@@ -143,15 +143,15 @@ class CostumeCoreOntologyTransformer(_Transformer):
                 image_filename = None
                 image_rights = None
 
-            cc_uri = fields.get("CC_URI")
+            # cc_uri = fields.get("CC_URI")
             inferred_uri = str(CC[fields["id"]])
-            if cc_uri is None:
-                uri = inferred_uri
-            elif cc_uri != inferred_uri:
-                self._logger.warning(
-                    "CC_URI (%s) does not match inferred URI (%s)", cc_uri, inferred_uri
-                )
-                uri = inferred_uri
+            # if cc_uri is None:
+            #     uri = inferred_uri
+            # elif cc_uri != inferred_uri:
+            #     self._logger.warning(
+            #         "CC_URI (%s) does not match inferred URI (%s)", cc_uri, inferred_uri
+            #     )
+            #     uri = inferred_uri
 
             term = CostumeCoreTerm(
                 aat_id=fields.get("AATID"),

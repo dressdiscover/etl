@@ -1,4 +1,3 @@
-from pathlib import Path
 from typing import Optional
 
 from paradicms_etl._loader import _Loader
