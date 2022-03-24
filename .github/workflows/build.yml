@@ -1,0 +1,37 @@
+name: Build
+on: [push, workflow_dispatch]
+jobs:
+  build:
+    name: Build and test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        path: dressdiscover/etl
+      - uses: actions/checkout@v3
+        repository: paradicms/etl
+        path: paradicms/etl
+      - uses: actions/checkout@v3
+        repository: paradicms/gui
+        path: paradicms/gui
+      - uses: actions/setup-python@v2
+        with:
+          python-version: "3.9.x"
+      - uses: actions/setup-python@v2
+        with:
+          python-version: 3.9
+      - name: Install Poetry
+        uses: snok/install-poetry@v1
+        with:
+          virtualenvs-in-project: true
+      - name: Load cached venv
+        id: cached-poetry-dependencies
+        uses: actions/cache@v2
+        with:
+          path: dressdiscover/etl/.venv
+          key: venv-${{ runner.os }}-${{ steps.setup-python.outputs.python-version }}-${{ hashFiles('**/poetry.lock') }}
+      - name: Install dependencies
+        if: steps.cached-poetry-dependencies.outputs.cache-hit != 'true'
+        run: cd dressdiscover/etl && poetry install --no-interaction --no-root
+      - run: cd dressdiscover/etl && poetry run black --check dressdiscover_etl
+      - run: cd dressdiscover/etl && poetry run flake8 dressdiscover_etl
+      - run: cd dressdiscover/etl && poetry run mypy dressdiscover_etl

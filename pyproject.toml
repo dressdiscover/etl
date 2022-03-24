@@ -12,6 +12,10 @@ paradicms-gui = { path = "../../paradicms/gui/loader", develop = true }
 # pastpy = { path = "../../pastpy/requirements.txt", develop = true }
 
 [tool.poetry.dev-dependencies]
+black = "^22.1.0"
+flake8 = "^4.0.1"
+mypy = "^0.931"
+pytest = "^7.0.1"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
