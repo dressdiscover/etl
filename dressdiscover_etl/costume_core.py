@@ -1,14 +1,13 @@
 from typing import Dict, Optional, Tuple, List
 
-from paradicms_etl.models.image import Image
-from paradicms_etl.models.image_dimensions import ImageDimensions
-from paradicms_etl.models.named_value import NamedValue
-from rdflib import Literal, URIRef
-
 from dressdiscover_etl.models.costume_core_predicate import CostumeCorePredicate
 from dressdiscover_etl.models.costume_core_predicates import COSTUME_CORE_PREDICATES
 from dressdiscover_etl.models.costume_core_term import CostumeCoreTerm
 from dressdiscover_etl.models.costume_core_terms import COSTUME_CORE_TERMS
+from paradicms_etl.models.image import Image
+from paradicms_etl.models.image_dimensions import ImageDimensions
+from paradicms_etl.models.named_value import NamedValue
+from rdflib import Literal, URIRef
 
 
 class CostumeCore:
@@ -42,7 +41,8 @@ class CostumeCore:
                         costume_core_term
                     )
         self.__terms_by_predicate_id = {
-            predicate_id: tuple(terms) for predicate_id, terms in terms_by_predicate_id
+            predicate_id: tuple(terms)
+            for predicate_id, terms in terms_by_predicate_id.items()
         }
 
         images = []

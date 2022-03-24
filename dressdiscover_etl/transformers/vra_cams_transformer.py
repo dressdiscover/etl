@@ -15,8 +15,6 @@ from rdflib import URIRef, DCTERMS
 
 class VraCamsTransformer(AirtableTransformer):
     def transform(self, *, records_by_table, **kwds):
-        yield from PropertyDefinitions.as_tuple()
-
         institution = Institution(
             name="Visual Resources Association", uri=URIRef("http://vraweb.org")
         )
