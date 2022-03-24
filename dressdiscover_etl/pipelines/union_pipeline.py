@@ -2,6 +2,12 @@ from pathlib import Path
 from typing import Generator, Optional
 
 from configargparse import ArgParser
+from dressdiscover_etl.loaders.ant_conc_txt_loader import AntConcTxtLoader
+from dressdiscover_etl.pipelines.penn_museum_pipeline import PennMuseumPipeline
+from dressdiscover_etl.pipelines.schcc_pipeline import SchccPipeline
+from dressdiscover_etl.pipelines.uc_daap_vac_pipeline import UcDaapVacPipeline
+from dressdiscover_etl.pipelines.vccc_pipeline import VcccPipeline
+from paradicms_etl.loader import Loader
 from paradicms_etl.model import Model
 from paradicms_etl.models.collection import Collection
 from paradicms_etl.models.image import Image
@@ -15,12 +21,6 @@ from paradicms_etl.transformers.validation_transformer import ValidationTransfor
 from paradicms_gui.deployers.s3_deployer import S3Deployer  # type: ignore
 from paradicms_gui.image_archivers.s3_image_archiver import S3ImageArchiver  # type: ignore
 from paradicms_gui.loaders.gui_loader import GuiLoader  # type: ignore
-
-from dressdiscover_etl.loaders.ant_conc_txt_loader import AntConcTxtLoader
-from dressdiscover_etl.pipelines.penn_museum_pipeline import PennMuseumPipeline
-from dressdiscover_etl.pipelines.schcc_pipeline import SchccPipeline
-from dressdiscover_etl.pipelines.uc_daap_vac_pipeline import UcDaapVacPipeline
-from dressdiscover_etl.pipelines.vccc_pipeline import VcccPipeline
 
 
 class UnionPipeline(CompositePipeline):
@@ -36,6 +36,7 @@ class UnionPipeline(CompositePipeline):
         load_data_only: Optional[bool] = None,
         **kwds,
     ):
+        loader: Loader
         if load_ant_conc:
             loader = AntConcTxtLoader(
                 loaded_data_dir_path=data_dir_path / self.__ID / "loaded" / "data",
