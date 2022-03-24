@@ -6,13 +6,16 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-        path: dressdiscover/etl
+        with:
+          path: dressdiscover/etl
       - uses: actions/checkout@v3
-        repository: paradicms/etl
-        path: paradicms/etl
+        with:
+          repository: paradicms/etl
+          path: paradicms/etl
       - uses: actions/checkout@v3
-        repository: paradicms/gui
-        path: paradicms/gui
+        with:
+          repository: paradicms/gui
+          path: paradicms/gui
       - uses: actions/setup-python@v2
         with:
           python-version: "3.9.x"
