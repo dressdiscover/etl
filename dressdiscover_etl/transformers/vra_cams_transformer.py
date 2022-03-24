@@ -175,7 +175,9 @@ class VraCamsTransformer(AirtableTransformer):
         assert work_title is not None
         work_abstract = work_record_fields.pop("DescriptionDisplay")
         try:
-            work_rights = Rights.from_fields(holder=work_record_fields.pop("DescriptionSource"))
+            work_rights = Rights.from_fields(
+                holder=work_record_fields.pop("DescriptionSource")
+            )
         except KeyError:
             work_rights = None
 
