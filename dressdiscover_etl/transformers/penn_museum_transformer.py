@@ -2,24 +2,19 @@ import csv
 from pathlib import Path
 from typing import Dict, Generator, Tuple
 
-from paradicms_etl._model import _Model
-from paradicms_etl._transformer import _Transformer
+from paradicms_etl.model import Model
 from paradicms_etl.models.collection import Collection
 from paradicms_etl.models.creative_commons_licenses import CreativeCommonsLicenses
-from paradicms_etl.models.dublin_core_property_definitions import (
-    DublinCorePropertyDefinitions,
-)
 from paradicms_etl.models.institution import Institution
-from paradicms_etl.models.work import Work
 from paradicms_etl.models.property import Property
 from paradicms_etl.models.rights import Rights
-from paradicms_etl.models.vra_core_property_definitions import (
-    VraCorePropertyDefinitions,
-)
-from rdflib import URIRef
+from paradicms_etl.models.work import Work
+from paradicms_etl.namespaces import VRA
+from paradicms_etl.transformer import Transformer
+from rdflib import URIRef, DCTERMS
 
 
-class PennMuseumTransformer(_Transformer):
+class PennMuseumTransformer(Transformer):
     __RELEVANT_OBJECT_NAMES = {"Dress", "Clothing", "Hat", "Shirt", "Skirt"}
     __IGNORE_KEYS = (
         "emuIRN",
@@ -34,14 +29,12 @@ class PennMuseumTransformer(_Transformer):
         "other_numbers",
     )
 
-    def transform(self, *, file_path: Path):
-        yield CreativeCommonsLicenses.BY
-        yield from DublinCorePropertyDefinitions.as_tuple()
-        yield from VraCorePropertyDefinitions.as_tuple()
+    def transform(self, *, file_path: Path):  # type: ignore
+        yield CreativeCommonsLicenses.BY_3_0
 
         institution = Institution(
             name="Penn Museum",
-            rights=Rights(
+            rights=Rights.from_fields(
                 license=URIRef("http://creativecommons.org/licenses/by/3.0/"),
                 statement="Copyright Penn Museum",
             ),
@@ -49,7 +42,7 @@ class PennMuseumTransformer(_Transformer):
         )
         yield institution
 
-        collections_by_curatorial_section = {}
+        collections_by_curatorial_section: Dict[str, Collection] = {}
 
         with open(file_path, encoding="utf-8") as csv_file:
             for csv_row in csv.DictReader(csv_file):
@@ -59,7 +52,7 @@ class PennMuseumTransformer(_Transformer):
 
                 collection = collections_by_curatorial_section.get(curatorial_section)
                 if collection is None:
-                    collection = Collection(
+                    collection = Collection.from_fields(
                         institution_uri=institution.uri,
                         title=curatorial_section,
                         uri=URIRef(
@@ -89,7 +82,7 @@ class PennMuseumTransformer(_Transformer):
         collection: Collection,
         csv_row: Dict[str, str],
         institution: Institution,
-    ) -> Generator[_Model, None, None]:
+    ) -> Generator[Model, None, None]:
         csv_row = {
             key.strip().encode("ascii", "ignore").decode("ascii"): value.strip()
             for key, value in csv_row.items()
@@ -100,7 +93,7 @@ class PennMuseumTransformer(_Transformer):
             values_joined = csv_row.pop(key, None)
             if values_joined is None:
                 return ()
-            return values_joined.split("|")
+            return tuple(values_joined.split("|"))
 
         description = csv_row.pop("description", None)
         if not description:
@@ -116,24 +109,22 @@ class PennMuseumTransformer(_Transformer):
 
         properties = set()
         if description:
-            properties.add(
-                Property(DublinCorePropertyDefinitions.DESCRIPTION, description)
-            )
-        properties.add(Property(DublinCorePropertyDefinitions.TITLE, object_name))
+            properties.add(Property(DCTERMS.description, description))
+        properties.add(Property(DCTERMS.title, object_name))
 
         for key, property_definition in (
-            ("accession_credit_line", DublinCorePropertyDefinitions.CONTRIBUTOR),
-            ("creator", DublinCorePropertyDefinitions.CREATOR),
-            ("culture", VraCorePropertyDefinitions.CULTURAL_CONTEXT),
-            ("culture_area", DublinCorePropertyDefinitions.SPATIAL),
-            ("date_made", DublinCorePropertyDefinitions.DATE_CREATED),
-            ("date_made_early", VraCorePropertyDefinitions.EARLIEST_DATE),
-            ("date_made_late", VraCorePropertyDefinitions.LATEST_DATE),
-            ("material", VraCorePropertyDefinitions.MATERIAL),
-            ("object_number", DublinCorePropertyDefinitions.IDENTIFIER),
-            ("period", DublinCorePropertyDefinitions.TEMPORAL),
-            ("provenience", DublinCorePropertyDefinitions.PROVENANCE),
-            ("technique", VraCorePropertyDefinitions.TECHNIQUE),
+            ("accession_credit_line", DCTERMS.contributor),
+            ("creator", DCTERMS.creator),
+            ("culture", VRA.culturalContext),
+            ("culture_area", DCTERMS.spatial),
+            ("date_made", DCTERMS.date),
+            ("date_made_early", VRA.earliestDate),
+            ("date_made_late", VRA.latestDate),
+            ("material", VRA.MATERIAL),
+            ("object_number", DCTERMS.identifier),
+            ("period", DCTERMS.temporal),
+            ("provenience", DCTERMS.provenance),
+            ("technique", VRA.technique),
         ):
             for value in pop_multiple_values(key):
                 properties.add(Property(property_definition, value))

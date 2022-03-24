@@ -1,22 +1,17 @@
-from typing import Tuple
+from typing import Tuple, Set, Dict
 
-from paradicms_etl.models.dublin_core_property_definitions import (
-    DublinCorePropertyDefinitions,
-)
 from paradicms_etl.models.property import Property
-from paradicms_etl.models.vra_core_property_definitions import (
-    VraCorePropertyDefinitions,
-)
+from paradicms_etl.namespaces import VRA
 from paradicms_etl.transformers.omeka_classic_transformer import OmekaClassicTransformer
-from rdflib import URIRef
+from rdflib import URIRef, DCTERMS
 
 from dressdiscover_etl.costume_core import CostumeCore
 from dressdiscover_etl.models import costume_core_predicates
 
 
 class CostumeCoreOmekaClassicTransformer(OmekaClassicTransformer):
-    __UNKNOWN_CC_TERMS = {}
-    __UNKNOWN_ITM_KEYS = set()
+    __UNKNOWN_CC_TERMS: Dict[str, Set[str]] = {}
+    __UNKNOWN_ITM_KEYS: Set[str] = set()
 
     def __init__(self, **kwds):
         OmekaClassicTransformer.__init__(self, **kwds)
@@ -25,9 +20,8 @@ class CostumeCoreOmekaClassicTransformer(OmekaClassicTransformer):
     def transform(self, **kwds):
         yield from self.__costume_core.images
         yield from self.__costume_core.property_definitions
-        yield from self.__costume_core.property_value_definitions
+        yield from self.__costume_core.named_values
         yield from OmekaClassicTransformer.transform(self, **kwds)
-        yield from VraCorePropertyDefinitions.as_tuple()
         for (
             costume_core_predicate_id,
             costume_core_terms,
@@ -48,17 +42,17 @@ class CostumeCoreOmekaClassicTransformer(OmekaClassicTransformer):
 
         properties = set()
 
-        for key, property_definition in (
-            ("Category", DublinCorePropertyDefinitions.SUBJECT),
-            ("Culture", VraCorePropertyDefinitions.CULTURAL_CONTEXT),
-            ("Date Earliest", VraCorePropertyDefinitions.EARLIEST_DATE),
-            ("Date Latest", VraCorePropertyDefinitions.LATEST_DATE),
-            ("Description Main", DublinCorePropertyDefinitions.DESCRIPTION),
-            ("Source Identifier", DublinCorePropertyDefinitions.IDENTIFIER),
-            ("Technique", VraCorePropertyDefinitions.TECHNIQUE),
+        for key, property_uri in (
+            ("Category", DCTERMS.subject),
+            ("Culture", VRA.culturalContext),
+            ("Date Earliest", VRA.earliestDate),
+            ("Date Latest", VRA.latestDate),
+            ("Description Main", DCTERMS.description),
+            ("Source Identifier", DCTERMS.identifier),
+            ("Technique", VRA.technique),
         ):
             for value in itm_element_text_tree.pop(key, []):
-                properties.add(Property(property_definition.uri, value))
+                properties.add(Property(property_uri, value))
 
         for key, predicate in (
             ("Classification", costume_core_predicates.classification),

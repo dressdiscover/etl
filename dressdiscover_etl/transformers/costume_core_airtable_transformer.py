@@ -3,15 +3,14 @@ from typing import Optional
 from paradicms_etl.models.image import Image
 from paradicms_etl.models.image_dimensions import ImageDimensions
 from paradicms_etl.models.property import Property
-from paradicms_etl.models.rights import Rights
 from paradicms_etl.models.work import Work
-from paradicms_etl.transformers._airtable_transformer import _AirtableTransformer
+from paradicms_etl.transformers.airtable_transformer import AirtableTransformer
 from rdflib import URIRef
 
 from dressdiscover_etl.costume_core import CostumeCore
 
 
-class CostumeCoreAirtableTransformer(_AirtableTransformer):
+class CostumeCoreAirtableTransformer(AirtableTransformer):
     # __IGNORE_FEATURE_RECORD_IDS = {
     #     # feature display
     #     "recI7sxKzQwM5YKhT",
@@ -39,7 +38,7 @@ class CostumeCoreAirtableTransformer(_AirtableTransformer):
     #     term_records: Tuple[Dict, ...]
 
     def __init__(self, costume_core: Optional[CostumeCore] = None, **kwds):
-        _AirtableTransformer.__init__(self, **kwds)
+        AirtableTransformer.__init__(self, **kwds)
         self.__costume_core = (
             costume_core if costume_core is not None else CostumeCore()
         )
@@ -141,9 +140,7 @@ class CostumeCoreAirtableTransformer(_AirtableTransformer):
         for object_record in object_records:
             work_uri = URIRef(
                 self._record_url(
-                    base_id=self.__base_id,
-                    table=self.__OBJECTS_TABLE,
-                    record_id=object_record["id"],
+                    record_id=object_record["id"], table=self.__OBJECTS_TABLE
                 )
             )
 
@@ -157,7 +154,6 @@ class CostumeCoreAirtableTransformer(_AirtableTransformer):
 
                     if field_key == "Images":
                         yield from self.__transform_object_images(
-                            institution_uri=institution_uri,
                             object_images=field_value,
                             work_uri=work_uri,
                         )
@@ -173,7 +169,7 @@ class CostumeCoreAirtableTransformer(_AirtableTransformer):
                 if isinstance(field_value, list):
                     field_values = field_value
                 else:
-                    field_values = (field_value,)
+                    field_values = [field_value]
 
                 for field_value in field_values:
                     if field_value.startswith("rec"):
@@ -206,30 +202,26 @@ class CostumeCoreAirtableTransformer(_AirtableTransformer):
                 institution_uri=institution_uri,
                 collection_uris=(collection_uri,),
                 properties=tuple(properties),
-                rights=Rights.from_properties(properties),
+                # rights=Rights.from_properties(properties),
                 title=object_record["fields"]["Title"],
                 uri=work_uri,
             )
 
-    def __transform_object_images(
-        self, *, institution_uri: URIRef, object_images, work_uri: URIRef
-    ):
+    def __transform_object_images(self, *, object_images, work_uri: URIRef):
         for object_image in object_images:
-            original_image = Image.create(
+            original_image = Image.from_fields(
                 depicts_uri=work_uri,
-                institution_uri=institution_uri,
                 uri=URIRef(object_image["url"]),
             )
             yield original_image
 
             for thumbnail in object_image["thumbnails"].values():
-                yield Image.create(
+                yield Image.from_fields(
                     depicts_uri=work_uri,
                     exact_dimensions=ImageDimensions(
                         height=thumbnail["height"],
                         width=thumbnail["width"],
                     ),
-                    institution_uri=institution_uri,
                     original_image_uri=original_image.uri,
                     uri=URIRef(thumbnail["url"]),
                 )

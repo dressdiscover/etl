@@ -1,13 +1,13 @@
 import dataclasses
 from pathlib import Path
 
-from paradicms_etl.loaders._buffering_loader import _BufferingLoader
+from paradicms_etl.loaders.buffering_loader import BufferingLoader
 
 from dressdiscover_etl.models.costume_core_predicate import CostumeCorePredicate
 from dressdiscover_etl.models.costume_core_term import CostumeCoreTerm
 
 
-class CostumeCoreOntologyPyLoader(_BufferingLoader):
+class CostumeCoreOntologyPyLoader(BufferingLoader):
     def _flush(self, models):
         models_dir_path = Path(__file__).parent.parent / "models"
         assert models_dir_path.is_dir(), models_dir_path

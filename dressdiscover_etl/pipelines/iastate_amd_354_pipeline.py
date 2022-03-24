@@ -1,20 +1,20 @@
 from configargparse import ArgParser
-from paradicms_etl._pipeline import _Pipeline
 from paradicms_etl.extractors.existing_file_extractor import ExistingFileExtractor
-from paradicms_etl.image_archivers.s3_image_archiver import S3ImageArchiver
-from paradicms_etl.loaders.gui.gui_loader import GuiLoader
-from paradicms_etl.loaders.gui.s3_gui_deployer import S3GuiDeployer
+from paradicms_etl.pipeline import Pipeline
+from paradicms_gui.deployers.s3_deployer import S3Deployer  # type: ignore
+from paradicms_gui.image_archivers.s3_image_archiver import S3ImageArchiver  # type: ignore
+from paradicms_gui.loaders.gui_loader import GuiLoader  # type: ignore
 
 from dressdiscover_etl.transformers.iastate_amd_354_transformer import (
     IastateAmd354Transformer,
 )
 
 
-class IastateAmd354Pipeline(_Pipeline):
+class IastateAmd354Pipeline(Pipeline):
     ID = "iastate_amd_354"
 
     def __init__(self, **kwds):
-        _Pipeline.__init__(
+        Pipeline.__init__(
             self,
             id=self.ID,
             extractor=ExistingFileExtractor(
@@ -24,7 +24,7 @@ class IastateAmd354Pipeline(_Pipeline):
             ),
             loader=GuiLoader(
                 gui="bootstrap-collection",
-                deployer=S3GuiDeployer(
+                deployer=S3Deployer(
                     s3_bucket_name="iastate-amd354.dressdiscover.org", **kwds
                 ),
                 image_archiver=S3ImageArchiver(
@@ -39,8 +39,8 @@ class IastateAmd354Pipeline(_Pipeline):
 
     @classmethod
     def add_arguments(cls, arg_parser: ArgParser) -> None:
-        _Pipeline.add_arguments(arg_parser)
-        _Pipeline._add_aws_credentials_arguments(arg_parser)
+        Pipeline.add_arguments(arg_parser)
+        Pipeline._add_aws_credentials_arguments(arg_parser)
 
 
 if __name__ == "__main__":

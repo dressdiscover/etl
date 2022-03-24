@@ -1,24 +1,24 @@
 import csv
-from typing import Generator, Optional
+from typing import Optional, Iterable
 
-from paradicms_etl._loader import _Loader
-from paradicms_etl._model import _Model
-from paradicms_etl.models.property_definitions import PropertyDefinitions
+from paradicms_etl.loader import Loader
+from paradicms_etl.model import Model
 from paradicms_etl.models.work import Work
+from rdflib import DCTERMS, Graph, Literal
 
 from dressdiscover_etl.costume_core import CostumeCore
-from dressdiscover_etl.namespace import CC
+from dressdiscover_etl.namespaces import COCO
 from dressdiscover_etl.transformers.costume_core_property_extractor import (
     CostumeCorePropertyExtractor,
 )
 
 
-class CostumeCorePropertyExtractorCsvFileLoader(_Loader):
+class CostumeCorePropertyExtractorCsvFileLoader(Loader):
     def __init__(self, costume_core: Optional[CostumeCore] = None, **kwds):
-        _Loader.__init__(self, **kwds)
+        Loader.__init__(self, **kwds)
         self.__extractor = CostumeCorePropertyExtractor(costume_core=costume_core)
 
-    def load(self, *, models: Generator[_Model, None, None]):
+    def load(self, models: Iterable[Model]):
         with open(
             self._loaded_data_dir_path
             / (self._pipeline_id + "-extracted-costume-core-properties.csv"),
@@ -42,22 +42,14 @@ class CostumeCorePropertyExtractorCsvFileLoader(_Loader):
                     continue
 
                 work = model
-                description_properties = tuple(
-                    property_
-                    for property_ in work.properties
-                    if property_.property_definition_uri
-                    == PropertyDefinitions.DESCRIPTION.uri
-                )
-                if not description_properties:
-                    self._logger.info("work %s has no description, skipping", work.uri)
-                    continue
-                if len(description_properties) > 1:
+                work_resource = work.to_rdf(Graph())
+                description = work_resource.value(DCTERMS.description)
+                if not description or not isinstance(description, Literal):
                     self._logger.info(
-                        "work %s has more than one description, skipping", work.uri
+                        "work %s has no literal description, skipping", work.uri
                     )
                     continue
-
-                description = description_properties[0].value.strip()
+                description = description.value.strip()
                 if not description:
                     self._logger.info(
                         "work %s description is empty, skipping", work.uri
@@ -85,16 +77,14 @@ class CostumeCorePropertyExtractorCsvFileLoader(_Loader):
                                 "object_description": description,
                                 "object_uri": str(work.uri),
                                 "extracted_candidate": candidate,
-                                "predicate": str(
-                                    extracted_property.property_definition_uri
-                                ),
+                                "predicate": str(extracted_property.uri),
                                 "value": extracted_property.value,
                             }
                         )
-                for assigned_property in work.properties:
-                    if not str(assigned_property.property_definition_uri).startswith(
-                        str(CC)
-                    ):
+                for p, o in work_resource.predicate_objects():
+                    if not str(p).startswith(str(COCO)):
+                        continue
+                    if not isinstance(o, Literal):
                         continue
                     csv_writer.writerow(
                         {
@@ -102,9 +92,7 @@ class CostumeCorePropertyExtractorCsvFileLoader(_Loader):
                                 "ascii", "replace"
                             ).decode("ascii"),
                             "object_uri": str(work.uri),
-                            "predicate": str(assigned_property.property_definition_uri),
-                            "value": assigned_property.value.encode(
-                                "ascii", "replace"
-                            ).decode("ascii"),
+                            "predicate": str(p),
+                            "value": o.value.encode("ascii", "replace").decode("ascii"),
                         }
                     )

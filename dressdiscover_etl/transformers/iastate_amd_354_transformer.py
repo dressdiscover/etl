@@ -2,24 +2,23 @@ import csv
 from pathlib import Path
 from typing import Dict
 
-from paradicms_etl._transformer import _Transformer
 from paradicms_etl.models.collection import Collection
+from paradicms_etl.models.creative_commons_licenses import CreativeCommonsLicenses
 from paradicms_etl.models.image import Image
 from paradicms_etl.models.institution import Institution
+from paradicms_etl.models.license import License
 from paradicms_etl.models.property import Property
-from paradicms_etl.models.property_definition import PropertyDefinition
-from paradicms_etl.models.property_definitions import PropertyDefinitions
 from paradicms_etl.models.rights import Rights
-from paradicms_etl.models.rights_value import RightsValue
 from paradicms_etl.models.work import Work
-from paradicms_etl.utils.csv_utils import strip_csv_row
-from rdflib import URIRef
+from paradicms_etl.namespaces import VRA
+from paradicms_etl.transformer import Transformer
+from paradicms_etl.utils.strip_csv_row import strip_csv_row
+from rdflib import URIRef, DCTERMS
 
-from dressdiscover_etl.costume_core import CostumeCore
 from dressdiscover_etl.models import costume_core_predicates, costume_core_terms
 
 
-class IastateAmd354Transformer(_Transformer):
+class IastateAmd354Transformer(Transformer):
     __URN_BASE = "urn:iastate_amd_354:"
 
     __INSTITUTION = Institution(
@@ -40,65 +39,26 @@ class IastateAmd354Transformer(_Transformer):
     }
 
     __LICENSES = {
-        "CC BY 4.0": RightsValue(
-            text="CC BY 4.0",
-            uri="https://creativecommons.org/licenses/by/4.0/",
+        "CC BY 4.0": CreativeCommonsLicenses.BY_4_0,
+        "CC BY-NC-SA 4.0": CreativeCommonsLicenses.BY_NC_SA_4_0,
+        "CC0 1.0": CreativeCommonsLicenses.CC0_1_0,
+        "Digital image courtesy of the Getty's Open Content Program": License.from_fields(
+            identifier="Getty Open Content Program",
+            title="Getty Open Content Program",
+            uri=URIRef("https://www.getty.edu/about/whatwedo/opencontent.html"),
         ),
-        "CC BY-NC-SA 4.0": RightsValue(
-            text="CC BY-NC-SA 4.0",
-            uri="https://creativecommons.org/licenses/by-nc-sa/4.0/",
+        "Open Access": License.from_fields(
+            identifier="Open Access",
+            title="Open Access",
+            uri=URIRef("https://images.nga.gov/en/page/openaccess.html"),
         ),
-        "CC0 1.0": RightsValue(
-            text="CC0 1.0", uri="https://creativecommons.org/publicdomain/zero/1.0/"
-        ),
-        "Digital image courtesy of the Getty's Open Content Program": RightsValue(
-            text="Any use permitted",
-            uri="https://www.getty.edu/about/whatwedo/opencontent.html",
-        ),
-        "Open Access": RightsValue(
-            text="Any use permitted",
-            uri="https://images.nga.gov/en/page/openaccess.html",
-        ),
-        "Public Domain": RightsValue(
-            text="Public Domain",
-            uri="https://creativecommons.org/publicdomain/mark/1.0/",
-        ),
+        "Public Domain": CreativeCommonsLicenses.PUBLICDOMAIN,
     }
 
-    __RIGHTS_STATEMENTS = {
-        "CC BY 4.0": RightsValue(
-            text="In Copyright", uri="http://rightsstatements.org/vocab/InC/1.0/"
-        ),
-        "CC BY-NC-SA 4.0": RightsValue(
-            text="In Copyright", uri="http://rightsstatements.org/vocab/InC/1.0/"
-        ),
-        "CC0 1.0": None,
-        "Digital image courtesy of the Getty's Open Content Program": RightsValue(
-            text="Digital image courtesy of the Getty's Open Content Program",
-            uri="https://www.getty.edu/about/whatwedo/opencontent.html",
-        ),
-        "Open Access": RightsValue(
-            text="National Gallery Open Access",
-            uri="https://images.nga.gov/en/page/openaccess.html",
-        ),
-        "Public Domain": None,
-    }
-
-    __TEXTBOOK_CHAPTER_PROPERTY_DEFINITION = PropertyDefinition(
-        faceted=True,
-        label="Textbook chapter",
-        uri=URIRef(__URN_BASE + "property_definition:textbook_chapter"),
-    )
-
-    def transform(self, *, file_path: Path):
-        yield from PropertyDefinitions.as_tuple()
-        yield from CostumeCore().property_definitions
-        yield self.__TEXTBOOK_CHAPTER_PROPERTY_DEFINITION
-
+    def transform(self, *, file_path: Path):  # type: ignore
         yield self.__INSTITUTION
-        yield Image.create(
+        yield Image.from_fields(
             depicts_uri=self.__INSTITUTION.uri,
-            institution_uri=self.__INSTITUTION.uri,
             uri=URIRef(
                 (file_path.parent / "brandelements-wordmark-with-modifier.png").as_uri()
             ),
@@ -145,15 +105,15 @@ class IastateAmd354Transformer(_Transformer):
         # object_properties.append(
         #     Property(PropertyDefinitions.DESCRIPTION.uri, image_description)
         # )
-        object_properties.append(Property(PropertyDefinitions.TITLE.uri, image_title))
+        object_properties.append(Property(DCTERMS.title, image_title))
 
         # DC/VRA/custom string properties
         for key, property_uri in (
-            ("Century", PropertyDefinitions.DATE.uri),
-            ("Country of Origin", PropertyDefinitions.SPATIAL.uri),
-            ("Earliest Date", PropertyDefinitions.EARLIEST_DATE.uri),
-            ("Latest Date", PropertyDefinitions.LATEST_DATE.uri),
-            ("Textbook Chapter", self.__TEXTBOOK_CHAPTER_PROPERTY_DEFINITION.uri),
+            ("Century", DCTERMS.DATE),
+            ("Country of Origin", DCTERMS.spatial),
+            ("Earliest Date", VRA.earliestDate),
+            ("Latest Date", VRA.latestDate),
+            # ("Textbook Chapter", self.__TEXTBOOK_CHAPTER_PROPERTY_DEFINITION.uri),
         ):
             try:
                 value = csv_row.pop(key)
@@ -215,23 +175,22 @@ class IastateAmd354Transformer(_Transformer):
             collection_uris=(self.__COLLECTION.uri,),
             institution_uri=self.__INSTITUTION.uri,
             properties=tuple(object_properties),
-            rights=Rights(
+            rights=Rights.from_fields(
                 holder=object_source,
                 license=self.__LICENSES[image_license],
-                statement=self.__RIGHTS_STATEMENTS[image_license],
+                # statement=self.__RIGHTS_STATEMENTS[image_license],
             ),
             title=image_title,
             uri=URIRef(csv_row.pop("Object URL")),
         )
         yield work
 
-        image = Image.create(
+        image = Image.from_fields(
             depicts_uri=work.uri,
-            institution_uri=self.__INSTITUTION.uri,
-            rights=Rights(
+            rights=Rights.from_fields(
                 holder=image_source,
                 license=self.__LICENSES[image_license],
-                statement=self.__RIGHTS_STATEMENTS[image_license],
+                # statement=self.__RIGHTS_STATEMENTS[image_license],
             ),
             uri=URIRef(image_file_path.as_uri()),
             # uri=URIRef(image_url),

@@ -1,15 +1,7 @@
-from itertools import chain
-from typing import Dict, List, Optional, Set, Tuple, Union
+from typing import Dict, List, Set, Tuple, Union, FrozenSet
 
-from paradicms_etl._transformer import _Transformer
 from paradicms_etl.models.collection import Collection
 from paradicms_etl.models.creative_commons_licenses import CreativeCommonsLicenses
-from paradicms_etl.models.creative_commons_rights_statements import (
-    CreativeCommonsRightsStatements,
-)
-from paradicms_etl.models.dublin_core_property_definitions import (
-    DublinCorePropertyDefinitions,
-)
 from paradicms_etl.models.image import Image
 from paradicms_etl.models.image_dimensions import ImageDimensions
 from paradicms_etl.models.institution import Institution
@@ -20,19 +12,20 @@ from paradicms_etl.models.rights_statements_dot_org_rights_statements import (
     RightsStatementsDotOrgRightsStatements,
 )
 from paradicms_etl.models.work import Work
-from rdflib import Graph, URIRef
+from paradicms_etl.transformer import Transformer
+from rdflib import Graph, URIRef, DCTERMS
 
 from dressdiscover_etl.models.costume_core_description import CostumeCoreDescription
 from dressdiscover_etl.models.costume_core_ontology import CostumeCoreOntology
 from dressdiscover_etl.models.costume_core_predicate import CostumeCorePredicate
 from dressdiscover_etl.models.costume_core_rights import CostumeCoreRights
 from dressdiscover_etl.models.costume_core_term import CostumeCoreTerm
-from dressdiscover_etl.namespace import CC
+from dressdiscover_etl.namespaces import COCO
 
 
-class CostumeCoreOntologyTransformer(_Transformer):
+class CostumeCoreOntologyTransformer(Transformer):
     def __init__(self, *, ontology_version: str, **kwds):
-        _Transformer.__init__(self, **kwds)
+        Transformer.__init__(self, **kwds)
         self.__ontology_version = ontology_version
 
     def __parse_predicates(
@@ -63,8 +56,10 @@ class CostumeCoreOntologyTransformer(_Transformer):
             )
         return tuple(sorted(predicates, key=lambda predicate: predicate.id))
 
-    def __parse_rights(self, fields: Dict[str, str], key_prefix: str):
-        def get_first_list_element(list_: Optional[List[str]]):
+    def __parse_rights(
+        self, fields: Dict[str, Union[str, List[str], None]], key_prefix: str
+    ):
+        def get_first_list_element(list_: Union[str, List[str], None]):
             if list_ is None:
                 return None
             if not isinstance(list_, list):
@@ -116,13 +111,13 @@ class CostumeCoreOntologyTransformer(_Transformer):
             else:
                 description = None
 
-            features = []
+            features_list = []
             for feature_record_id in fields.get("features", []):
                 for feature_record in feature_records:
                     if feature_record["id"] == feature_record_id:
-                        features.append(feature_record["fields"]["id"])
+                        features_list.append(feature_record["fields"]["id"])
                         break
-            features = tuple(features)
+            features = tuple(features_list)
 
             image_record_id = fields.get("image_filename")
             if image_record_id:
@@ -144,7 +139,7 @@ class CostumeCoreOntologyTransformer(_Transformer):
                 image_rights = None
 
             # cc_uri = fields.get("CC_URI")
-            inferred_uri = str(CC[fields["id"]])
+            inferred_uri = str(COCO[fields["id"]])
             # if cc_uri is None:
             #     uri = inferred_uri
             # elif cc_uri != inferred_uri:
@@ -167,8 +162,10 @@ class CostumeCoreOntologyTransformer(_Transformer):
             terms.append(term)
         return tuple(sorted(terms, key=lambda term: term.id))
 
-    def transform(self, *, records_by_table: Dict[str, Tuple]) -> Graph:
-        yield CostumeCoreOntology(uri=URIRef(str(CC)), version=self.__ontology_version)
+    def transform(self, *, records_by_table: Dict[str, Tuple]) -> Graph:  # type: ignore
+        yield CostumeCoreOntology(
+            uri=URIRef(str(COCO)), version=self.__ontology_version
+        )
 
         feature_records = tuple(
             record
@@ -198,7 +195,7 @@ class CostumeCoreOntologyTransformer(_Transformer):
         )
         yield from terms
 
-        terms_by_features = {}
+        terms_by_features: Dict[str, List[CostumeCoreTerm]] = {}
         for term in terms:
             if term.features:
                 for feature in term.features:
@@ -231,9 +228,6 @@ class CostumeCoreOntologyTransformer(_Transformer):
         rights_licenses_records,
         terms: Tuple[CostumeCoreTerm, ...],
     ):
-        yield DublinCorePropertyDefinitions.CREATOR
-        yield DublinCorePropertyDefinitions.DESCRIPTION
-
         institution = Institution(
             name="Costume Core Ontology",
             uri=URIRef("http://www.ardenkirkland.com/costumecore/"),
@@ -258,22 +252,23 @@ class CostumeCoreOntologyTransformer(_Transformer):
             version="1.0",
         )
         available_licenses_by_uri[odc_by_license.uri] = odc_by_license
+        available_license_uris = frozenset(available_licenses_by_uri.keys())
 
         available_rights_statements_by_uri = {
             rights_statement.uri: rights_statement
-            for rights_statement in chain(
-                CreativeCommonsRightsStatements.as_tuple(),
-                RightsStatementsDotOrgRightsStatements.as_tuple(),
-            )
+            for rights_statement in RightsStatementsDotOrgRightsStatements.as_tuple()
         }
+        available_rights_statement_uris = frozenset(
+            available_rights_statements_by_uri.keys()
+        )
 
-        yielded_license_uris = set()
-        yielded_rights_statement_uris = set()
-        yielded_collection_uris = set()
+        yielded_license_uris: Set[URIRef] = set()
+        yielded_rights_statement_uris: Set[URIRef] = set()
+        yielded_collection_uris: Set[URIRef] = set()
 
         def transform_to_paradicms_rights(rights: CostumeCoreRights) -> Rights:
             def transform_rights_field(
-                available_rights_uris: Set[URIRef],
+                available_rights_uris: FrozenSet[URIRef],
                 rights_uri: Union[None, str],
                 yielded_rights_uris: Set[URIRef],
             ) -> Union[None, str, URIRef]:
@@ -299,7 +294,7 @@ class CostumeCoreOntologyTransformer(_Transformer):
 
                 return URIRef(rights_uri)
 
-            return Rights(
+            return Rights.from_fields(
                 creator=rights.author,
                 # holder=RightsValue(text=rights.source_name, uri=rights.source_url),
                 holder=rights.source_name,
@@ -309,7 +304,9 @@ class CostumeCoreOntologyTransformer(_Transformer):
                 # if rights.license_uri
                 # else None,
                 license=transform_rights_field(
-                    available_licenses_by_uri, rights.license_uri, yielded_license_uris
+                    available_license_uris,
+                    rights.license_uri,
+                    yielded_license_uris,
                 ),
                 # statement=RightsValue(
                 #     text=uri_text(rights.rights_statement_uri),
@@ -318,7 +315,7 @@ class CostumeCoreOntologyTransformer(_Transformer):
                 # if rights.rights_statement_uri
                 # else None,
                 statement=transform_rights_field(
-                    available_rights_statements_by_uri,
+                    available_rights_statement_uris,
                     rights.rights_statement_uri,
                     yielded_rights_statement_uris,
                 ),
@@ -354,13 +351,13 @@ class CostumeCoreOntologyTransformer(_Transformer):
             if term.description:
                 work_properties.append(
                     Property(
-                        DublinCorePropertyDefinitions.DESCRIPTION,
+                        DCTERMS.description,
                         term.description.text_en,
                     )
                 )
                 work_properties.append(
-                    property(
-                        DublinCorePropertyDefinitions.CREATOR,
+                    Property(
+                        DCTERMS.creator,
                         term.description.rights.author,
                     )
                 )
@@ -385,19 +382,19 @@ class CostumeCoreOntologyTransformer(_Transformer):
 
             image_rights = transform_to_paradicms_rights(term.image_rights)
 
-            original_image = Image(
+            original_image = Image.from_fields(
                 depicts_uri=work.uri,
                 rights=image_rights,
-                uri=URIRef(term.full_size_image_url),
+                uri=URIRef(str(term.full_size_image_url)),
             )
             yield original_image
 
-            yield Image(
+            yield Image.from_fields(
                 depicts_uri=work.uri,
                 exact_dimensions=ImageDimensions(height=200, width=200),
                 original_image_uri=original_image.uri,
                 rights=image_rights,
-                uri=URIRef(term.thumbnail_url),
+                uri=URIRef(str(term.thumbnail_url)),
             )
 
         # Yield only the licenses and rights statements we use

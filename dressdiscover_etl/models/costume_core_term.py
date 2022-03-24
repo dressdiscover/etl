@@ -2,7 +2,7 @@ from dataclasses import dataclass
 from typing import Optional, Tuple
 from urllib.parse import quote
 
-from paradicms_etl._model import _Model
+from paradicms_etl.model import Model
 from rdflib import BNode, Graph, Literal, RDF, RDFS, URIRef
 from rdflib.namespace import DCTERMS, OWL
 from rdflib.resource import Resource
@@ -12,12 +12,12 @@ from dressdiscover_etl.models.costume_core_rights import CostumeCoreRights
 
 
 @dataclass(frozen=True)
-class CostumeCoreTerm(_Model):
-    description: CostumeCoreDescription
+class CostumeCoreTerm(Model):
     display_name_en: str
     id: str
     uri: str
     aat_id: Optional[str] = None
+    description: Optional[CostumeCoreDescription] = None
     features: Optional[Tuple[str, ...]] = None
     image_filename: Optional[str] = None
     image_rights: Optional[CostumeCoreRights] = None
@@ -43,7 +43,7 @@ class CostumeCoreTerm(_Model):
             else None
         )
 
-    def to_rdf(self, *, graph: Graph, **kwds) -> Resource:
+    def to_rdf(self, graph: Graph) -> Resource:
         resource = graph.resource(URIRef(self.uri))
         resource.add(RDFS.label, Literal(self.label, lang="en"))
         resource.add(DCTERMS.identifier, Literal(self.id))

@@ -1,10 +1,10 @@
-from paradicms_etl._pipeline import _Pipeline
 from paradicms_etl.extractors.luna_extractor import LunaExtractor
+from paradicms_etl.pipeline import Pipeline
 
 from dressdiscover_etl.transformers.uc_daap_vac_transformer import UcDaapVacTransformer
 
 
-class UcDaapVacPipeline(_Pipeline):
+class UcDaapVacPipeline(Pipeline):
     """
     Pipeline for the Visual Arts Collection at the Library for Design, Architecture, Art, and Planning at the University of Cincinnati
     """
@@ -12,7 +12,7 @@ class UcDaapVacPipeline(_Pipeline):
     ID = "uc_daap_vac"
 
     def __init__(self, **kwds):
-        _Pipeline.__init__(
+        Pipeline.__init__(
             self,
             extractor=LunaExtractor(
                 base_url="https://digital.libraries.uc.edu/",

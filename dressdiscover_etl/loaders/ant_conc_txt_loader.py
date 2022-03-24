@@ -1,12 +1,9 @@
-from paradicms_etl._loader import _Loader
-from paradicms_etl.models.dublin_core_property_definitions import (
-    DublinCorePropertyDefinitions,
-)
+from paradicms_etl.loader import Loader
 from paradicms_etl.models.work import Work
-from rdflib import Literal
+from rdflib import Literal, DCTERMS
 
 
-class AntConcTxtLoader(_Loader):
+class AntConcTxtLoader(Loader):
     def load(self, *, models):
         with open(
             self._loaded_data_dir_path / "AntConc.txt",
@@ -24,9 +21,7 @@ class AntConcTxtLoader(_Loader):
                 for property_ in work.properties:
                     if not isinstance(property_.value, Literal):
                         continue
-                    if property_.uri in (
-                        DublinCorePropertyDefinitions.DESCRIPTION.uri,
-                    ):
+                    if property_.uri in [DCTERMS.description]:
                         descriptions.add(str(property_.value.toPython()))
                 if not descriptions:
                     self._logger.warn("work %s has no description", work.uri)

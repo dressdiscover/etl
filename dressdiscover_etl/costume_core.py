@@ -1,16 +1,8 @@
-from itertools import chain
-from typing import Dict, Optional, Tuple
+from typing import Dict, Optional, Tuple, List
 
-from paradicms_etl.models.dublin_core_property_definitions import (
-    DublinCorePropertyDefinitions,
-)
 from paradicms_etl.models.image import Image
 from paradicms_etl.models.image_dimensions import ImageDimensions
-from paradicms_etl.models.property_definition import PropertyDefinition
-from paradicms_etl.models.property_value_definition import PropertyValueDefinition
-from paradicms_etl.models.vra_core_property_definitions import (
-    VraCorePropertyDefinitions,
-)
+from paradicms_etl.models.named_value import NamedValue
 from rdflib import Literal, URIRef
 
 from dressdiscover_etl.models.costume_core_predicate import CostumeCorePredicate
@@ -42,39 +34,23 @@ class CostumeCore:
 
         self.__terms_by_id = {term.id: term for term in terms}
 
-        terms_by_predicate_id = {}
+        terms_by_predicate_id: Dict[str, List[CostumeCoreTerm]] = {}
         for costume_core_term in COSTUME_CORE_TERMS:
             if costume_core_term.features:
                 for feature in costume_core_term.features:
                     terms_by_predicate_id.setdefault(feature, []).append(
                         costume_core_term
                     )
-        self.__terms_by_predicate_id = terms_by_predicate_id
-
-        paradicms_property_definition_uris = {
-            str(property_definition.uri)
-            for property_definition in chain(
-                DublinCorePropertyDefinitions.as_tuple(),
-                VraCorePropertyDefinitions.as_tuple(),
-            )
+        self.__terms_by_predicate_id = {
+            predicate_id: tuple(terms) for predicate_id, terms in terms_by_predicate_id
         }
-        # Exclude properties already defined by paradicms
-        self.__property_definitions = tuple(
-            PropertyDefinition(
-                # faceted=costume_core_predicate.id in terms_by_predicate_id,
-                label=costume_core_predicate.label,
-                uri=URIRef(costume_core_predicate.uri),
-            )
-            for costume_core_predicate in COSTUME_CORE_PREDICATES
-            if costume_core_predicate.uri not in paradicms_property_definition_uris
-        )
 
         images = []
-        property_value_definitions = []
+        named_values = []
         for term in self.__terms:
             if not term.features:
                 continue
-            property_value_definition = PropertyValueDefinition(
+            named_value = NamedValue.from_fields(
                 property_uris=tuple(
                     URIRef(self.__predicates_by_id[predicate_id].uri)
                     for predicate_id in term.features
@@ -82,13 +58,13 @@ class CostumeCore:
                 uri=URIRef(term.uri),
                 value=Literal(term.display_name_en),
             )
-            property_value_definitions.append(property_value_definition)
+            named_values.append(named_value)
 
             full_size_image_url = term.full_size_image_url
             if full_size_image_url is None:
                 continue
             full_size_image = Image(
-                depicts_uri=property_value_definition.uri,
+                depicts_uri=named_value.uri,
                 uri=URIRef(full_size_image_url),
             )
             images.append(full_size_image)
@@ -97,8 +73,8 @@ class CostumeCore:
             if thumbnail_url is None:
                 continue
             images.append(
-                Image(
-                    depicts_uri=property_value_definition.uri,
+                Image.from_fields(
+                    depicts_uri=named_value.uri,
                     exact_dimensions=ImageDimensions(height=200, width=200),
                     original_image_uri=full_size_image.uri,
                     uri=URIRef(thumbnail_url),
@@ -106,11 +82,15 @@ class CostumeCore:
             )
 
         self.__images = tuple(images)
-        self.__property_value_definitions = tuple(property_value_definitions)
+        self.__named_values = tuple(named_values)
 
     @property
     def images(self) -> Tuple[Image, ...]:
         return self.__images
+
+    @property
+    def named_values(self) -> Tuple[NamedValue, ...]:
+        return self.__named_values
 
     @property
     def predicates(self) -> Tuple[CostumeCorePredicate, ...]:
@@ -125,14 +105,6 @@ class CostumeCore:
         return self.__predicates_by_label
 
     @property
-    def property_definitions(self) -> Tuple[PropertyDefinition, ...]:
-        return self.__property_definitions
-
-    @property
-    def property_value_definitions(self) -> Tuple[PropertyValueDefinition, ...]:
-        return self.__property_value_definitions
-
-    @property
     def terms(self) -> Tuple[CostumeCoreTerm, ...]:
         return self.__terms
 
@@ -141,5 +113,5 @@ class CostumeCore:
         return self.__terms_by_id
 
     @property
-    def terms_by_predicate_id(self) -> Dict[str, CostumeCoreTerm]:
+    def terms_by_predicate_id(self) -> Dict[str, Tuple[CostumeCoreTerm, ...]]:
         return self.__terms_by_predicate_id

@@ -1,14 +1,14 @@
-from paradicms_etl._pipeline import _Pipeline
 from paradicms_etl.extractors.existing_file_extractor import ExistingFileExtractor
+from paradicms_etl.pipeline import Pipeline
 
 from dressdiscover_etl.transformers.schcc_transformer import SchccTransformer
 
 
-class SchccPipeline(_Pipeline):
+class SchccPipeline(Pipeline):
     ID = "schcc"
 
     def __init__(self, **kwds):
-        _Pipeline.__init__(
+        Pipeline.__init__(
             self,
             extractor=ExistingFileExtractor(
                 file_name="Smith CostumeCoreToolkit-MappingTemplate2 - Remediated.csv",

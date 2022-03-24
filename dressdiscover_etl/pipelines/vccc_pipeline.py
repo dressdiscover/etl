@@ -1,14 +1,14 @@
-from paradicms_etl._pipeline import _Pipeline
 from paradicms_etl.extractors.omeka_classic_extractor import OmekaClassicExtractor
+from paradicms_etl.pipeline import Pipeline
 
 from dressdiscover_etl.transformers.vccc_transformer import VcccTransformer
 
 
-class VcccPipeline(_Pipeline):
+class VcccPipeline(Pipeline):
     __ID = "vccc"
 
     def __init__(self, *, omeka_api_key: str, **kwds):
-        _Pipeline.__init__(
+        Pipeline.__init__(
             self,
             extractor=OmekaClassicExtractor(
                 api_key=omeka_api_key,
@@ -23,7 +23,7 @@ class VcccPipeline(_Pipeline):
 
     @classmethod
     def add_arguments(cls, arg_parser):
-        _Pipeline.add_arguments(arg_parser)
+        Pipeline.add_arguments(arg_parser)
         arg_parser.add_argument("--omeka-api-key", help="Omeka API key", required=True)
 
 

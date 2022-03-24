@@ -2,21 +2,19 @@ from pathlib import Path
 from typing import Generator, Optional
 
 from configargparse import ArgParser
-from paradicms_etl._model import _Model
-from paradicms_etl.image_archivers.s3_image_archiver import S3ImageArchiver
-from paradicms_etl.loaders.gui.gui_loader import GuiLoader
-from paradicms_etl.loaders.gui.s3_gui_deployer import S3GuiDeployer
+from paradicms_etl.model import Model
 from paradicms_etl.models.collection import Collection
-from paradicms_etl.models.gui_metadata import GuiMetadata
 from paradicms_etl.models.image import Image
 from paradicms_etl.models.institution import Institution
-from paradicms_etl.models.property_definition import PropertyDefinition
 from paradicms_etl.models.work import Work
-from paradicms_etl.pipelines._composite_pipeline import _CompositePipeline
+from paradicms_etl.pipelines.composite_pipeline import CompositePipeline
 from paradicms_etl.pipelines.past_perfect_online_pipeline import (
     PastPerfectOnlinePipeline,
 )
 from paradicms_etl.transformers.validation_transformer import ValidationTransformer
+from paradicms_gui.deployers.s3_deployer import S3Deployer  # type: ignore
+from paradicms_gui.image_archivers.s3_image_archiver import S3ImageArchiver  # type: ignore
+from paradicms_gui.loaders.gui_loader import GuiLoader  # type: ignore
 
 from dressdiscover_etl.loaders.ant_conc_txt_loader import AntConcTxtLoader
 from dressdiscover_etl.pipelines.penn_museum_pipeline import PennMuseumPipeline
@@ -25,7 +23,7 @@ from dressdiscover_etl.pipelines.uc_daap_vac_pipeline import UcDaapVacPipeline
 from dressdiscover_etl.pipelines.vccc_pipeline import VcccPipeline
 
 
-class UnionPipeline(_CompositePipeline):
+class UnionPipeline(CompositePipeline):
     __ID = "union"
 
     def __init__(
@@ -55,9 +53,7 @@ class UnionPipeline(_CompositePipeline):
             loader = GuiLoader(
                 data_dir_path=data_dir_path,
                 gui="material-ui-union",
-                deployer=S3GuiDeployer(
-                    s3_bucket_name="union.dressdiscover.org", **kwds
-                ),
+                deployer=S3Deployer(s3_bucket_name="union.dressdiscover.org", **kwds),
                 image_archiver=S3ImageArchiver(
                     s3_bucket_name="dressdiscover-images", **kwds
                 ),
@@ -66,7 +62,7 @@ class UnionPipeline(_CompositePipeline):
                 **kwds,
             )
 
-        _CompositePipeline.__init__(
+        CompositePipeline.__init__(
             self,
             id=self.__ID,
             loader=loader,
@@ -105,8 +101,8 @@ class UnionPipeline(_CompositePipeline):
 
     @classmethod
     def add_arguments(cls, arg_parser: ArgParser):
-        _CompositePipeline.add_arguments(arg_parser)
-        _CompositePipeline._add_aws_credentials_arguments(arg_parser)
+        CompositePipeline.add_arguments(arg_parser)
+        CompositePipeline._add_aws_credentials_arguments(arg_parser)
         arg_parser.add_argument(
             "--load-ant-conc", action="store_true", help="load an AntConc text file"
         )
@@ -130,26 +126,15 @@ class UnionPipeline(_CompositePipeline):
             for pipeline in self._pipelines:
                 yield from pipeline.extract_transform(**kwds)
 
-        def filter_models(models: Generator[_Model, None, None]):
+        def filter_models(models: Generator[Model, None, None]):
             for model in models:
-                if isinstance(
-                    model, (Collection, Image, Institution, Work, PropertyDefinition)
-                ):
+                if isinstance(model, (Collection, Image, Institution, Work)):
                     yield model
                 elif model.__class__.__name__ not in excluded_model_class_names:
                     self._logger.info(
                         "filtering out %s model", model.__class__.__name__
                     )
                     excluded_model_class_names.add(model.__class__.__name__)
-
-        self.loader.load(
-            models=(
-                GuiMetadata(
-                    document_title="DressDiscover Union",
-                    navbar_title="DressDiscover Union",
-                ),
-            )
-        )
 
         self.loader.load(
             models=ValidationTransformer(pipeline_id=self.id).transform(

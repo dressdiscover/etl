@@ -1,4 +1,6 @@
-from typing import Collection, Optional
+from typing import Optional
+
+from paradicms_etl.models.collection import Collection
 
 from dressdiscover_etl.transformers.costume_core_omeka_classic_transformer import (
     CostumeCoreOmekaClassicTransformer,

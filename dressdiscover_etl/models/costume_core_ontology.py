@@ -1,20 +1,36 @@
-from dataclasses import dataclass
-
-from paradicms_etl.models._named_model import _NamedModel
-from rdflib import Graph, Literal, OWL, URIRef
+from paradicms_etl.models.named_model import NamedModel
+from paradicms_etl.utils.resource_builder import ResourceBuilder
+from rdflib import Literal, OWL, URIRef
 from rdflib.namespace import DCTERMS, RDF, RDFS
-from rdflib.resource import Resource
 
-from dressdiscover_etl.namespace import CC
+from dressdiscover_etl.namespaces import COCO
 
 
-@dataclass(frozen=True)
-class CostumeCoreOntology(_NamedModel):
-    version: str
+class CostumeCoreOntology(NamedModel):
+    @classmethod
+    def from_fields(cls, *, version: str) -> "CostumeCoreOntology":
+        resource_builder = ResourceBuilder(URIRef(str(COCO)[:-1]))
 
-    def to_rdf(self, *, graph: Graph, **kwds) -> Resource:
-        graph.namespace_manager.bind("cc", CC)
-        graph.namespace_manager.bind("owl", OWL)
+        resource_builder.add(RDF.type, OWL.Ontology)
+        resource_builder.add(OWL.versionIRI, COCO[version])
+        resource_builder.add(OWL.versionInfo, Literal(version))
+        resource_builder.add(DCTERMS.title, Literal("Costume Core Ontology"))
+        resource_builder.add(DCTERMS.creator, Literal("Arden Kirkland"))
+        resource_builder.add(DCTERMS.contributor, Literal("Minor Gordon"))
+        resource_builder.add(
+            DCTERMS.rights,
+            Literal(
+                "This ontology is distributed under a Creative Commons BY SA 4.0 license  - https://creativecommons.org/licenses/by-sa/4.0/"
+            ),
+        )
+        resource_builder.add(
+            RDFS.comment,
+            Literal(
+                "The Costume Core ontology is for describing artifacts of historic clothing, and is meant to build upon VRA Core and Dublin Core. Work to develop this ontology was part of the Costume Core Toolkit project, funded by a Visual Resources Association Foundation Project Grant in 2019-2020. More information is at http://ardenkirkland.com/costumecore"
+            ),
+        )
+
+        resource = resource_builder.build()
 
         # Annotation properties
         for annotation_property_local in (
@@ -25,28 +41,8 @@ class CostumeCoreOntology(_NamedModel):
             "rights",
             "source",
         ):
-            graph.add(
+            resource.graph.add(
                 (DCTERMS[annotation_property_local], RDF.type, OWL.AnnotationProperty)
             )
 
-        ontology_resource = graph.resource(URIRef(str(CC)[:-1]))
-        ontology_resource.add(RDF.type, OWL.Ontology)
-        ontology_resource.add(OWL.versionIRI, CC[self.version])
-        ontology_resource.add(OWL.versionInfo, Literal(self.version))
-        ontology_resource.add(DCTERMS.title, Literal("Costume Core Ontology"))
-        ontology_resource.add(DCTERMS.creator, Literal("Arden Kirkland"))
-        ontology_resource.add(DCTERMS.contributor, Literal("Minor Gordon"))
-        ontology_resource.add(
-            DCTERMS.rights,
-            Literal(
-                "This ontology is distributed under a Creative Commons BY SA 4.0 license  - https://creativecommons.org/licenses/by-sa/4.0/"
-            ),
-        )
-        ontology_resource.add(
-            RDFS.comment,
-            Literal(
-                "The Costume Core ontology is for describing artifacts of historic clothing, and is meant to build upon VRA Core and Dublin Core. Work to develop this ontology was part of the Costume Core Toolkit project, funded by a Visual Resources Association Foundation Project Grant in 2019-2020. More information is at http://ardenkirkland.com/costumecore"
-            ),
-        )
-
-        return ontology_resource
+        return cls(resource)

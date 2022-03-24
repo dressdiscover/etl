@@ -1,19 +1,19 @@
 import re
 from pprint import pprint
-from typing import Dict, List, Tuple
+from typing import Dict, List, Tuple, Generator, Any
 
 from paradicms_etl.models.collection import Collection
 from paradicms_etl.models.image import Image
 from paradicms_etl.models.institution import Institution
-from paradicms_etl.models.work import Work
 from paradicms_etl.models.property import Property
-from paradicms_etl.models.property_definitions import PropertyDefinitions
 from paradicms_etl.models.rights import Rights
-from paradicms_etl.transformers._airtable_transformer import _AirtableTransformer
-from rdflib import URIRef
+from paradicms_etl.models.work import Work
+from paradicms_etl.namespaces import VRA
+from paradicms_etl.transformers.airtable_transformer import AirtableTransformer
+from rdflib import URIRef, DCTERMS
 
 
-class VraCamsTransformer(_AirtableTransformer):
+class VraCamsTransformer(AirtableTransformer):
     def transform(self, *, records_by_table, **kwds):
         yield from PropertyDefinitions.as_tuple()
 
@@ -55,7 +55,7 @@ class VraCamsTransformer(_AirtableTransformer):
         Returns a dict of
         {key_prefix: [{sub_key: [sub value, sub value]}]}
         """
-        result = {}
+        result: Dict[str, List[Dict[str, List[str]]]] = {}
 
         for key_prefix in key_prefixes:
             for key in list(sorted(fields.keys())):
@@ -76,18 +76,18 @@ class VraCamsTransformer(_AirtableTransformer):
 
                 if isinstance(key_suffix_parts[0], int):
                     # Agent1Name
-                    value_number = key_suffix_parts.pop(0)
+                    value_number = int(key_suffix_parts.pop(0))
                 else:
                     # AgentName1
                     assert isinstance(key_suffix_parts[-1], int)
-                    value_number = key_suffix_parts.pop(-1)
+                    value_number = int(key_suffix_parts.pop(-1))
                 if key_suffix_parts:
                     assert isinstance(key_suffix_parts[0], str)
                     sub_key = key_suffix_parts.pop(0)
                     if key_suffix_parts:
                         # Agent1Name1
                         assert isinstance(key_suffix_parts[0], int)
-                        sub_value_number = key_suffix_parts[0]
+                        sub_value_number = int(key_suffix_parts[0])
                     else:
                         # AgentName1
                         sub_value_number = None
@@ -100,7 +100,7 @@ class VraCamsTransformer(_AirtableTransformer):
                 sub_key_values = key_prefix_values[value_number - 1]
                 if sub_value_number is None:
                     assert sub_key not in sub_key_values
-                    sub_key_values[sub_key] = value
+                    sub_key_values[str(sub_key)] = value  # type: ignore
                 else:
                     sub_key_values.setdefault(sub_key, []).append(value)
         return result
@@ -108,14 +108,12 @@ class VraCamsTransformer(_AirtableTransformer):
     def __transform_image_record(
         self,
         *,
-        image_record: object,
-        institution_uri: URIRef,
+        image_record: Any,
         work_uri: URIRef,
-    ) -> Image:
+    ) -> Generator[Image, None, None]:
         for image_thumbnail in image_record["fields"].get("IMAGE_Thumbnail", []):
-            yield Image.create(
+            yield Image.from_fields(
                 depicts_uri=work_uri,
-                institution_uri=institution_uri,
                 uri=URIRef(image_thumbnail["thumbnails"]["full"]["url"]),
             )
 
@@ -123,10 +121,10 @@ class VraCamsTransformer(_AirtableTransformer):
         self,
         *,
         collection_uri: URIRef,
-        image_records: List[object],
+        image_records: List[Any],
         institution_uri: URIRef,
-        work_records: List[object],
-    ) -> Image:
+        work_records: List[Any],
+    ) -> Generator[Image, None, None]:
         # Mutable dict of remaining (unyielded) image records
         images_records_by_id = {
             image_record["id"]: image_record for image_record in image_records
@@ -147,9 +145,9 @@ class VraCamsTransformer(_AirtableTransformer):
         self,
         *,
         collection_uri: URIRef,
-        image_records_by_id: Dict[str, object],
+        image_records_by_id: Dict[str, Any],
         institution_uri: URIRef,
-        work_record: object,
+        work_record: Any,
     ):
         work_uri = URIRef(
             self._record_url(
@@ -177,30 +175,30 @@ class VraCamsTransformer(_AirtableTransformer):
         assert work_title is not None
         work_abstract = work_record_fields.pop("DescriptionDisplay")
         try:
-            work_rights = Rights(holder=work_record_fields.pop("DescriptionSource"))
+            work_rights = Rights.from_fields(holder=work_record_fields.pop("DescriptionSource"))
         except KeyError:
             work_rights = None
 
         work_properties = []
 
-        for (key, property_definition) in (
-            ("AgentDisplay", PropertyDefinitions.CREATOR),
-            ("CulturalContextDisplay", PropertyDefinitions.CULTURAL_CONTEXT),
-            ("DateDisplay", PropertyDefinitions.DATE),
-            ("LocationDisplay", PropertyDefinitions.SPATIAL),
-            ("InscriptionDisplay", PropertyDefinitions.INSCRIPTION),
-            ("MaterialDisplay", PropertyDefinitions.MATERIAL),
-            ("MeasurementsDisplay", PropertyDefinitions.MEASUREMENTS),
-            ("StylePeriodDisplay", PropertyDefinitions.STYLE_PERIOD),
-            ("SubjectDisplay", PropertyDefinitions.SUBJECT),
-            ("TechniqueDisplay", PropertyDefinitions.TECHNIQUE),
-            ("TitleAlt", PropertyDefinitions.ALTERNATIVE_TITLE),
-            ("WorktypeDisplay", PropertyDefinitions.WORK_TYPE),
+        for (key, property_uri) in (
+            ("AgentDisplay", DCTERMS.creator),
+            ("CulturalContextDisplay", VRA.culturalContext),
+            ("DateDisplay", DCTERMS.date),
+            ("LocationDisplay", DCTERMS.spatial),
+            ("InscriptionDisplay", VRA.inscription),
+            ("MaterialDisplay", VRA.material),
+            # ("MeasurementsDisplay", VRA.measurements),
+            ("StylePeriodDisplay", VRA.stylePeriod),
+            ("SubjectDisplay", DCTERMS.subject),
+            ("TechniqueDisplay", VRA.technique),
+            ("TitleAlt", DCTERMS.alternative),
+            # ("WorktypeDisplay", VRA.workType),
         ):
             for value in work_record_fields.pop(key, "").split(":"):
                 value = value.strip()
                 if value:
-                    work_properties.append(Property(property_definition, value))
+                    work_properties.append(Property(property_uri, value))
 
         for ignore_key in (
             "LocationNotes",
@@ -238,7 +236,6 @@ class VraCamsTransformer(_AirtableTransformer):
             image_record = image_records_by_id.pop(image_record_id)
             yield from self.__transform_image_record(
                 image_record=image_record,
-                institution_uri=institution_uri,
                 work_uri=work_uri,
             )
 

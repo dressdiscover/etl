@@ -1,10 +1,10 @@
 from typing import Optional
 
 from configargparse import ArgParser
-from paradicms_etl._loader import _Loader
-from paradicms_etl._pipeline import _Pipeline
 from paradicms_etl.extractors.airtable_extractor import AirtableExtractor
+from paradicms_etl.loader import Loader
 from paradicms_etl.loaders.composite_loader import CompositeLoader
+from paradicms_etl.pipeline import Pipeline
 
 from dressdiscover_etl.loaders.costume_core_ontology_py_loader import (
     CostumeCoreOntologyPyLoader,
@@ -17,7 +17,7 @@ from dressdiscover_etl.transformers.costume_core_ontology_transformer import (
 )
 
 
-class CostumeCoreOntologyPipeline(_Pipeline):
+class CostumeCoreOntologyPipeline(Pipeline):
     ID = "costume_core_ontology"
 
     def __init__(
@@ -25,7 +25,7 @@ class CostumeCoreOntologyPipeline(_Pipeline):
         *,
         api_key: str,
         ontology_version: str,
-        loader: Optional[_Loader] = None,
+        loader: Optional[Loader] = None,
         **kwds
     ):
         if loader is None:
@@ -54,7 +54,7 @@ class CostumeCoreOntologyPipeline(_Pipeline):
                 ),
             )
 
-        _Pipeline.__init__(
+        Pipeline.__init__(
             self,
             extractor=AirtableExtractor(
                 api_key=api_key,
@@ -79,8 +79,8 @@ class CostumeCoreOntologyPipeline(_Pipeline):
 
     @classmethod
     def add_arguments(cls, arg_parser: ArgParser):
-        _Pipeline.add_arguments(arg_parser)
-        _Pipeline._add_aws_credentials_arguments(arg_parser)
+        Pipeline.add_arguments(arg_parser)
+        Pipeline._add_aws_credentials_arguments(arg_parser)
         arg_parser.add_argument("--api-key", required=True)
         arg_parser.add_argument("--ontology-version", required=True)
 

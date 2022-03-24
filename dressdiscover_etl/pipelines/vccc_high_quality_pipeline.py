@@ -1,14 +1,14 @@
 from pathlib import Path
 from typing import Optional
 
-from paradicms_etl._loader import _Loader
-from paradicms_etl._pipeline import _Pipeline
 from paradicms_etl.extractors.omeka_classic_extractor import OmekaClassicExtractor
+from paradicms_etl.loader import Loader
 from paradicms_etl.loaders.composite_loader import CompositeLoader
 from paradicms_etl.loaders.rdf_file_loader import RdfFileLoader
-from paradicms_gui.deployers.s3_deployer import S3Deployer
-from paradicms_gui.image_archivers.s3_image_archiver import S3ImageArchiver
-from paradicms_gui.loaders.gui_loader import GuiLoader
+from paradicms_etl.pipeline import Pipeline
+from paradicms_gui.deployers.s3_deployer import S3Deployer  # type: ignore
+from paradicms_gui.image_archivers.s3_image_archiver import S3ImageArchiver  # type: ignore
+from paradicms_gui.loaders.gui_loader import GuiLoader  # type: ignore
 from rdflib import DCTERMS
 
 from dressdiscover_etl.transformers.vccc_transformer import VcccTransformer
@@ -93,7 +93,7 @@ AL2013001""".split()
 )
 
 
-class VcccHighQualityPipeline(_Pipeline):
+class VcccHighQualityPipeline(Pipeline):
     __ID = "vccc_high_quality"
 
     class __VcccHighQualityTransformer(VcccTransformer):
@@ -114,7 +114,7 @@ class VcccHighQualityPipeline(_Pipeline):
         *,
         data_dir_path: Path,
         omeka_api_key: str,
-        loader: Optional[_Loader] = None,
+        loader: Optional[Loader] = None,
         **kwds
     ):
         if loader is None:
@@ -144,7 +144,7 @@ class VcccHighQualityPipeline(_Pipeline):
                 **kwds,
             )
 
-        _Pipeline.__init__(
+        Pipeline.__init__(
             self,
             extractor=OmekaClassicExtractor(
                 api_key=omeka_api_key,
@@ -163,8 +163,8 @@ class VcccHighQualityPipeline(_Pipeline):
 
     @classmethod
     def add_arguments(cls, arg_parser):
-        _Pipeline.add_arguments(arg_parser)
-        _Pipeline._add_aws_credentials_arguments(arg_parser)
+        Pipeline.add_arguments(arg_parser)
+        Pipeline._add_aws_credentials_arguments(arg_parser)
         arg_parser.add_argument("--omeka-api-key", help="Omeka API key", required=True)
 
 

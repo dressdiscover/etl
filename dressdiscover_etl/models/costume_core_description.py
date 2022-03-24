@@ -1,8 +1,9 @@
-from typing import NamedTuple
+from dataclasses import dataclass
 
 from dressdiscover_etl.models.costume_core_rights import CostumeCoreRights
 
 
-class CostumeCoreDescription(NamedTuple):
+@dataclass(frozen=True)
+class CostumeCoreDescription:
     rights: CostumeCoreRights
     text_en: str

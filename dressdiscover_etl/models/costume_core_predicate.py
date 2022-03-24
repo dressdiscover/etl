@@ -1,17 +1,17 @@
 from dataclasses import dataclass
 from typing import Optional, Tuple
 
+from paradicms_etl.model import Model
 from rdflib import BNode, Graph, Literal, OWL, RDF, RDFS, URIRef
 from rdflib.collection import Collection
 from rdflib.namespace import DCTERMS
 from rdflib.resource import Resource
 
 from dressdiscover_etl.models.costume_core_term import CostumeCoreTerm
-from paradicms_etl._model import _Model
 
 
 @dataclass(frozen=True)
-class CostumeCorePredicate(_Model):
+class CostumeCorePredicate(Model):
     description_text_en: str
     display_name_en: str
     id: str
@@ -23,7 +23,7 @@ class CostumeCorePredicate(_Model):
     def label(self):
         return self.display_name_en
 
-    def to_rdf(self, *, graph: Graph, **kwds) -> Resource:
+    def to_rdf(self, graph: Graph) -> Resource:
         assert self.terms is not None
         resource = graph.resource(URIRef(self.uri))
         resource.add(RDF.type, OWL.ObjectProperty)
@@ -40,3 +40,4 @@ class CostumeCorePredicate(_Model):
                 range_individuals_collection.append(URIRef(predicate_term.uri))
             range_class_resource.add(OWL.oneOf, range_individuals_collection.uri)
             resource.add(RDFS.range, range_class_resource)
+        return resource

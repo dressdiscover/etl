@@ -1,7 +1,9 @@
-from typing import NamedTuple, Optional
+from dataclasses import dataclass
+from typing import Optional
 
 
-class CostumeCoreRights(NamedTuple):
+@dataclass(frozen=True)
+class CostumeCoreRights:
     author: str
     license_uri: Optional[str]
     rights_statement_uri: Optional[str]
