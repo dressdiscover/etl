@@ -34,6 +34,7 @@ mypy-extensions = ">=0.4.3"
 pathspec = ">=0.9.0"
 platformdirs = ">=2"
 tomli = ">=1.1.0"
+typing-extensions = {version = ">=3.10.0.0", markers = "python_version < \"3.10\""}
 
 [package.extras]
 colorama = ["colorama (>=0.4.3)"]
@@ -425,7 +426,6 @@ spacy = ">=2.2.2"
 [package.source]
 type = "url"
 url = "https://github.com/explosion/spacy-models/releases/download/en_core_web_sm-2.2.5/en_core_web_sm-2.2.5.tar.gz"
-
 [[package]]
 name = "flake8"
 version = "4.0.1"
@@ -1228,8 +1228,8 @@ python-versions = "*"
 
 [metadata]
 lock-version = "1.1"
-python-versions = ">=3.10,<3.11"
-content-hash = "f175553f6a125d740e0248484778bfd779faeb51b092e9ce7a52e0474940555b"
+python-versions = ">=3.9,<3.11"
+content-hash = "67cd1027cecf1f3cbb7f4721c6c07e85e2c27d3f82f7cc4a99469f01313cec41"
 
 [metadata.files]
 atomicwrites = [
