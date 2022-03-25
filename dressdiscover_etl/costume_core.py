@@ -1,13 +1,14 @@
 from typing import Dict, Optional, Tuple, List
 
-from dressdiscover_etl.models.costume_core_predicate import CostumeCorePredicate
-from dressdiscover_etl.models.costume_core_predicates import COSTUME_CORE_PREDICATES
-from dressdiscover_etl.models.costume_core_term import CostumeCoreTerm
-from dressdiscover_etl.models.costume_core_terms import COSTUME_CORE_TERMS
 from paradicms_etl.models.image import Image
 from paradicms_etl.models.image_dimensions import ImageDimensions
 from paradicms_etl.models.named_value import NamedValue
 from rdflib import Literal, URIRef
+
+from dressdiscover_etl.models.costume_core_predicate import CostumeCorePredicate
+from dressdiscover_etl.models.costume_core_predicates import COSTUME_CORE_PREDICATES
+from dressdiscover_etl.models.costume_core_term import CostumeCoreTerm
+from dressdiscover_etl.models.costume_core_terms import COSTUME_CORE_TERMS
 
 
 class CostumeCore:
@@ -63,7 +64,7 @@ class CostumeCore:
             full_size_image_url = term.full_size_image_url
             if full_size_image_url is None:
                 continue
-            full_size_image = Image(
+            full_size_image = Image.from_fields(
                 depicts_uri=named_value.uri,
                 uri=URIRef(full_size_image_url),
             )

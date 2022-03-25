@@ -46,7 +46,7 @@ class CostumeCoreAirtableTransformer(AirtableTransformer):
         self.__institution_kwds = kwds
 
     def transform(self, *, records_by_table, **kwds):
-        yield from self.__costume_core.property_definitions
+        yield from self.__costume_core.named_values
 
         institution = self._transform_institution_from_arguments(
             **self.__institution_kwds
@@ -198,7 +198,7 @@ class CostumeCoreAirtableTransformer(AirtableTransformer):
                     else:
                         properties.append(Property(URIRef(predicate.uri), field_value))
 
-            yield Work(
+            yield Work.from_fields(
                 institution_uri=institution_uri,
                 collection_uris=(collection_uri,),
                 properties=tuple(properties),

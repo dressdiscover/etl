@@ -234,7 +234,7 @@ class CostumeCoreOntologyTransformer(Transformer):
         )
         yield institution
 
-        yield Image(
+        yield Image.from_fields(
             depicts_uri=institution.uri,
             exact_dimensions=ImageDimensions(height=446, width=808),
             uri=URIRef("http://www.ardenkirkland.com/costumecore/costumeCoreLogo.jpg"),

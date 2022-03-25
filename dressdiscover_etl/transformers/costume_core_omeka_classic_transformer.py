@@ -19,7 +19,6 @@ class CostumeCoreOmekaClassicTransformer(OmekaClassicTransformer):
 
     def transform(self, **kwds):
         yield from self.__costume_core.images
-        yield from self.__costume_core.property_definitions
         yield from self.__costume_core.named_values
         yield from OmekaClassicTransformer.transform(self, **kwds)
         for (
