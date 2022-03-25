@@ -413,19 +413,19 @@ toolz = ">=0.8.0"
 cython = ["cython"]
 
 [[package]]
-name = "en-core-web-sm"
-version = "2.2.5"
-description = "English multi-task CNN trained on OntoNotes. Assigns context-specific token vectors, POS tags, dependency parse and named entities."
+name = "en-core-web-md"
+version = "3.2.0"
+description = "English pipeline optimized for CPU. Components: tok2vec, tagger, parser, senter, ner, attribute_ruler, lemmatizer."
 category = "main"
 optional = false
 python-versions = "*"
 
 [package.dependencies]
-spacy = ">=2.2.2"
+spacy = ">=3.2.0,<3.3.0"
 
 [package.source]
 type = "url"
-url = "https://github.com/explosion/spacy-models/releases/download/en_core_web_sm-2.2.5/en_core_web_sm-2.2.5.tar.gz"
+url = "https://github.com/explosion/spacy-models/releases/download/en_core_web_md-3.2.0/en_core_web_md-3.2.0-py3-none-any.whl"
 [[package]]
 name = "flake8"
 version = "4.0.1"
@@ -1229,7 +1229,7 @@ python-versions = "*"
 [metadata]
 lock-version = "1.1"
 python-versions = ">=3.9,<3.11"
-content-hash = "67cd1027cecf1f3cbb7f4721c6c07e85e2c27d3f82f7cc4a99469f01313cec41"
+content-hash = "bb25f22fc2e6b09f5e67a9ba7347582233af6909893ab6ab88ca6e9f33f9ecb2"
 
 [metadata.files]
 atomicwrites = [
@@ -1344,7 +1344,7 @@ cymem = [
 cytoolz = [
     {file = "cytoolz-0.11.2.tar.gz", hash = "sha256:ea23663153806edddce7e4153d1d407d62357c05120a4e8485bddf1bd5ab22b4"},
 ]
-en-core-web-sm = []
+en-core-web-md = []
 flake8 = [
     {file = "flake8-4.0.1-py2.py3-none-any.whl", hash = "sha256:479b1304f72536a55948cb40a32dce8bb0ffe3501e26eaf292c7e60eb5e0428d"},
     {file = "flake8-4.0.1.tar.gz", hash = "sha256:806e034dda44114815e23c16ef92f95c91e4c71100ff52813adf7132a6ad870d"},

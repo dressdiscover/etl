@@ -17,7 +17,7 @@ class CostumeCorePropertyExtractor:
         import spacy
 
         self.__logger = logging.getLogger(self.__class__.__name__)
-        self.__spacy = spacy.load("en_core_web_sm")
+        self.__spacy = spacy.load("en_core_web_md")
 
         if costume_core is None:
             costume_core = CostumeCore()
