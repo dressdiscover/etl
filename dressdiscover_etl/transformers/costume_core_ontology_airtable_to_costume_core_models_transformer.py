@@ -1,7 +1,7 @@
 from typing import Dict, List, Tuple, Union
 
 from paradicms_etl.transformer import Transformer
-from rdflib import Graph
+from rdflib import Graph, URIRef
 
 from dressdiscover_etl.models.costume_core_description import CostumeCoreDescription
 from dressdiscover_etl.models.costume_core_ontology import CostumeCoreOntology
@@ -39,7 +39,7 @@ class CostumeCoreOntologyAirtableToCostumeCoreModelsTransformer(Transformer):
                     id=id,
                     sub_property_of_uri=fields.get("sub_property_of"),
                     terms=predicate_terms,
-                    _uri=uri,
+                    _uri=URIRef(uri),
                 )
             )
         return tuple(sorted(predicates, key=lambda predicate: predicate.id))
@@ -144,7 +144,7 @@ class CostumeCoreOntologyAirtableToCostumeCoreModelsTransformer(Transformer):
                 id=fields["id"],
                 image_filename=image_filename,
                 image_rights=image_rights,
-                _uri=inferred_uri,
+                _uri=URIRef(inferred_uri),
                 wikidata_id=fields.get("WikidataID"),
             )
             terms.append(term)
@@ -168,11 +168,11 @@ class CostumeCoreOntologyAirtableToCostumeCoreModelsTransformer(Transformer):
             for record in records_by_table["images"]
             if "filename" in record["fields"]
         )
-        rights_licenses_records = tuple(
-            record
-            for record in records_by_table["rights_licenses"]
-            if "Nickname" in record["fields"]
-        )
+        # rights_licenses_records = tuple(
+        #     record
+        #     for record in records_by_table["rights_licenses"]
+        #     if "Nickname" in record["fields"]
+        # )
 
         terms = self.__parse_terms(
             feature_records=feature_records,
