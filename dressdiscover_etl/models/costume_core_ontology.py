@@ -1,4 +1,4 @@
-from paradicms_etl.models.named_model import NamedModel
+from paradicms_etl.models.resource_backed_named_model import ResourceBackedNamedModel
 from paradicms_etl.utils.resource_builder import ResourceBuilder
 from rdflib import Literal, OWL, URIRef
 from rdflib.namespace import DCTERMS, RDF, RDFS
@@ -6,7 +6,7 @@ from rdflib.namespace import DCTERMS, RDF, RDFS
 from dressdiscover_etl.namespaces import COCO
 
 
-class CostumeCoreOntology(NamedModel):
+class CostumeCoreOntology(ResourceBackedNamedModel):
     @classmethod
     def from_fields(cls, *, version: str) -> "CostumeCoreOntology":
         resource_builder = ResourceBuilder(URIRef(str(COCO)[:-1]))

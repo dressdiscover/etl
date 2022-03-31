@@ -1,4 +1,5 @@
 from paradicms_etl.loaders.rdf_file_loader import RdfFileLoader
+from rdflib import ConjunctiveGraph
 
 from dressdiscover_etl.models.costume_core_predicate import CostumeCorePredicate
 from dressdiscover_etl.models.costume_core_term import CostumeCoreTerm
@@ -17,7 +18,7 @@ class CostumeCoreOntologyRdfFileLoader(RdfFileLoader):
             ),
         )
 
-    def _new_graph(self):
-        graph = RdfFileLoader._new_graph(self)
-        bind_namespaces(graph)
-        return graph
+    def _new_conjunctive_graph(self) -> ConjunctiveGraph:
+        conjunctive_graph = RdfFileLoader._new_conjunctive_graph(self)
+        bind_namespaces(conjunctive_graph.namespace_manager)
+        return conjunctive_graph

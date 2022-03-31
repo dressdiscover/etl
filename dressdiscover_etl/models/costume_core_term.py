@@ -2,7 +2,7 @@ from dataclasses import dataclass
 from typing import Optional, Tuple
 from urllib.parse import quote
 
-from paradicms_etl.model import Model
+from paradicms_etl.models.named_model import NamedModel
 from rdflib import BNode, Graph, Literal, RDF, RDFS, URIRef
 from rdflib.namespace import DCTERMS, OWL
 from rdflib.resource import Resource
@@ -12,16 +12,20 @@ from dressdiscover_etl.models.costume_core_rights import CostumeCoreRights
 
 
 @dataclass(frozen=True)
-class CostumeCoreTerm(Model):
+class CostumeCoreTerm(NamedModel):
     display_name_en: str
     id: str
-    uri: str
+    _uri: URIRef
     aat_id: Optional[str] = None
     description: Optional[CostumeCoreDescription] = None
     features: Optional[Tuple[str, ...]] = None
     image_filename: Optional[str] = None
     image_rights: Optional[CostumeCoreRights] = None
     wikidata_id: Optional[str] = None
+
+    @classmethod
+    def from_rdf(cls, resource: Resource):
+        raise NotImplementedError
 
     @property
     def full_size_image_url(self) -> Optional[str]:
@@ -83,3 +87,7 @@ class CostumeCoreTerm(Model):
             graph.add((same_as_uri, OWL.sameAs, resource.identifier))
             graph.add((same_as_uri, RDF.type, OWL.NamedIndividual))
         return resource
+
+    @property
+    def uri(self) -> URIRef:
+        return self._uri

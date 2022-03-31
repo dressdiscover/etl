@@ -1,7 +1,7 @@
 from dataclasses import dataclass
 from typing import Optional, Tuple
 
-from paradicms_etl.model import Model
+from paradicms_etl.models.named_model import NamedModel
 from rdflib import BNode, Graph, Literal, OWL, RDF, RDFS, URIRef
 from rdflib.collection import Collection
 from rdflib.namespace import DCTERMS
@@ -11,13 +11,17 @@ from dressdiscover_etl.models.costume_core_term import CostumeCoreTerm
 
 
 @dataclass(frozen=True)
-class CostumeCorePredicate(Model):
+class CostumeCorePredicate(NamedModel):
     description_text_en: str
     display_name_en: str
     id: str
-    sub_property_of_uri: Optional[str]
-    uri: str
+    _uri: URIRef
+    sub_property_of_uri: Optional[str] = None
     terms: Optional[Tuple[CostumeCoreTerm, ...]] = None
+
+    @classmethod
+    def from_rdf(cls, resource: Resource):
+        raise NotImplementedError
 
     @property
     def label(self):
@@ -41,3 +45,7 @@ class CostumeCorePredicate(Model):
             range_class_resource.add(OWL.oneOf, range_individuals_collection.uri)
             resource.add(RDFS.range, range_class_resource)
         return resource
+
+    @property
+    def uri(self):
+        return self._uri

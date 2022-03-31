@@ -19,6 +19,7 @@ class CostumeCoreOntologyPyLoader(BufferingLoader):
                 "from .costume_core_predicate import CostumeCorePredicate",
                 file=predicates_py_file,
             )
+            print("import rdflib.term", file=predicates_py_file)
             print(file=predicates_py_file)
             predicates = tuple(
                 filter(lambda model: isinstance(model, CostumeCorePredicate), models)
@@ -49,6 +50,7 @@ class CostumeCoreOntologyPyLoader(BufferingLoader):
                 "from .costume_core_rights import CostumeCoreRights", file=terms_py_file
             )
             print("from .costume_core_term import CostumeCoreTerm", file=terms_py_file)
+            print("import rdflib.term", file=terms_py_file)
             print(file=terms_py_file)
             terms = tuple(
                 filter(lambda model: isinstance(model, CostumeCoreTerm), models)

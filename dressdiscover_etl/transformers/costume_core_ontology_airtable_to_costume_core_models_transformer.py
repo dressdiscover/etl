@@ -39,7 +39,7 @@ class CostumeCoreOntologyAirtableToCostumeCoreModelsTransformer(Transformer):
                     id=id,
                     sub_property_of_uri=fields.get("sub_property_of"),
                     terms=predicate_terms,
-                    uri=uri,
+                    _uri=uri,
                 )
             )
         return tuple(sorted(predicates, key=lambda predicate: predicate.id))
@@ -144,7 +144,7 @@ class CostumeCoreOntologyAirtableToCostumeCoreModelsTransformer(Transformer):
                 id=fields["id"],
                 image_filename=image_filename,
                 image_rights=image_rights,
-                uri=inferred_uri,
+                _uri=inferred_uri,
                 wikidata_id=fields.get("WikidataID"),
             )
             terms.append(term)
