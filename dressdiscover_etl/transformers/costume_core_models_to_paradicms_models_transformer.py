@@ -1,5 +1,6 @@
-from typing import Set, FrozenSet, Union, Collection
+from typing import Set, FrozenSet, Union
 
+from paradicms_etl.models.collection import Collection
 from paradicms_etl.models.creative_commons_licenses import CreativeCommonsLicenses
 from paradicms_etl.models.image import Image
 from paradicms_etl.models.image_dimensions import ImageDimensions
@@ -24,7 +25,7 @@ class CostumeCoreModelsToParadicmsModelsTransformer(Transformer):
         self.__costume_core = CostumeCore()
 
     def transform(self):
-        institution = Institution(
+        institution = Institution.from_fields(
             name="Costume Core Ontology",
             uri=URIRef("http://www.ardenkirkland.com/costumecore/"),
         )
@@ -43,7 +44,7 @@ class CostumeCoreModelsToParadicmsModelsTransformer(Transformer):
         available_licenses_by_uri = {
             license.uri: license for license in CreativeCommonsLicenses.as_tuple()
         }
-        odc_by_license = License(
+        odc_by_license = License.from_fields(
             identifier="ODC-By",
             title="Open Data Commons Attribution License (ODC-By) v1.0",
             uri=URIRef("http://opendatacommons.org/licenses/by/1-0/"),
@@ -84,13 +85,20 @@ class CostumeCoreModelsToParadicmsModelsTransformer(Transformer):
                         yielded_rights_uris.add(http_rights_uri)
                         return http_rights_uri
 
-                self._logger.warning("unknown rights URI: %s", rights_uri)
+                if id(available_rights_uris) != id(
+                    available_rights_statement_uris
+                ) or rights_uri not in (
+                    URIRef("https://creativecommons.org/publicdomain/zero/1.0/"),
+                    URIRef("https://creativecommons.org/publicdomain/mark/1.0/"),
+                ):
+                    self._logger.warning("unknown rights URI: %s", rights_uri)
 
                 # for rights_license_record in rights_licenses_records:
                 #     if rights_license_record["fields"]["URL"] == rights_uri:
                 #         return rights_license_record["fields"]["Nickname"]
 
-                return URIRef(rights_uri)
+                # return URIRef(rights_uri)
+                return None
 
             return Rights.from_fields(
                 creator=rights.author,
@@ -137,7 +145,7 @@ class CostumeCoreModelsToParadicmsModelsTransformer(Transformer):
                     continue
 
                 # feature_record = feature_records_by_id[predicate.id]
-                collection = Collection(
+                collection = Collection.from_fields(
                     institution_uri=institution.uri,
                     title=predicate.label,
                     uri=collection_uri,
@@ -160,7 +168,7 @@ class CostumeCoreModelsToParadicmsModelsTransformer(Transformer):
                     )
                 )
 
-            work = Work(
+            work = Work.from_fields(
                 abstract=term.description.text_en if term.description else None,
                 collection_uris=tuple(
                     URIRef(term_predicate.uri) for term_predicate in term_predicates
