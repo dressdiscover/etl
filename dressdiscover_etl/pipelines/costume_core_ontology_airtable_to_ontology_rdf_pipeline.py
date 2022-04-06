@@ -1,8 +1,10 @@
 from configargparse import ArgParser
-from paradicms_etl.extractors.airtable_extractor import AirtableExtractor
 from paradicms_etl.loaders.composite_loader import CompositeLoader
 from paradicms_etl.pipeline import Pipeline
 
+from dressdiscover_etl.extractors.costume_core_ontology_airtable_extractor import (
+    CostumeCoreOntologyAirtableExtractor,
+)
 from dressdiscover_etl.loaders.costume_core_ontology_py_loader import (
     CostumeCoreOntologyPyLoader,
 )
@@ -14,24 +16,14 @@ from dressdiscover_etl.transformers.costume_core_ontology_airtable_to_costume_co
 )
 
 
-class CostumeCoreOntologyAirtableToRdfPipeline(Pipeline):
+class CostumeCoreOntologyAirtableToOntologyRdfPipeline(Pipeline):
     ID = "costume_core_ontology"
 
     def __init__(self, *, api_key: str, ontology_version: str, **kwds):
         Pipeline.__init__(
             self,
-            extractor=AirtableExtractor(
-                api_key=api_key,
-                base_id="appfEYYWWn3CqSAxW",
-                pipeline_id=self.ID,
-                tables=(
-                    "feature_values",
-                    "features",
-                    "feature_sets",
-                    "images",
-                    "rights_licenses",
-                ),
-                **kwds,
+            extractor=CostumeCoreOntologyAirtableExtractor(
+                api_key=api_key, pipeline_id=self.ID, **kwds
             ),
             id=self.ID,
             loader=CompositeLoader(
@@ -61,4 +53,4 @@ class CostumeCoreOntologyAirtableToRdfPipeline(Pipeline):
 
 
 if __name__ == "__main__":
-    CostumeCoreOntologyAirtableToRdfPipeline.main()
+    CostumeCoreOntologyAirtableToOntologyRdfPipeline.main()

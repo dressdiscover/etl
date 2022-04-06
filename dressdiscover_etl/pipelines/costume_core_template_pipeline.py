@@ -8,8 +8,8 @@ from paradicms_gui.deployers.s3_deployer import S3Deployer  # type: ignore
 from paradicms_gui.image_archivers.s3_image_archiver import S3ImageArchiver  # type: ignore
 from paradicms_gui.loaders.gui_loader import GuiLoader  # type: ignore
 
-from dressdiscover_etl.extractors.costume_core_airtable_extractor import (
-    CostumeCoreAirtableExtractor,
+from dressdiscover_etl.extractors.costume_core_data_airtable_extractor import (
+    CostumeCoreDataAirtableExtractor,
 )
 from dressdiscover_etl.loaders.costume_core_property_extractor_csv_file_loader import (
     CostumeCorePropertyExtractorCsvFileLoader,
@@ -50,7 +50,7 @@ class CostumeCoreTemplatePipeline(Pipeline):
 
         Pipeline.__init__(
             self,
-            extractor=CostumeCoreAirtableExtractor(
+            extractor=CostumeCoreDataAirtableExtractor(
                 api_key=api_key, base_id=self.__BASE_ID, pipeline_id=self.__ID, **kwds
             ),
             id=self.__ID,

@@ -13,6 +13,11 @@ from dressdiscover_etl.models.costume_core_rights import CostumeCoreRights
 
 @dataclass(frozen=True)
 class CostumeCoreTerm(NamedModel):
+    FULL_SIZE_IMAGE_BASE_URL = (
+        "https://worksheet.dressdiscover.org/img/worksheet/full_size/"
+    )
+    THUMBNAIL_BASE_URL = "https://worksheet.dressdiscover.org/img/worksheet/thumbnail/"
+
     display_name_en: str
     id: str
     _uri: URIRef
@@ -30,7 +35,7 @@ class CostumeCoreTerm(NamedModel):
     @property
     def full_size_image_url(self) -> Optional[str]:
         return (
-            f"https://worksheet.dressdiscover.org/img/worksheet/full_size/{quote(self.image_filename)}"
+            self.FULL_SIZE_IMAGE_BASE_URL + quote(self.image_filename)
             if self.image_filename
             else None
         )
@@ -42,7 +47,7 @@ class CostumeCoreTerm(NamedModel):
     @property
     def thumbnail_url(self) -> Optional[str]:
         return (
-            f"https://worksheet.dressdiscover.org/img/worksheet/thumbnail/{quote(self.image_filename)}"
+            self.THUMBNAIL_BASE_URL + quote(self.image_filename)
             if self.image_filename
             else None
         )

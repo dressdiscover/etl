@@ -1,12 +1,14 @@
 from paradicms_etl.loaders.rdf_file_loader import RdfFileLoader
-from rdflib import ConjunctiveGraph
 
+from dressdiscover_etl.loaders.dressdiscover_rdf_file_loader import (
+    DressdiscoverRdfFileLoader,
+)
 from dressdiscover_etl.models.costume_core_predicate import CostumeCorePredicate
 from dressdiscover_etl.models.costume_core_term import CostumeCoreTerm
-from dressdiscover_etl.namespaces import COCO, bind_namespaces
+from dressdiscover_etl.namespaces import COCO
 
 
-class CostumeCoreOntologyRdfFileLoader(RdfFileLoader):
+class CostumeCoreOntologyRdfFileLoader(DressdiscoverRdfFileLoader):
     def _flush(self, models):
         RdfFileLoader._flush(
             self,
@@ -17,8 +19,3 @@ class CostumeCoreOntologyRdfFileLoader(RdfFileLoader):
                 and str(model.uri).startswith(str(COCO))
             ),
         )
-
-    def _new_conjunctive_graph(self) -> ConjunctiveGraph:
-        conjunctive_graph = RdfFileLoader._new_conjunctive_graph(self)
-        bind_namespaces(conjunctive_graph.namespace_manager)
-        return conjunctive_graph

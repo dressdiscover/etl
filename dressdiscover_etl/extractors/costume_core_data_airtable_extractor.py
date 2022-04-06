@@ -1,7 +1,7 @@
 from paradicms_etl.extractors.airtable_extractor import AirtableExtractor
 
 
-class CostumeCoreAirtableExtractor(AirtableExtractor):
+class CostumeCoreDataAirtableExtractor(AirtableExtractor):
     def __init__(self, **kwds):
         AirtableExtractor.__init__(
             self,

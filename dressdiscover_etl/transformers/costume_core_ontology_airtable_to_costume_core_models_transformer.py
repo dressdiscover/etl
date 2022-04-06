@@ -46,7 +46,7 @@ class CostumeCoreOntologyAirtableToCostumeCoreModelsTransformer(Transformer):
 
     def __parse_rights(
         self, fields: Dict[str, Union[str, List[str], None]], key_prefix: str
-    ):
+    ) -> CostumeCoreRights:
         def get_first_list_element(list_: Union[str, List[str], None]):
             if list_ is None:
                 return None

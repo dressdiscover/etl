@@ -5,6 +5,7 @@
 /data/costume_core_template/
 /data/costume_core_ontology/extracted/
 /data/costume_core_ontology/loaded/data/
+/data/costume_core_ontology/loaded/costume_core_ontology_worksheet.ttl
 /data/costume_core_ontology/loaded/original_image_cache/
 /data/costume_core_ontology/loaded/thumbnail_cache/
 /data/hctc/
