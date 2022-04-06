@@ -13,7 +13,7 @@ scipy = "1.7.3"
 textacy = "^0.12.0"
 
 [tool.poetry.dev-dependencies]
-black = "^22.1.0"
+black = "^22.3.0"
 flake8 = "^4.0.1"
 mypy = "^0.931"
 paradicms-etl = { path = "../../paradicms/etl", develop = true }
