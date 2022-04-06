@@ -254,6 +254,7 @@ class CostumeCoreOntologyAirtableToWorksheetModelsTransformer(Transformer):
         description_text_en = record_fields.get("description_text_en")
         if not description_text_en:
             return None
+        assert isinstance(description_text_en, str)
         return Text.from_fields(
             rights=self.__transform_rights(
                 key_prefix="description",
@@ -310,6 +311,8 @@ class CostumeCoreOntologyAirtableToWorksheetModelsTransformer(Transformer):
                 URIRef("https://creativecommons.org/publicdomain/mark/1.0/"),
             ):
                 self._logger.warning("unknown rights URI: %s", rights_uri)
+
+            return None
 
         return Rights.from_fields(
             creator=get_first_list_element(
