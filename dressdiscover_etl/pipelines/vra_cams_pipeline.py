@@ -17,7 +17,7 @@ class VraCamsPipeline(Pipeline):
     def __init__(self, api_key: str, loader: Optional[Loader] = None, **kwds):
         if loader is None:
             loader = GuiLoader(
-                app="bootstrap-collection",
+                app="collection",
                 deployer=S3Deployer(
                     s3_bucket_name="vra-cams.dressdiscover.org",
                     **kwds,

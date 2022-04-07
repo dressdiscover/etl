@@ -23,7 +23,7 @@ class IastateAmd354Pipeline(Pipeline):
                 **kwds,
             ),
             loader=GuiLoader(
-                app="bootstrap-collection",
+                app="collection",
                 deployer=S3Deployer(
                     s3_bucket_name="iastate-amd354.dressdiscover.org", **kwds
                 ),

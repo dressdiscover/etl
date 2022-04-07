@@ -32,7 +32,7 @@ class CostumeCoreTemplatePipeline(Pipeline):
                     ),
                     RdfFileLoader(pipeline_id=self.__ID, **kwds),
                     GuiLoader(
-                        app="bootstrap-collection",
+                        app="collection",
                         deployer=S3Deployer(
                             s3_bucket_name="costumecoretemplate.dressdiscover.org",
                             **kwds,

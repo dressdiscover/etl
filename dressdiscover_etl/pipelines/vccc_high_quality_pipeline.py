@@ -124,7 +124,7 @@ class VcccHighQualityPipeline(Pipeline):
                         data_dir_path=data_dir_path, pipeline_id=self.__ID, **kwds
                     ),
                     GuiLoader(
-                        app="bootstrap-search",
+                        app="collection",
                         configuration_json_file_path=(
                             data_dir_path / self.__ID / "configuration.json"
                         ).absolute(),
