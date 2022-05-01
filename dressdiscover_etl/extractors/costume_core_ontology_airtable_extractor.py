@@ -6,8 +6,9 @@ class CostumeCoreOntologyAirtableExtractor(AirtableExtractor):
         AirtableExtractor.__init__(
             self,
             api_key=api_key,
-            base_id="appfEYYWWn3CqSAxW",
+            base_id="appS5bN4hk1aWEzE0",
             tables=(
+                "AAT_variant_terms",
                 "feature_values",
                 "features",
                 "feature_sets",

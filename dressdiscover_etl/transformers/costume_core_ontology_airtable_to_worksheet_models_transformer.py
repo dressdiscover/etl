@@ -1,5 +1,6 @@
+from enum import Enum
 from typing import Dict, Tuple, Iterable, Union, List, Set, FrozenSet, Optional
-from urllib.parse import quote
+from urllib.parse import quote_plus
 
 from paradicms_etl.model import Model
 from paradicms_etl.models.creative_commons_licenses import CreativeCommonsLicenses
@@ -22,6 +23,21 @@ from dressdiscover_etl.namespaces import COCO
 
 
 class CostumeCoreOntologyAirtableToWorksheetModelsTransformer(Transformer):
+    class __ImageDepictsType(Enum):
+        FEATURE = "feature"
+        FEATURE_SET = "featureSet"
+        FEATURE_VALUE = "featureValue"
+
+        def __str__(self):
+            return self.value
+
+    class __ImageType(Enum):
+        FULL_SIZE = "fullSize"
+        THUMBNAIL = "thumbnail"
+
+        def __str__(self):
+            return self.value
+
     def __init__(self, *args, **kwds):
         Transformer.__init__(self, *args, **kwds)
         self.__available_licenses_by_uri = {
@@ -45,33 +61,52 @@ class CostumeCoreOntologyAirtableToWorksheetModelsTransformer(Transformer):
         self.__available_rights_statement_uris = frozenset(
             self.__available_rights_statements_by_uri.keys()
         )
+        self.__referenced_license_uris: Set[URIRef] = set()
+        self.__referenced_rights_statement_uris: Set[URIRef] = set()
 
     @staticmethod
     def __feature_set_uri(feature_set_record) -> URIRef:
-        # Don't use "id" directly on the Costume Core namespace, since it's the same "id" as the work type term
-        return COCO["featureSet/" + quote(feature_set_record["fields"]["feature_sets"])]
+        return URIRef(
+            ":".join(
+                (
+                    "urn",
+                    "costumeCore",
+                    "ontology",
+                    quote_plus(feature_set_record["fields"]["feature_sets_id"]),
+                )
+            )
+        )
+
+    @staticmethod
+    def __image_uri(
+        *,
+        depicts_type: __ImageDepictsType,
+        depicts_uri: URIRef,
+        filename: str,
+        type: __ImageType,
+    ) -> URIRef:
+        return URIRef(
+            ":".join(
+                (
+                    "urn",
+                    "costumeCore",
+                    "image",
+                    str(depicts_type),
+                    quote_plus(depicts_uri),
+                    filename,
+                    str(type),
+                )
+            )
+        )
 
     def transform(self, *, records_by_table: Dict[str, Tuple]) -> Graph:  # type: ignore
-        feature_records = tuple(
-            record
-            for record in records_by_table["features"]
-            if "id" in record["fields"]
-        )
-        feature_set_records = tuple(
-            record
-            for record in records_by_table["feature_sets"]
-            if "id" in record["fields"]
-        )
-        feature_value_records = tuple(
-            record
-            for record in records_by_table["feature_values"]
-            if "id" in record["fields"]
-        )
-        image_records = tuple(
-            record
-            for record in records_by_table["images"]
-            if "filename" in record["fields"]
-        )
+        feature_records = tuple(records_by_table["features"])
+        feature_set_records = tuple(records_by_table["feature_sets"])
+        feature_value_records = tuple(records_by_table["feature_values"])
+        image_records_by_id = {
+            image_record["id"]: image_record
+            for image_record in records_by_table["images"]
+        }
         # rights_licenses_records = tuple(
         #     record
         #     for record in records_by_table["rights_licenses"]
@@ -79,41 +114,48 @@ class CostumeCoreOntologyAirtableToWorksheetModelsTransformer(Transformer):
         # )
 
         # Track which licenses and rights statements we want to yield as we see references to them
-        referenced_license_uris: Set[URIRef] = set()
-        referenced_rights_statement_uris: Set[URIRef] = set()
 
         yield from self.__transform_feature_records(
             feature_records=feature_records,
             feature_set_records=feature_set_records,
-            referenced_license_uris=referenced_license_uris,
-            referenced_rights_statement_uris=referenced_rights_statement_uris,
+            image_records_by_id=image_records_by_id,
         )
 
         yield from self.__transform_feature_set_records(
-            feature_set_records=feature_set_records
+            feature_set_records=feature_set_records,
+            image_records_by_id=image_records_by_id,
         )
 
         yield from self.__transform_feature_value_records(
             feature_records=feature_records,
             feature_value_records=feature_value_records,
-            image_records=image_records,
-            referenced_license_uris=referenced_license_uris,
-            referenced_rights_statement_uris=referenced_rights_statement_uris,
+            image_records_by_id=image_records_by_id,
         )
 
         # Yield referenced licenses and rights statements once
-        for license_uri in referenced_license_uris:
+        for license_uri in self.__referenced_license_uris:
             yield self.__available_licenses_by_uri[license_uri]
 
-        for rights_statement_uri in referenced_rights_statement_uris:
+        for rights_statement_uri in self.__referenced_rights_statement_uris:
             yield self.__available_rights_statements_by_uri[rights_statement_uri]
 
+    def __transform_description_fields(
+        self, *, record_fields: Dict[str, Union[str, List[str], None]], key_prefix=""
+    ) -> Optional[Text]:
+        description_text_en = record_fields.get(key_prefix + "description_text_en")
+        if not description_text_en:
+            return None
+        assert isinstance(description_text_en, str)
+        return Text.from_fields(
+            rights=self.__transform_rights_fields(
+                key_prefix=key_prefix + "description",
+                record_fields=record_fields,
+            ),
+            value=description_text_en,
+        )
+
     def __transform_feature_records(
-        self,
-        feature_records,
-        feature_set_records,
-        referenced_license_uris: Set[URIRef],
-        referenced_rights_statement_uris: Set[URIRef],
+        self, feature_records, feature_set_records, image_records_by_id
     ) -> Iterable[Model]:
         for feature_record in feature_records:
             feature_record_fields = feature_record["fields"]
@@ -132,47 +174,61 @@ class CostumeCoreOntologyAirtableToWorksheetModelsTransformer(Transformer):
                         feature_set_uris.add(self.__feature_set_uri(feature_set_record))
 
             if not feature_set_uris:
-                self._logger.warning(
+                self._logger.debug(
                     "feature %s does not belong to any feature sets",
                     feature_record["fields"]["id"],
                 )
                 continue
 
+            feature_uri = URIRef(feature_record_fields["URI"])
+
             yield WorksheetFeature.from_fields(
-                abstract=self.__transform_description(
+                abstract=self.__transform_description_fields(
                     record_fields=feature_record_fields,
-                    referenced_license_uris=referenced_license_uris,
-                    referenced_rights_statement_uris=referenced_rights_statement_uris,
                 ),
                 feature_set_uris=tuple(feature_set_uris),
                 title=feature_record_fields["display_name_en"],
-                uri=URIRef(feature_record_fields["URI"]),
+                uri=feature_uri,
+            )
+
+            yield from self.__transform_image_records(
+                depicts_type=self.__ImageDepictsType.FEATURE,
+                depicts_uri=feature_uri,
+                image_records=tuple(
+                    image_records_by_id[image_record_id]
+                    for image_record_id in feature_record_fields.get("images", [])
+                ),
             )
 
     def __transform_feature_set_records(
-        self,
-        *,
-        feature_set_records,
+        self, *, feature_set_records, image_records_by_id
     ) -> Iterable[Model]:
         for feature_set_record in feature_set_records:
+            feature_set_uri = self.__feature_set_uri(feature_set_record)
+
             yield WorksheetFeatureSet.from_fields(
-                title=feature_set_record["fields"]["display_name_en"],
-                uri=self.__feature_set_uri(feature_set_record),
+                abstract=self.__transform_description_fields(
+                    key_prefix="feature_sets_",
+                    record_fields=feature_set_record["fields"],
+                ),
+                title=feature_set_record["fields"]["feature_sets_display_name_en"],
+                uri=feature_set_uri,
+            )
+
+            yield from self.__transform_image_records(
+                depicts_type=self.__ImageDepictsType.FEATURE_SET,
+                depicts_uri=feature_set_uri,
+                image_records=tuple(
+                    image_records_by_id[image_record_id]
+                    for image_record_id in feature_set_record["fields"].get(
+                        "images", []
+                    )
+                ),
             )
 
     def __transform_feature_value_records(
-        self,
-        *,
-        feature_records,
-        feature_value_records,
-        image_records,
-        referenced_license_uris: Set[URIRef],
-        referenced_rights_statement_uris: Set[URIRef],
+        self, *, feature_records, feature_value_records, image_records_by_id
     ) -> Iterable[Model]:
-        image_records_by_id = {
-            image_record["id"]: image_record for image_record in image_records
-        }
-
         for feature_value_record in feature_value_records:
             feature_value_record_fields = feature_value_record["fields"]
 
@@ -190,7 +246,7 @@ class CostumeCoreOntologyAirtableToWorksheetModelsTransformer(Transformer):
                         break
 
             if not feature_uris:
-                self._logger.warning(
+                self._logger.debug(
                     "feature value %s does not belong to any features",
                     feature_value_record_fields["id"],
                 )
@@ -201,10 +257,8 @@ class CostumeCoreOntologyAirtableToWorksheetModelsTransformer(Transformer):
 
             feature_value_uri = COCO[feature_value_record_fields["id"]]
             feature_value = NamedValue.from_fields(
-                abstract=self.__transform_description(
-                    record_fields=feature_value_record_fields,
-                    referenced_license_uris=referenced_license_uris,
-                    referenced_rights_statement_uris=referenced_rights_statement_uris,
+                abstract=self.__transform_description_fields(
+                    record_fields=feature_value_record_fields
                 ),
                 property_uris=tuple(feature_uris),
                 title=feature_value_record_fields["display_name_en"],
@@ -213,25 +267,28 @@ class CostumeCoreOntologyAirtableToWorksheetModelsTransformer(Transformer):
             )
             yield feature_value
 
-            image_record_id = feature_value_record_fields.get("image_filename")
-            if image_record_id:
-                image_record_id = image_record_id[0]
-                assert image_record_id
+            image_filename = feature_value_record_fields.get("image_filename")
+            if image_filename:
+                image_filename = image_filename[0]
+                assert image_filename
 
-                image_record = image_records_by_id[image_record_id]
+                image_record = image_records_by_id[image_filename]
                 image_filename = image_record["fields"]["filename"]
-                image_rights = self.__transform_rights(
-                    key_prefix="image",
-                    record_fields=feature_value_record_fields,
-                    referenced_license_uris=referenced_license_uris,
-                    referenced_rights_statement_uris=referenced_rights_statement_uris,
+                image_rights = self.__transform_rights_fields(
+                    key_prefix="image", record_fields=feature_value_record_fields
                 )
+
+                # See note in transform_image_records re: image URIs.
 
                 full_size_image = Image.from_fields(
                     depicts_uri=feature_value.uri,
                     rights=image_rights,
-                    uri=URIRef(
-                        CostumeCoreTerm.FULL_SIZE_IMAGE_BASE_URL + image_filename
+                    src=CostumeCoreTerm.FULL_SIZE_IMAGE_BASE_URL + image_filename,
+                    uri=self.__image_uri(
+                        depicts_uri=feature_value.uri,
+                        depicts_type=self.__ImageDepictsType.FEATURE_VALUE,
+                        filename=image_filename,
+                        type=self.__ImageType.FULL_SIZE,
                     ),
                 )
                 yield full_size_image
@@ -241,37 +298,68 @@ class CostumeCoreOntologyAirtableToWorksheetModelsTransformer(Transformer):
                     exact_dimensions=ImageDimensions(height=200, width=200),
                     original_image_uri=full_size_image.uri,
                     rights=image_rights,
-                    uri=URIRef(CostumeCoreTerm.THUMBNAIL_BASE_URL + image_filename),
+                    src=CostumeCoreTerm.THUMBNAIL_BASE_URL + image_filename,
+                    uri=self.__image_uri(
+                        depicts_uri=feature_value.uri,
+                        depicts_type=self.__ImageDepictsType.FEATURE_VALUE,
+                        filename=image_filename,
+                        type=self.__ImageType.THUMBNAIL,
+                    ),
                 )
 
-    def __transform_description(
-        self,
-        *,
-        record_fields: Dict[str, Union[str, List[str], None]],
-        referenced_license_uris: Set[URIRef],
-        referenced_rights_statement_uris: Set[URIRef],
-    ) -> Optional[Text]:
-        description_text_en = record_fields.get("description_text_en")
-        if not description_text_en:
-            return None
-        assert isinstance(description_text_en, str)
-        return Text.from_fields(
-            rights=self.__transform_rights(
-                key_prefix="description",
-                record_fields=record_fields,
-                referenced_license_uris=referenced_license_uris,
-                referenced_rights_statement_uris=referenced_rights_statement_uris,
-            ),
-            value=description_text_en,
-        )
+    def __transform_image_records(
+        self, *, depicts_type: __ImageDepictsType, depicts_uri: URIRef, image_records
+    ) -> Iterable[Image]:
+        # yield from self.__transform_image_records(
+        #     depicts_uri=feature_set_uri,
+        #     image_records=tuple(
+        #         image_records_by_id[image_record_id]
+        #         for image_record_id in feature_set_record["fields"].get(
+        #             "images", []
+        #         )
+        #     ),
+        # )
+        if not image_records:
+            return
 
-    def __transform_rights(
-        self,
-        *,
-        key_prefix: str,
-        record_fields: Dict[str, Union[str, List[str], None]],
-        referenced_license_uris: Set[URIRef],
-        referenced_rights_statement_uris: Set[URIRef],
+        for image_record in image_records:
+            image_filename = image_record["fields"]["filename"]
+            image_rights = self.__transform_rights_fields(
+                key_prefix="image", record_fields=image_record["fields"]
+            )
+
+            # The same image may be used to depict multiple objects e.g., a feature value, a feature, and a feature set.
+            # Allow the src to be duplicated but make the URIs unique.
+
+            full_size_image = Image.from_fields(
+                depicts_uri=depicts_uri,
+                rights=image_rights,
+                src=CostumeCoreTerm.FULL_SIZE_IMAGE_BASE_URL + image_filename,
+                uri=self.__image_uri(
+                    depicts_uri=depicts_uri,
+                    depicts_type=depicts_type,
+                    filename=image_filename,
+                    type=self.__ImageType.FULL_SIZE,
+                ),
+            )
+            yield full_size_image
+
+            yield Image.from_fields(
+                depicts_uri=depicts_uri,
+                exact_dimensions=ImageDimensions(height=200, width=200),
+                original_image_uri=full_size_image.uri,
+                rights=image_rights,
+                src=CostumeCoreTerm.THUMBNAIL_BASE_URL + image_filename,
+                uri=self.__image_uri(
+                    depicts_uri=depicts_uri,
+                    depicts_type=depicts_type,
+                    filename=image_filename,
+                    type=self.__ImageType.THUMBNAIL,
+                ),
+            )
+
+    def __transform_rights_fields(
+        self, *, key_prefix: str, record_fields: Dict[str, Union[str, List[str], None]]
     ) -> Rights:
         """
         Utility function to transform a prefixed subset of fields into a Rights model.
@@ -323,14 +411,14 @@ class CostumeCoreOntologyAirtableToWorksheetModelsTransformer(Transformer):
                 rights_uri_str=get_first_list_element(
                     record_fields.get(f"{key_prefix}_rights_license")
                 ),
-                referenced_rights_uris=referenced_license_uris,
+                referenced_rights_uris=self.__referenced_license_uris,
             ),
             statement=transform_rights_uri(
                 available_rights_uris=self.__available_rights_statement_uris,
                 rights_uri_str=get_first_list_element(
                     record_fields.get(f"{key_prefix}_rights_statement")
                 ),
-                referenced_rights_uris=referenced_rights_statement_uris,
+                referenced_rights_uris=self.__referenced_rights_statement_uris,
             ),
             # source_name=get_first_list_element(
             #     fields[f"{key_prefix}_rights_source_name"]
