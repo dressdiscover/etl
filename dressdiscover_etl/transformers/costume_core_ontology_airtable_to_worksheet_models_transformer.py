@@ -72,7 +72,7 @@ class CostumeCoreOntologyAirtableToWorksheetModelsTransformer(Transformer):
                     "urn",
                     "costumeCore",
                     "ontology",
-                    quote_plus(feature_set_record["fields"]["feature_sets_id"]),
+                    quote_plus(feature_set_record["fields"]["id"]),
                 )
             )
         )
@@ -140,15 +140,15 @@ class CostumeCoreOntologyAirtableToWorksheetModelsTransformer(Transformer):
             yield self.__available_rights_statements_by_uri[rights_statement_uri]
 
     def __transform_description_fields(
-        self, *, record_fields: Dict[str, Union[str, List[str], None]], key_prefix=""
+        self, *, record_fields: Dict[str, Union[str, List[str], None]]
     ) -> Optional[Text]:
-        description_text_en = record_fields.get(key_prefix + "description_text_en")
+        description_text_en = record_fields.get("description_text_en")
         if not description_text_en:
             return None
         assert isinstance(description_text_en, str)
         return Text.from_fields(
             rights=self.__transform_rights_fields(
-                key_prefix=key_prefix + "description",
+                key_prefix="description",
                 record_fields=record_fields,
             ),
             value=description_text_en,
@@ -208,10 +208,9 @@ class CostumeCoreOntologyAirtableToWorksheetModelsTransformer(Transformer):
 
             yield WorksheetFeatureSet.from_fields(
                 abstract=self.__transform_description_fields(
-                    key_prefix="feature_sets_",
                     record_fields=feature_set_record["fields"],
                 ),
-                title=feature_set_record["fields"]["feature_sets_display_name_en"],
+                title=feature_set_record["fields"]["display_name_en"],
                 uri=feature_set_uri,
             )
 

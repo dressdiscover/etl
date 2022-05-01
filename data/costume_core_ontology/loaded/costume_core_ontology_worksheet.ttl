@@ -226,6 +226,7 @@
 
 <urn:costumeCore:image:featureValue:https%3A%2F%2Fw3id.org%2FcostumeCore%2Fontology%2FCC00016:CC00016.jpg:fullSize> a cms:Image ;
     dcterms:creator "Wikimedia user At~A~Glance" ;
+    dcterms:license <http://creativecommons.org/licenses/by/4.0/> ;
     cms:imageCopyable true ;
     cms:imageSrc "https://worksheet.dressdiscover.org/img/worksheet/full_size/CC00016.jpg" ;
     foaf:depicts coco:CC00016 ;
@@ -856,6 +857,7 @@
 
 <urn:costumeCore:image:featureValue:https%3A%2F%2Fw3id.org%2FcostumeCore%2Fontology%2FCC00307:CC00307.jpg:fullSize> a cms:Image ;
     dcterms:creator "Auckland Museum" ;
+    dcterms:license <http://creativecommons.org/licenses/by/4.0/> ;
     cms:imageCopyable true ;
     cms:imageSrc "https://worksheet.dressdiscover.org/img/worksheet/full_size/CC00307.jpg" ;
     foaf:depicts coco:CC00307 ;
@@ -927,6 +929,7 @@
 
 <urn:costumeCore:image:featureValue:https%3A%2F%2Fw3id.org%2FcostumeCore%2Fontology%2FCC00349:CC00349.jpg:fullSize> a cms:Image ;
     dcterms:creator "Auckland Museum" ;
+    dcterms:license <http://creativecommons.org/licenses/by/4.0/> ;
     cms:imageCopyable true ;
     cms:imageSrc "https://worksheet.dressdiscover.org/img/worksheet/full_size/CC00349.jpg" ;
     foaf:depicts coco:CC00349 ;
@@ -934,6 +937,7 @@
 
 <urn:costumeCore:image:featureValue:https%3A%2F%2Fw3id.org%2FcostumeCore%2Fontology%2FCC00350:CC00350.jpg:fullSize> a cms:Image ;
     dcterms:creator "Auckland Museum" ;
+    dcterms:license <http://creativecommons.org/licenses/by/4.0/> ;
     cms:imageCopyable true ;
     cms:imageSrc "https://worksheet.dressdiscover.org/img/worksheet/full_size/CC00350.jpg" ;
     foaf:depicts coco:CC00350 ;
@@ -4854,6 +4858,7 @@ coco:CC00627 a cms:NamedValue ;
 
 <urn:costumeCore:image:featureValue:https%3A%2F%2Fw3id.org%2FcostumeCore%2Fontology%2FCC00016:CC00016.jpg:thumbnail> a cms:Image ;
     dcterms:creator "Wikimedia user At~A~Glance" ;
+    dcterms:license <http://creativecommons.org/licenses/by/4.0/> ;
     cms:imageCopyable true ;
     cms:imageSrc "https://worksheet.dressdiscover.org/img/worksheet/thumbnail/CC00016.jpg" ;
     exif:height 200 ;
@@ -5563,6 +5568,7 @@ coco:CC00627 a cms:NamedValue ;
 
 <urn:costumeCore:image:featureValue:https%3A%2F%2Fw3id.org%2FcostumeCore%2Fontology%2FCC00307:CC00307.jpg:thumbnail> a cms:Image ;
     dcterms:creator "Auckland Museum" ;
+    dcterms:license <http://creativecommons.org/licenses/by/4.0/> ;
     cms:imageCopyable true ;
     cms:imageSrc "https://worksheet.dressdiscover.org/img/worksheet/thumbnail/CC00307.jpg" ;
     exif:height 200 ;
@@ -5643,6 +5649,7 @@ coco:CC00627 a cms:NamedValue ;
 
 <urn:costumeCore:image:featureValue:https%3A%2F%2Fw3id.org%2FcostumeCore%2Fontology%2FCC00349:CC00349.jpg:thumbnail> a cms:Image ;
     dcterms:creator "Auckland Museum" ;
+    dcterms:license <http://creativecommons.org/licenses/by/4.0/> ;
     cms:imageCopyable true ;
     cms:imageSrc "https://worksheet.dressdiscover.org/img/worksheet/thumbnail/CC00349.jpg" ;
     exif:height 200 ;
@@ -5651,6 +5658,7 @@ coco:CC00627 a cms:NamedValue ;
 
 <urn:costumeCore:image:featureValue:https%3A%2F%2Fw3id.org%2FcostumeCore%2Fontology%2FCC00350:CC00350.jpg:thumbnail> a cms:Image ;
     dcterms:creator "Auckland Museum" ;
+    dcterms:license <http://creativecommons.org/licenses/by/4.0/> ;
     cms:imageCopyable true ;
     cms:imageSrc "https://worksheet.dressdiscover.org/img/worksheet/thumbnail/CC00350.jpg" ;
     exif:height 200 ;
@@ -6867,6 +6875,23 @@ coco:closurePlacement a worksheet:Feature ;
         <urn:costumeCore:ontology:pants>,
         <urn:costumeCore:ontology:skirt>,
         <urn:costumeCore:ontology:top> .
+
+<http://creativecommons.org/licenses/by/4.0/> a creativecommons:License,
+        <http://www.paradicms.org/ns#License>,
+        cms:License ;
+    creativecommons:legalcode <http://creativecommons.org/licenses/by/4.0/legalcode> ;
+    creativecommons:licenseClass <http://creativecommons.org/license/> ;
+    creativecommons:permits creativecommons:DerivativeWorks,
+        creativecommons:Distribution,
+        creativecommons:Reproduction ;
+    creativecommons:requires creativecommons:Attribution,
+        creativecommons:Notice ;
+    dc:creator <http://creativecommons.org> ;
+    dc:identifier "by" ;
+    dc:title "Attribution 4.0 International"@en ;
+    dcterms:hasVersion "4.0" ;
+    foaf:logo <http://i.creativecommons.org/l/by/4.0/80x15.png>,
+        <http://i.creativecommons.org/l/by/4.0/88x31.png> .
 
 <http://creativecommons.org/licenses/by/2.0/> a creativecommons:License,
         <http://www.paradicms.org/ns#License>,
