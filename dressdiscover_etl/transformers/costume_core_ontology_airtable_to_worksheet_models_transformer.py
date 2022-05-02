@@ -1,5 +1,5 @@
 from enum import Enum
-from typing import Dict, Tuple, Iterable, Union, List, Set, FrozenSet, Optional
+from typing import Dict, Tuple, Iterable, Union, List, Set, FrozenSet, Optional, Any
 from urllib.parse import quote_plus
 
 from inflector import Inflector
@@ -239,7 +239,7 @@ class CostumeCoreOntologyAirtableToWorksheetModelsTransformer(Transformer):
     ) -> Iterable[Model]:
         inflector = Inflector()
 
-        variant_term_records_by_feature_value_id = {}
+        variant_term_records_by_feature_value_id: Dict[str, List[Any]] = {}
         for variant_term_record in variant_term_records:
             if variant_term_record["fields"]["xml-lang"] != "en":
                 continue
