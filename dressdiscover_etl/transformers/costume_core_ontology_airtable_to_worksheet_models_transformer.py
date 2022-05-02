@@ -2,6 +2,7 @@ from enum import Enum
 from typing import Dict, Tuple, Iterable, Union, List, Set, FrozenSet, Optional
 from urllib.parse import quote_plus
 
+from inflector import Inflector
 from paradicms_etl.model import Model
 from paradicms_etl.models.creative_commons_licenses import CreativeCommonsLicenses
 from paradicms_etl.models.image import Image
@@ -112,6 +113,7 @@ class CostumeCoreOntologyAirtableToWorksheetModelsTransformer(Transformer):
         #     for record in records_by_table["rights_licenses"]
         #     if "Nickname" in record["fields"]
         # )
+        variant_term_records = tuple(records_by_table["AAT_variant_terms"])
 
         # Track which licenses and rights statements we want to yield as we see references to them
 
@@ -130,6 +132,7 @@ class CostumeCoreOntologyAirtableToWorksheetModelsTransformer(Transformer):
             feature_records=feature_records,
             feature_value_records=feature_value_records,
             image_records_by_id=image_records_by_id,
+            variant_term_records=variant_term_records,
         )
 
         # Yield referenced licenses and rights statements once
@@ -226,12 +229,29 @@ class CostumeCoreOntologyAirtableToWorksheetModelsTransformer(Transformer):
             )
 
     def __transform_feature_value_records(
-        self, *, feature_records, feature_value_records, image_records_by_id
+        self,
+        *,
+        feature_records,
+        feature_value_records,
+        image_records_by_id,
+        variant_term_records,
     ) -> Iterable[Model]:
+        inflector = Inflector()
+
+        variant_term_records_by_feature_value_id = {}
+        for variant_term_record in variant_term_records:
+            if variant_term_record["fields"]["xml-lang"] != "en":
+                continue
+            assert len(variant_term_record["fields"]["feature_values_id"]) == 1
+            variant_term_records_by_feature_value_id.setdefault(
+                variant_term_record["fields"]["feature_values_id"][0], []
+            ).append(variant_term_record)
+
         for feature_value_record in feature_value_records:
             feature_value_record_fields = feature_value_record["fields"]
+            feature_value_id = feature_value_record_fields["id"]
 
-            if not feature_value_record_fields["id"].startswith("CC"):
+            if not feature_value_id.startswith("CC"):
                 continue
 
             if "display_name_en" not in feature_value_record_fields:
@@ -247,20 +267,53 @@ class CostumeCoreOntologyAirtableToWorksheetModelsTransformer(Transformer):
             if not feature_uris:
                 self._logger.debug(
                     "feature value %s does not belong to any features",
-                    feature_value_record_fields["id"],
+                    feature_value_id,
                 )
                 continue
 
             # aat_id=fields.get("AATID"),
             #     wikidata_id=fields.get("WikidataID"),
 
-            feature_value_uri = COCO[feature_value_record_fields["id"]]
+            pref_label = feature_value_record_fields["display_name_en"]
+
+            alt_labels = set()
+            for variant_term_record in variant_term_records_by_feature_value_id.get(
+                feature_value_id, []
+            ):
+                variant_term = variant_term_record["fields"]["term"]
+                if variant_term == pref_label:
+                    self._logger.debug(
+                        "feature value %s has variant term that is the same as the preferred label: %s",
+                        feature_value_id,
+                        pref_label,
+                    )
+                    continue
+                elif inflector.singularize(variant_term) == pref_label:
+                    self._logger.debug(
+                        "feature value %s has variant term (%s) that is the the plural of the preferred label (%s)",
+                        feature_value_id,
+                        variant_term,
+                        pref_label,
+                    )
+                    continue
+                elif inflector.pluralize(variant_term) == pref_label:
+                    self._logger.debug(
+                        "feature value %s has variant term (%s) that is the the singular of the preferred label (%s)",
+                        feature_value_id,
+                        variant_term,
+                        pref_label,
+                    )
+                    continue
+                alt_labels.add(variant_term)
+
+            feature_value_uri = COCO[feature_value_id]
             feature_value = NamedValue.from_fields(
                 abstract=self.__transform_description_fields(
                     record_fields=feature_value_record_fields
                 ),
+                alt_labels=tuple(alt_labels),
                 property_uris=tuple(feature_uris),
-                title=feature_value_record_fields["display_name_en"],
+                title=pref_label,
                 value=feature_value_uri,
                 uri=feature_value_uri,
             )
