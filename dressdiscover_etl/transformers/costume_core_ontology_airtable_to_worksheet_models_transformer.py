@@ -73,6 +73,7 @@ class CostumeCoreOntologyAirtableToWorksheetModelsTransformer(Transformer):
                     "urn",
                     "costumeCore",
                     "ontology",
+                    "featureSet",
                     quote_plus(feature_set_record["fields"]["id"]),
                 )
             )

@@ -72,53 +72,53 @@
     foaf:depicts coco:trimming ;
     foaf:thumbnail <urn:costumeCore:image:feature:https%3A%2F%2Fw3id.org%2FcostumeCore%2Fontology%2Ftrimming:trimming.jpg:thumbnail> .
 
-<urn:costumeCore:image:featureSet:urn%3AcostumeCore%3Aontology%3Acoat:CC00106.jpg:fullSize> a cms:Image ;
+<urn:costumeCore:image:featureSet:urn%3AcostumeCore%3Aontology%3AfeatureSet%3Acoat:CC00106.jpg:fullSize> a cms:Image ;
     dcterms:creator "David Ring for MoMu - Fashion Museum Antwerp" ;
     dcterms:license <http://creativecommons.org/publicdomain/zero/1.0/> ;
     cms:imageCopyable true ;
     cms:imageSrc "https://worksheet.dressdiscover.org/img/worksheet/full_size/CC00106.jpg" ;
-    foaf:depicts <urn:costumeCore:ontology:coat> ;
-    foaf:thumbnail <urn:costumeCore:image:featureSet:urn%3AcostumeCore%3Aontology%3Acoat:CC00106.jpg:thumbnail> .
+    foaf:depicts <urn:costumeCore:ontology:featureSet:coat> ;
+    foaf:thumbnail <urn:costumeCore:image:featureSet:urn%3AcostumeCore%3Aontology%3AfeatureSet%3Acoat:CC00106.jpg:thumbnail> .
 
-<urn:costumeCore:image:featureSet:urn%3AcostumeCore%3Aontology%3Adress:CC00335.jpg:fullSize> a cms:Image ;
+<urn:costumeCore:image:featureSet:urn%3AcostumeCore%3Aontology%3AfeatureSet%3Adress:CC00335.jpg:fullSize> a cms:Image ;
     dcterms:creator "David Ring for MoMu - Fashion Museum Antwerp" ;
     dcterms:license <http://creativecommons.org/publicdomain/zero/1.0/> ;
     cms:imageCopyable true ;
     cms:imageSrc "https://worksheet.dressdiscover.org/img/worksheet/full_size/CC00335.jpg" ;
-    foaf:depicts <urn:costumeCore:ontology:dress> ;
-    foaf:thumbnail <urn:costumeCore:image:featureSet:urn%3AcostumeCore%3Aontology%3Adress:CC00335.jpg:thumbnail> .
+    foaf:depicts <urn:costumeCore:ontology:featureSet:dress> ;
+    foaf:thumbnail <urn:costumeCore:image:featureSet:urn%3AcostumeCore%3Aontology%3AfeatureSet%3Adress:CC00335.jpg:thumbnail> .
 
-<urn:costumeCore:image:featureSet:urn%3AcostumeCore%3Aontology%3Ajacket:CC00339.jpg:fullSize> a cms:Image ;
+<urn:costumeCore:image:featureSet:urn%3AcostumeCore%3Aontology%3AfeatureSet%3Ajacket:CC00339.jpg:fullSize> a cms:Image ;
     dcterms:creator "David Ring for MoMu - Fashion Museum Antwerp" ;
     dcterms:license <http://creativecommons.org/publicdomain/zero/1.0/> ;
     cms:imageCopyable true ;
     cms:imageSrc "https://worksheet.dressdiscover.org/img/worksheet/full_size/CC00339.jpg" ;
-    foaf:depicts <urn:costumeCore:ontology:jacket> ;
-    foaf:thumbnail <urn:costumeCore:image:featureSet:urn%3AcostumeCore%3Aontology%3Ajacket:CC00339.jpg:thumbnail> .
+    foaf:depicts <urn:costumeCore:ontology:featureSet:jacket> ;
+    foaf:thumbnail <urn:costumeCore:image:featureSet:urn%3AcostumeCore%3Aontology%3AfeatureSet%3Ajacket:CC00339.jpg:thumbnail> .
 
-<urn:costumeCore:image:featureSet:urn%3AcostumeCore%3Aontology%3Apants:CC00344.jpg:fullSize> a cms:Image ;
+<urn:costumeCore:image:featureSet:urn%3AcostumeCore%3Aontology%3AfeatureSet%3Apants:CC00344.jpg:fullSize> a cms:Image ;
     dcterms:creator "David Ring for MoMu - Fashion Museum Antwerp" ;
     dcterms:license <http://creativecommons.org/publicdomain/zero/1.0/> ;
     cms:imageCopyable true ;
     cms:imageSrc "https://worksheet.dressdiscover.org/img/worksheet/full_size/CC00344.jpg" ;
-    foaf:depicts <urn:costumeCore:ontology:pants> ;
-    foaf:thumbnail <urn:costumeCore:image:featureSet:urn%3AcostumeCore%3Aontology%3Apants:CC00344.jpg:thumbnail> .
+    foaf:depicts <urn:costumeCore:ontology:featureSet:pants> ;
+    foaf:thumbnail <urn:costumeCore:image:featureSet:urn%3AcostumeCore%3Aontology%3AfeatureSet%3Apants:CC00344.jpg:thumbnail> .
 
-<urn:costumeCore:image:featureSet:urn%3AcostumeCore%3Aontology%3Askirt:CC00341.jpg:fullSize> a cms:Image ;
+<urn:costumeCore:image:featureSet:urn%3AcostumeCore%3Aontology%3AfeatureSet%3Askirt:CC00341.jpg:fullSize> a cms:Image ;
     dcterms:creator "David Ring for MoMu - Fashion Museum Antwerp" ;
     dcterms:license <http://creativecommons.org/publicdomain/zero/1.0/> ;
     cms:imageCopyable true ;
     cms:imageSrc "https://worksheet.dressdiscover.org/img/worksheet/full_size/CC00341.jpg" ;
-    foaf:depicts <urn:costumeCore:ontology:skirt> ;
-    foaf:thumbnail <urn:costumeCore:image:featureSet:urn%3AcostumeCore%3Aontology%3Askirt:CC00341.jpg:thumbnail> .
+    foaf:depicts <urn:costumeCore:ontology:featureSet:skirt> ;
+    foaf:thumbnail <urn:costumeCore:image:featureSet:urn%3AcostumeCore%3Aontology%3AfeatureSet%3Askirt:CC00341.jpg:thumbnail> .
 
-<urn:costumeCore:image:featureSet:urn%3AcostumeCore%3Aontology%3Atop:CC00607.jpg:fullSize> a cms:Image ;
+<urn:costumeCore:image:featureSet:urn%3AcostumeCore%3Aontology%3AfeatureSet%3Atop:CC00607.jpg:fullSize> a cms:Image ;
     dcterms:creator "David Ring for MoMu - Fashion Museum Antwerp" ;
     dcterms:license <http://creativecommons.org/publicdomain/zero/1.0/> ;
     cms:imageCopyable true ;
     cms:imageSrc "https://worksheet.dressdiscover.org/img/worksheet/full_size/CC00607.jpg" ;
-    foaf:depicts <urn:costumeCore:ontology:top> ;
-    foaf:thumbnail <urn:costumeCore:image:featureSet:urn%3AcostumeCore%3Aontology%3Atop:CC00607.jpg:thumbnail> .
+    foaf:depicts <urn:costumeCore:ontology:featureSet:top> ;
+    foaf:thumbnail <urn:costumeCore:image:featureSet:urn%3AcostumeCore%3Aontology%3AfeatureSet%3Atop:CC00607.jpg:thumbnail> .
 
 <urn:costumeCore:image:featureValue:https%3A%2F%2Fw3id.org%2FcostumeCore%2Fontology%2FCC00001:CC00001.jpg:fullSize> a cms:Image ;
     dcterms:creator "David Ring for MoMu - Fashion Museum Antwerp" ;
@@ -5239,59 +5239,59 @@ coco:CC00627 a cms:NamedValue ;
     exif:width 200 ;
     foaf:depicts coco:trimming .
 
-<urn:costumeCore:image:featureSet:urn%3AcostumeCore%3Aontology%3Acoat:CC00106.jpg:thumbnail> a cms:Image ;
+<urn:costumeCore:image:featureSet:urn%3AcostumeCore%3Aontology%3AfeatureSet%3Acoat:CC00106.jpg:thumbnail> a cms:Image ;
     dcterms:creator "David Ring for MoMu - Fashion Museum Antwerp" ;
     dcterms:license <http://creativecommons.org/publicdomain/zero/1.0/> ;
     cms:imageCopyable true ;
     cms:imageSrc "https://worksheet.dressdiscover.org/img/worksheet/thumbnail/CC00106.jpg" ;
     exif:height 200 ;
     exif:width 200 ;
-    foaf:depicts <urn:costumeCore:ontology:coat> .
+    foaf:depicts <urn:costumeCore:ontology:featureSet:coat> .
 
-<urn:costumeCore:image:featureSet:urn%3AcostumeCore%3Aontology%3Adress:CC00335.jpg:thumbnail> a cms:Image ;
+<urn:costumeCore:image:featureSet:urn%3AcostumeCore%3Aontology%3AfeatureSet%3Adress:CC00335.jpg:thumbnail> a cms:Image ;
     dcterms:creator "David Ring for MoMu - Fashion Museum Antwerp" ;
     dcterms:license <http://creativecommons.org/publicdomain/zero/1.0/> ;
     cms:imageCopyable true ;
     cms:imageSrc "https://worksheet.dressdiscover.org/img/worksheet/thumbnail/CC00335.jpg" ;
     exif:height 200 ;
     exif:width 200 ;
-    foaf:depicts <urn:costumeCore:ontology:dress> .
+    foaf:depicts <urn:costumeCore:ontology:featureSet:dress> .
 
-<urn:costumeCore:image:featureSet:urn%3AcostumeCore%3Aontology%3Ajacket:CC00339.jpg:thumbnail> a cms:Image ;
+<urn:costumeCore:image:featureSet:urn%3AcostumeCore%3Aontology%3AfeatureSet%3Ajacket:CC00339.jpg:thumbnail> a cms:Image ;
     dcterms:creator "David Ring for MoMu - Fashion Museum Antwerp" ;
     dcterms:license <http://creativecommons.org/publicdomain/zero/1.0/> ;
     cms:imageCopyable true ;
     cms:imageSrc "https://worksheet.dressdiscover.org/img/worksheet/thumbnail/CC00339.jpg" ;
     exif:height 200 ;
     exif:width 200 ;
-    foaf:depicts <urn:costumeCore:ontology:jacket> .
+    foaf:depicts <urn:costumeCore:ontology:featureSet:jacket> .
 
-<urn:costumeCore:image:featureSet:urn%3AcostumeCore%3Aontology%3Apants:CC00344.jpg:thumbnail> a cms:Image ;
+<urn:costumeCore:image:featureSet:urn%3AcostumeCore%3Aontology%3AfeatureSet%3Apants:CC00344.jpg:thumbnail> a cms:Image ;
     dcterms:creator "David Ring for MoMu - Fashion Museum Antwerp" ;
     dcterms:license <http://creativecommons.org/publicdomain/zero/1.0/> ;
     cms:imageCopyable true ;
     cms:imageSrc "https://worksheet.dressdiscover.org/img/worksheet/thumbnail/CC00344.jpg" ;
     exif:height 200 ;
     exif:width 200 ;
-    foaf:depicts <urn:costumeCore:ontology:pants> .
+    foaf:depicts <urn:costumeCore:ontology:featureSet:pants> .
 
-<urn:costumeCore:image:featureSet:urn%3AcostumeCore%3Aontology%3Askirt:CC00341.jpg:thumbnail> a cms:Image ;
+<urn:costumeCore:image:featureSet:urn%3AcostumeCore%3Aontology%3AfeatureSet%3Askirt:CC00341.jpg:thumbnail> a cms:Image ;
     dcterms:creator "David Ring for MoMu - Fashion Museum Antwerp" ;
     dcterms:license <http://creativecommons.org/publicdomain/zero/1.0/> ;
     cms:imageCopyable true ;
     cms:imageSrc "https://worksheet.dressdiscover.org/img/worksheet/thumbnail/CC00341.jpg" ;
     exif:height 200 ;
     exif:width 200 ;
-    foaf:depicts <urn:costumeCore:ontology:skirt> .
+    foaf:depicts <urn:costumeCore:ontology:featureSet:skirt> .
 
-<urn:costumeCore:image:featureSet:urn%3AcostumeCore%3Aontology%3Atop:CC00607.jpg:thumbnail> a cms:Image ;
+<urn:costumeCore:image:featureSet:urn%3AcostumeCore%3Aontology%3AfeatureSet%3Atop:CC00607.jpg:thumbnail> a cms:Image ;
     dcterms:creator "David Ring for MoMu - Fashion Museum Antwerp" ;
     dcterms:license <http://creativecommons.org/publicdomain/zero/1.0/> ;
     cms:imageCopyable true ;
     cms:imageSrc "https://worksheet.dressdiscover.org/img/worksheet/thumbnail/CC00607.jpg" ;
     exif:height 200 ;
     exif:width 200 ;
-    foaf:depicts <urn:costumeCore:ontology:top> .
+    foaf:depicts <urn:costumeCore:ontology:featureSet:top> .
 
 <urn:costumeCore:image:featureValue:https%3A%2F%2Fw3id.org%2FcostumeCore%2Fontology%2FCC00001:CC00001.jpg:thumbnail> a cms:Image ;
     dcterms:creator "David Ring for MoMu - Fashion Museum Antwerp" ;
@@ -7562,10 +7562,10 @@ coco:sleeveLength a worksheet:Feature ;
             dcterms:license <http://creativecommons.org/publicdomain/mark/1.0/> ;
             rdf:value "Each term that describes the length of the sleeves of the garment." ] ;
     dcterms:title "Sleeve Length" ;
-    worksheet:featureSet <urn:costumeCore:ontology:coat>,
-        <urn:costumeCore:ontology:dress>,
-        <urn:costumeCore:ontology:jacket>,
-        <urn:costumeCore:ontology:top> .
+    worksheet:featureSet <urn:costumeCore:ontology:featureSet:coat>,
+        <urn:costumeCore:ontology:featureSet:dress>,
+        <urn:costumeCore:ontology:featureSet:jacket>,
+        <urn:costumeCore:ontology:featureSet:top> .
 
 coco:closurePlacement a worksheet:Feature ;
     dcterms:abstract [ a cms:Text ;
@@ -7573,12 +7573,12 @@ coco:closurePlacement a worksheet:Feature ;
             dcterms:license <http://creativecommons.org/publicdomain/mark/1.0/> ;
             rdf:value "Each placement of closures on the item." ] ;
     dcterms:title "Closure Placement" ;
-    worksheet:featureSet <urn:costumeCore:ontology:coat>,
-        <urn:costumeCore:ontology:dress>,
-        <urn:costumeCore:ontology:jacket>,
-        <urn:costumeCore:ontology:pants>,
-        <urn:costumeCore:ontology:skirt>,
-        <urn:costumeCore:ontology:top> .
+    worksheet:featureSet <urn:costumeCore:ontology:featureSet:coat>,
+        <urn:costumeCore:ontology:featureSet:dress>,
+        <urn:costumeCore:ontology:featureSet:jacket>,
+        <urn:costumeCore:ontology:featureSet:pants>,
+        <urn:costumeCore:ontology:featureSet:skirt>,
+        <urn:costumeCore:ontology:featureSet:top> .
 
 <http://creativecommons.org/licenses/by/4.0/> a creativecommons:License,
         <http://www.paradicms.org/ns#License>,
@@ -7621,12 +7621,12 @@ coco:length a worksheet:Feature ;
             dcterms:license <http://creativecommons.org/publicdomain/mark/1.0/> ;
             rdf:value "Each length of the object, where the hem lands on the body." ] ;
     dcterms:title "Length" ;
-    worksheet:featureSet <urn:costumeCore:ontology:coat>,
-        <urn:costumeCore:ontology:dress>,
-        <urn:costumeCore:ontology:jacket>,
-        <urn:costumeCore:ontology:pants>,
-        <urn:costumeCore:ontology:skirt>,
-        <urn:costumeCore:ontology:top> .
+    worksheet:featureSet <urn:costumeCore:ontology:featureSet:coat>,
+        <urn:costumeCore:ontology:featureSet:dress>,
+        <urn:costumeCore:ontology:featureSet:jacket>,
+        <urn:costumeCore:ontology:featureSet:pants>,
+        <urn:costumeCore:ontology:featureSet:skirt>,
+        <urn:costumeCore:ontology:featureSet:top> .
 
 coco:waistline a worksheet:Feature ;
     dcterms:abstract [ a cms:Text ;
@@ -7634,12 +7634,12 @@ coco:waistline a worksheet:Feature ;
             dcterms:license <http://creativecommons.org/publicdomain/mark/1.0/> ;
             rdf:value "Each term that describes the level and shape of the waist of the garment." ] ;
     dcterms:title "Waistline" ;
-    worksheet:featureSet <urn:costumeCore:ontology:coat>,
-        <urn:costumeCore:ontology:dress>,
-        <urn:costumeCore:ontology:jacket>,
-        <urn:costumeCore:ontology:pants>,
-        <urn:costumeCore:ontology:skirt>,
-        <urn:costumeCore:ontology:top> .
+    worksheet:featureSet <urn:costumeCore:ontology:featureSet:coat>,
+        <urn:costumeCore:ontology:featureSet:dress>,
+        <urn:costumeCore:ontology:featureSet:jacket>,
+        <urn:costumeCore:ontology:featureSet:pants>,
+        <urn:costumeCore:ontology:featureSet:skirt>,
+        <urn:costumeCore:ontology:featureSet:top> .
 
 coco:collar a worksheet:Feature ;
     dcterms:abstract [ a cms:Text ;
@@ -7648,10 +7648,10 @@ coco:collar a worksheet:Feature ;
             dcterms:rights <http://rightsstatements.org/vocab/InC/1.0/> ;
             rdf:value "Each term that describes the collar of the garment." ] ;
     dcterms:title "Collar" ;
-    worksheet:featureSet <urn:costumeCore:ontology:coat>,
-        <urn:costumeCore:ontology:dress>,
-        <urn:costumeCore:ontology:jacket>,
-        <urn:costumeCore:ontology:top> .
+    worksheet:featureSet <urn:costumeCore:ontology:featureSet:coat>,
+        <urn:costumeCore:ontology:featureSet:dress>,
+        <urn:costumeCore:ontology:featureSet:jacket>,
+        <urn:costumeCore:ontology:featureSet:top> .
 
 <http://creativecommons.org/licenses/by-sa/2.0/> a creativecommons:License,
         <http://www.paradicms.org/ns#License>,
@@ -7696,12 +7696,12 @@ coco:closure a worksheet:Feature ;
             dcterms:rights <http://rightsstatements.org/vocab/InC/1.0/> ;
             rdf:value "Each closure used on the garment." ] ;
     dcterms:title "Closure" ;
-    worksheet:featureSet <urn:costumeCore:ontology:coat>,
-        <urn:costumeCore:ontology:dress>,
-        <urn:costumeCore:ontology:jacket>,
-        <urn:costumeCore:ontology:pants>,
-        <urn:costumeCore:ontology:skirt>,
-        <urn:costumeCore:ontology:top> .
+    worksheet:featureSet <urn:costumeCore:ontology:featureSet:coat>,
+        <urn:costumeCore:ontology:featureSet:dress>,
+        <urn:costumeCore:ontology:featureSet:jacket>,
+        <urn:costumeCore:ontology:featureSet:pants>,
+        <urn:costumeCore:ontology:featureSet:skirt>,
+        <urn:costumeCore:ontology:featureSet:top> .
 
 coco:pantsType a worksheet:Feature ;
     dcterms:abstract [ a cms:Text ;
@@ -7709,7 +7709,7 @@ coco:pantsType a worksheet:Feature ;
             dcterms:license <http://creativecommons.org/publicdomain/mark/1.0/> ;
             rdf:value "Each term that describes the length and shape of pants." ] ;
     dcterms:title "Pants Type" ;
-    worksheet:featureSet <urn:costumeCore:ontology:pants> .
+    worksheet:featureSet <urn:costumeCore:ontology:featureSet:pants> .
 
 coco:trimming a worksheet:Feature ;
     dcterms:abstract [ a cms:Text ;
@@ -7718,12 +7718,12 @@ coco:trimming a worksheet:Feature ;
             dcterms:rights <http://rightsstatements.org/vocab/InC/1.0/> ;
             rdf:value "Each term for decorative material added to an object, distinguished from the fibers, textile type,  or other materials." ] ;
     dcterms:title "Trimming" ;
-    worksheet:featureSet <urn:costumeCore:ontology:coat>,
-        <urn:costumeCore:ontology:dress>,
-        <urn:costumeCore:ontology:jacket>,
-        <urn:costumeCore:ontology:pants>,
-        <urn:costumeCore:ontology:skirt>,
-        <urn:costumeCore:ontology:top> .
+    worksheet:featureSet <urn:costumeCore:ontology:featureSet:coat>,
+        <urn:costumeCore:ontology:featureSet:dress>,
+        <urn:costumeCore:ontology:featureSet:jacket>,
+        <urn:costumeCore:ontology:featureSet:pants>,
+        <urn:costumeCore:ontology:featureSet:skirt>,
+        <urn:costumeCore:ontology:featureSet:top> .
 
 coco:neckline a worksheet:Feature ;
     dcterms:abstract [ a cms:Text ;
@@ -7731,19 +7731,19 @@ coco:neckline a worksheet:Feature ;
             dcterms:license <http://creativecommons.org/publicdomain/mark/1.0/> ;
             rdf:value "Each type of neckline of the garment." ] ;
     dcterms:title "Neckline" ;
-    worksheet:featureSet <urn:costumeCore:ontology:coat>,
-        <urn:costumeCore:ontology:dress>,
-        <urn:costumeCore:ontology:jacket>,
-        <urn:costumeCore:ontology:top> .
+    worksheet:featureSet <urn:costumeCore:ontology:featureSet:coat>,
+        <urn:costumeCore:ontology:featureSet:dress>,
+        <urn:costumeCore:ontology:featureSet:jacket>,
+        <urn:costumeCore:ontology:featureSet:top> .
 
-<urn:costumeCore:ontology:pants> a worksheet:FeatureSet ;
+<urn:costumeCore:ontology:featureSet:pants> a worksheet:FeatureSet ;
     dcterms:abstract [ a cms:Text ;
             dcterms:creator "Arden Kirkland" ;
             dcterms:license <http://creativecommons.org/publicdomain/zero/1.0/> ;
             rdf:value "A set of features appropriate for bifurcated garments (covering the legs separately) such as pants, shorts, leggings, etc. " ] ;
     dcterms:title "Pants" .
 
-<urn:costumeCore:ontology:skirt> a worksheet:FeatureSet ;
+<urn:costumeCore:ontology:featureSet:skirt> a worksheet:FeatureSet ;
     dcterms:abstract [ a cms:Text ;
             dcterms:creator "Arden Kirkland" ;
             dcterms:license <http://creativecommons.org/publicdomain/zero/1.0/> ;
@@ -7756,10 +7756,10 @@ coco:sleeveType a worksheet:Feature ;
             dcterms:license <http://creativecommons.org/publicdomain/mark/1.0/> ;
             rdf:value "Each term that describes the shape of the sleeves of the garment." ] ;
     dcterms:title "Sleeve Type" ;
-    worksheet:featureSet <urn:costumeCore:ontology:coat>,
-        <urn:costumeCore:ontology:dress>,
-        <urn:costumeCore:ontology:jacket>,
-        <urn:costumeCore:ontology:top> .
+    worksheet:featureSet <urn:costumeCore:ontology:featureSet:coat>,
+        <urn:costumeCore:ontology:featureSet:dress>,
+        <urn:costumeCore:ontology:featureSet:jacket>,
+        <urn:costumeCore:ontology:featureSet:top> .
 
 coco:costumeComponents a worksheet:Feature ;
     dcterms:abstract [ a cms:Text ;
@@ -7768,12 +7768,12 @@ coco:costumeComponents a worksheet:Feature ;
             dcterms:rights <http://rightsstatements.org/vocab/InC/1.0/> ;
             rdf:value "Each additional component of the garment not included elsewhere." ] ;
     dcterms:title "Costume Components" ;
-    worksheet:featureSet <urn:costumeCore:ontology:coat>,
-        <urn:costumeCore:ontology:dress>,
-        <urn:costumeCore:ontology:jacket>,
-        <urn:costumeCore:ontology:pants>,
-        <urn:costumeCore:ontology:skirt>,
-        <urn:costumeCore:ontology:top> .
+    worksheet:featureSet <urn:costumeCore:ontology:featureSet:coat>,
+        <urn:costumeCore:ontology:featureSet:dress>,
+        <urn:costumeCore:ontology:featureSet:jacket>,
+        <urn:costumeCore:ontology:featureSet:pants>,
+        <urn:costumeCore:ontology:featureSet:skirt>,
+        <urn:costumeCore:ontology:featureSet:top> .
 
 coco:skirtType a worksheet:Feature ;
     dcterms:abstract [ a cms:Text ;
@@ -7781,24 +7781,24 @@ coco:skirtType a worksheet:Feature ;
             dcterms:license <http://creativecommons.org/publicdomain/mark/1.0/> ;
             rdf:value "Each term that describes the skirt of the garment." ] ;
     dcterms:title "Skirt Type" ;
-    worksheet:featureSet <urn:costumeCore:ontology:dress>,
-        <urn:costumeCore:ontology:skirt> .
+    worksheet:featureSet <urn:costumeCore:ontology:featureSet:dress>,
+        <urn:costumeCore:ontology:featureSet:skirt> .
 
-<urn:costumeCore:ontology:coat> a worksheet:FeatureSet ;
+<urn:costumeCore:ontology:featureSet:coat> a worksheet:FeatureSet ;
     dcterms:abstract [ a cms:Text ;
             dcterms:creator "Arden Kirkland" ;
             dcterms:license <http://creativecommons.org/publicdomain/zero/1.0/> ;
             rdf:value "A set of features appropriate for garments that cover both the upper and lower body (above and below the waist, past the hips), commonly with an opening at the front, such as coats." ] ;
     dcterms:title "Coat" .
 
-<urn:costumeCore:ontology:jacket> a worksheet:FeatureSet ;
+<urn:costumeCore:ontology:featureSet:jacket> a worksheet:FeatureSet ;
     dcterms:abstract [ a cms:Text ;
             dcterms:creator "Arden Kirkland" ;
             dcterms:license <http://creativecommons.org/publicdomain/zero/1.0/> ;
             rdf:value "A set of features appropriate for garments mainly worn on the upper body, but possibly extending to the hips, commonly with an opening at the front, such as jackets." ] ;
     dcterms:title "Jacket" .
 
-<urn:costumeCore:ontology:top> a worksheet:FeatureSet ;
+<urn:costumeCore:ontology:featureSet:top> a worksheet:FeatureSet ;
     dcterms:abstract [ a cms:Text ;
             dcterms:creator "Arden Kirkland" ;
             dcterms:license <http://creativecommons.org/publicdomain/zero/1.0/> ;
@@ -7812,7 +7812,7 @@ coco:dressType a worksheet:Feature ;
             dcterms:rights <http://rightsstatements.org/vocab/InC/1.0/> ;
             rdf:value "Each term that describes the type of dress." ] ;
     dcterms:title "Dress Type" ;
-    worksheet:featureSet <urn:costumeCore:ontology:dress> .
+    worksheet:featureSet <urn:costumeCore:ontology:featureSet:dress> .
 
 coco:pattern a worksheet:Feature ;
     dcterms:abstract [ a cms:Text ;
@@ -7821,14 +7821,14 @@ coco:pattern a worksheet:Feature ;
             dcterms:rights <http://rightsstatements.org/vocab/InC/1.0/> ;
             rdf:value "Each design motif appearing on the object." ] ;
     dcterms:title "Pattern" ;
-    worksheet:featureSet <urn:costumeCore:ontology:coat>,
-        <urn:costumeCore:ontology:dress>,
-        <urn:costumeCore:ontology:jacket>,
-        <urn:costumeCore:ontology:pants>,
-        <urn:costumeCore:ontology:skirt>,
-        <urn:costumeCore:ontology:top> .
+    worksheet:featureSet <urn:costumeCore:ontology:featureSet:coat>,
+        <urn:costumeCore:ontology:featureSet:dress>,
+        <urn:costumeCore:ontology:featureSet:jacket>,
+        <urn:costumeCore:ontology:featureSet:pants>,
+        <urn:costumeCore:ontology:featureSet:skirt>,
+        <urn:costumeCore:ontology:featureSet:top> .
 
-<urn:costumeCore:ontology:dress> a worksheet:FeatureSet ;
+<urn:costumeCore:ontology:featureSet:dress> a worksheet:FeatureSet ;
     dcterms:abstract [ a cms:Text ;
             dcterms:creator "Arden Kirkland" ;
             dcterms:license <http://creativecommons.org/publicdomain/zero/1.0/> ;
@@ -7841,12 +7841,12 @@ coco:otherMaterials a worksheet:Feature ;
             dcterms:license <http://creativecommons.org/publicdomain/mark/1.0/> ;
             rdf:value "Any other material terms that do not describe fibers, textiles, or trimmings." ] ;
     dcterms:title "Other Materials" ;
-    worksheet:featureSet <urn:costumeCore:ontology:coat>,
-        <urn:costumeCore:ontology:dress>,
-        <urn:costumeCore:ontology:jacket>,
-        <urn:costumeCore:ontology:pants>,
-        <urn:costumeCore:ontology:skirt>,
-        <urn:costumeCore:ontology:top> .
+    worksheet:featureSet <urn:costumeCore:ontology:featureSet:coat>,
+        <urn:costumeCore:ontology:featureSet:dress>,
+        <urn:costumeCore:ontology:featureSet:jacket>,
+        <urn:costumeCore:ontology:featureSet:pants>,
+        <urn:costumeCore:ontology:featureSet:skirt>,
+        <urn:costumeCore:ontology:featureSet:top> .
 
 coco:colorMain a worksheet:Feature ;
     dcterms:abstract [ a cms:Text ;
@@ -7855,12 +7855,12 @@ coco:colorMain a worksheet:Feature ;
             dcterms:rights <http://rightsstatements.org/vocab/InC/1.0/> ;
             rdf:value "The most dominant color in the garment." ] ;
     dcterms:title "Color Main" ;
-    worksheet:featureSet <urn:costumeCore:ontology:coat>,
-        <urn:costumeCore:ontology:dress>,
-        <urn:costumeCore:ontology:jacket>,
-        <urn:costumeCore:ontology:pants>,
-        <urn:costumeCore:ontology:skirt>,
-        <urn:costumeCore:ontology:top> .
+    worksheet:featureSet <urn:costumeCore:ontology:featureSet:coat>,
+        <urn:costumeCore:ontology:featureSet:dress>,
+        <urn:costumeCore:ontology:featureSet:jacket>,
+        <urn:costumeCore:ontology:featureSet:pants>,
+        <urn:costumeCore:ontology:featureSet:skirt>,
+        <urn:costumeCore:ontology:featureSet:top> .
 
 coco:colorSecondary a worksheet:Feature ;
     dcterms:abstract [ a cms:Text ;
@@ -7869,12 +7869,12 @@ coco:colorSecondary a worksheet:Feature ;
             dcterms:rights <http://rightsstatements.org/vocab/InC/1.0/> ;
             rdf:value "Any additional colors in the garment." ] ;
     dcterms:title "Color Secondary" ;
-    worksheet:featureSet <urn:costumeCore:ontology:coat>,
-        <urn:costumeCore:ontology:dress>,
-        <urn:costumeCore:ontology:jacket>,
-        <urn:costumeCore:ontology:pants>,
-        <urn:costumeCore:ontology:skirt>,
-        <urn:costumeCore:ontology:top> .
+    worksheet:featureSet <urn:costumeCore:ontology:featureSet:coat>,
+        <urn:costumeCore:ontology:featureSet:dress>,
+        <urn:costumeCore:ontology:featureSet:jacket>,
+        <urn:costumeCore:ontology:featureSet:pants>,
+        <urn:costumeCore:ontology:featureSet:skirt>,
+        <urn:costumeCore:ontology:featureSet:top> .
 
 coco:fiber a worksheet:Feature ;
     dcterms:abstract [ a cms:Text ;
@@ -7883,12 +7883,12 @@ coco:fiber a worksheet:Feature ;
             dcterms:rights <http://rightsstatements.org/vocab/InC/1.0/> ;
             rdf:value "Each term for the type of fiber used in the materials of the object, distinguished from the textile type, trimmings, or other materials." ] ;
     dcterms:title "Fiber" ;
-    worksheet:featureSet <urn:costumeCore:ontology:coat>,
-        <urn:costumeCore:ontology:dress>,
-        <urn:costumeCore:ontology:jacket>,
-        <urn:costumeCore:ontology:pants>,
-        <urn:costumeCore:ontology:skirt>,
-        <urn:costumeCore:ontology:top> .
+    worksheet:featureSet <urn:costumeCore:ontology:featureSet:coat>,
+        <urn:costumeCore:ontology:featureSet:dress>,
+        <urn:costumeCore:ontology:featureSet:jacket>,
+        <urn:costumeCore:ontology:featureSet:pants>,
+        <urn:costumeCore:ontology:featureSet:skirt>,
+        <urn:costumeCore:ontology:featureSet:top> .
 
 coco:hasTechnique a worksheet:Feature ;
     dcterms:abstract [ a cms:Text ;
@@ -7899,12 +7899,12 @@ coco:hasTechnique a worksheet:Feature ;
 
 Do not include a description of where the technique is in evidence on the garment: that should be a part of the narrative description.""" ] ;
     dcterms:title "Technique" ;
-    worksheet:featureSet <urn:costumeCore:ontology:coat>,
-        <urn:costumeCore:ontology:dress>,
-        <urn:costumeCore:ontology:jacket>,
-        <urn:costumeCore:ontology:pants>,
-        <urn:costumeCore:ontology:skirt>,
-        <urn:costumeCore:ontology:top> .
+    worksheet:featureSet <urn:costumeCore:ontology:featureSet:coat>,
+        <urn:costumeCore:ontology:featureSet:dress>,
+        <urn:costumeCore:ontology:featureSet:jacket>,
+        <urn:costumeCore:ontology:featureSet:pants>,
+        <urn:costumeCore:ontology:featureSet:skirt>,
+        <urn:costumeCore:ontology:featureSet:top> .
 
 coco:textileMaterials a worksheet:Feature ;
     dcterms:abstract [ a cms:Text ;
@@ -7913,12 +7913,12 @@ coco:textileMaterials a worksheet:Feature ;
             dcterms:rights <http://rightsstatements.org/vocab/InC/1.0/> ;
             rdf:value "Each term for materials produced from component fibers, distinguished from the fibers, trimmings, or other materials." ] ;
     dcterms:title "Textile Materials" ;
-    worksheet:featureSet <urn:costumeCore:ontology:coat>,
-        <urn:costumeCore:ontology:dress>,
-        <urn:costumeCore:ontology:jacket>,
-        <urn:costumeCore:ontology:pants>,
-        <urn:costumeCore:ontology:skirt>,
-        <urn:costumeCore:ontology:top> .
+    worksheet:featureSet <urn:costumeCore:ontology:featureSet:coat>,
+        <urn:costumeCore:ontology:featureSet:dress>,
+        <urn:costumeCore:ontology:featureSet:jacket>,
+        <urn:costumeCore:ontology:featureSet:pants>,
+        <urn:costumeCore:ontology:featureSet:skirt>,
+        <urn:costumeCore:ontology:featureSet:top> .
 
 <http://creativecommons.org/licenses/by-sa/3.0/> a creativecommons:License,
         <http://www.paradicms.org/ns#License>,
