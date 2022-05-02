@@ -6,6 +6,7 @@
 @prefix exif: <http://www.w3.org/2003/12/exif/ns#> .
 @prefix foaf: <http://xmlns.com/foaf/0.1/> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
 @prefix skos: <http://www.w3.org/2004/02/skos/core#> .
 @prefix worksheet: <http://www.paradicms.org/ns/worksheet#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
@@ -7565,7 +7566,8 @@ coco:sleeveLength a worksheet:Feature ;
     worksheet:featureSet <urn:costumeCore:ontology:featureSet:coat>,
         <urn:costumeCore:ontology:featureSet:dress>,
         <urn:costumeCore:ontology:featureSet:jacket>,
-        <urn:costumeCore:ontology:featureSet:top> .
+        <urn:costumeCore:ontology:featureSet:top> ;
+    sh:order 22 .
 
 coco:closurePlacement a worksheet:Feature ;
     dcterms:abstract [ a cms:Text ;
@@ -7578,7 +7580,8 @@ coco:closurePlacement a worksheet:Feature ;
         <urn:costumeCore:ontology:featureSet:jacket>,
         <urn:costumeCore:ontology:featureSet:pants>,
         <urn:costumeCore:ontology:featureSet:skirt>,
-        <urn:costumeCore:ontology:featureSet:top> .
+        <urn:costumeCore:ontology:featureSet:top> ;
+    sh:order 18 .
 
 <http://creativecommons.org/licenses/by/4.0/> a creativecommons:License,
         <http://www.paradicms.org/ns#License>,
@@ -7626,7 +7629,8 @@ coco:length a worksheet:Feature ;
         <urn:costumeCore:ontology:featureSet:jacket>,
         <urn:costumeCore:ontology:featureSet:pants>,
         <urn:costumeCore:ontology:featureSet:skirt>,
-        <urn:costumeCore:ontology:featureSet:top> .
+        <urn:costumeCore:ontology:featureSet:top> ;
+    sh:order 24 .
 
 coco:waistline a worksheet:Feature ;
     dcterms:abstract [ a cms:Text ;
@@ -7639,7 +7643,8 @@ coco:waistline a worksheet:Feature ;
         <urn:costumeCore:ontology:featureSet:jacket>,
         <urn:costumeCore:ontology:featureSet:pants>,
         <urn:costumeCore:ontology:featureSet:skirt>,
-        <urn:costumeCore:ontology:featureSet:top> .
+        <urn:costumeCore:ontology:featureSet:top> ;
+    sh:order 23 .
 
 coco:collar a worksheet:Feature ;
     dcterms:abstract [ a cms:Text ;
@@ -7651,7 +7656,8 @@ coco:collar a worksheet:Feature ;
     worksheet:featureSet <urn:costumeCore:ontology:featureSet:coat>,
         <urn:costumeCore:ontology:featureSet:dress>,
         <urn:costumeCore:ontology:featureSet:jacket>,
-        <urn:costumeCore:ontology:featureSet:top> .
+        <urn:costumeCore:ontology:featureSet:top> ;
+    sh:order 20 .
 
 <http://creativecommons.org/licenses/by-sa/2.0/> a creativecommons:License,
         <http://www.paradicms.org/ns#License>,
@@ -7701,7 +7707,8 @@ coco:closure a worksheet:Feature ;
         <urn:costumeCore:ontology:featureSet:jacket>,
         <urn:costumeCore:ontology:featureSet:pants>,
         <urn:costumeCore:ontology:featureSet:skirt>,
-        <urn:costumeCore:ontology:featureSet:top> .
+        <urn:costumeCore:ontology:featureSet:top> ;
+    sh:order 17 .
 
 coco:pantsType a worksheet:Feature ;
     dcterms:abstract [ a cms:Text ;
@@ -7709,7 +7716,8 @@ coco:pantsType a worksheet:Feature ;
             dcterms:license <http://creativecommons.org/publicdomain/mark/1.0/> ;
             rdf:value "Each term that describes the length and shape of pants." ] ;
     dcterms:title "Pants Type" ;
-    worksheet:featureSet <urn:costumeCore:ontology:featureSet:pants> .
+    worksheet:featureSet <urn:costumeCore:ontology:featureSet:pants> ;
+    sh:order 14 .
 
 coco:trimming a worksheet:Feature ;
     dcterms:abstract [ a cms:Text ;
@@ -7723,7 +7731,8 @@ coco:trimming a worksheet:Feature ;
         <urn:costumeCore:ontology:featureSet:jacket>,
         <urn:costumeCore:ontology:featureSet:pants>,
         <urn:costumeCore:ontology:featureSet:skirt>,
-        <urn:costumeCore:ontology:featureSet:top> .
+        <urn:costumeCore:ontology:featureSet:top> ;
+    sh:order 9 .
 
 coco:neckline a worksheet:Feature ;
     dcterms:abstract [ a cms:Text ;
@@ -7734,7 +7743,8 @@ coco:neckline a worksheet:Feature ;
     worksheet:featureSet <urn:costumeCore:ontology:featureSet:coat>,
         <urn:costumeCore:ontology:featureSet:dress>,
         <urn:costumeCore:ontology:featureSet:jacket>,
-        <urn:costumeCore:ontology:featureSet:top> .
+        <urn:costumeCore:ontology:featureSet:top> ;
+    sh:order 19 .
 
 <urn:costumeCore:ontology:featureSet:pants> a worksheet:FeatureSet ;
     dcterms:abstract [ a cms:Text ;
@@ -7759,7 +7769,8 @@ coco:sleeveType a worksheet:Feature ;
     worksheet:featureSet <urn:costumeCore:ontology:featureSet:coat>,
         <urn:costumeCore:ontology:featureSet:dress>,
         <urn:costumeCore:ontology:featureSet:jacket>,
-        <urn:costumeCore:ontology:featureSet:top> .
+        <urn:costumeCore:ontology:featureSet:top> ;
+    sh:order 21 .
 
 coco:costumeComponents a worksheet:Feature ;
     dcterms:abstract [ a cms:Text ;
@@ -7773,7 +7784,8 @@ coco:costumeComponents a worksheet:Feature ;
         <urn:costumeCore:ontology:featureSet:jacket>,
         <urn:costumeCore:ontology:featureSet:pants>,
         <urn:costumeCore:ontology:featureSet:skirt>,
-        <urn:costumeCore:ontology:featureSet:top> .
+        <urn:costumeCore:ontology:featureSet:top> ;
+    sh:order 25 .
 
 coco:skirtType a worksheet:Feature ;
     dcterms:abstract [ a cms:Text ;
@@ -7782,7 +7794,8 @@ coco:skirtType a worksheet:Feature ;
             rdf:value "Each term that describes the skirt of the garment." ] ;
     dcterms:title "Skirt Type" ;
     worksheet:featureSet <urn:costumeCore:ontology:featureSet:dress>,
-        <urn:costumeCore:ontology:featureSet:skirt> .
+        <urn:costumeCore:ontology:featureSet:skirt> ;
+    sh:order 15 .
 
 <urn:costumeCore:ontology:featureSet:coat> a worksheet:FeatureSet ;
     dcterms:abstract [ a cms:Text ;
@@ -7812,7 +7825,8 @@ coco:dressType a worksheet:Feature ;
             dcterms:rights <http://rightsstatements.org/vocab/InC/1.0/> ;
             rdf:value "Each term that describes the type of dress." ] ;
     dcterms:title "Dress Type" ;
-    worksheet:featureSet <urn:costumeCore:ontology:featureSet:dress> .
+    worksheet:featureSet <urn:costumeCore:ontology:featureSet:dress> ;
+    sh:order 13 .
 
 coco:pattern a worksheet:Feature ;
     dcterms:abstract [ a cms:Text ;
@@ -7826,7 +7840,8 @@ coco:pattern a worksheet:Feature ;
         <urn:costumeCore:ontology:featureSet:jacket>,
         <urn:costumeCore:ontology:featureSet:pants>,
         <urn:costumeCore:ontology:featureSet:skirt>,
-        <urn:costumeCore:ontology:featureSet:top> .
+        <urn:costumeCore:ontology:featureSet:top> ;
+    sh:order 6 .
 
 <urn:costumeCore:ontology:featureSet:dress> a worksheet:FeatureSet ;
     dcterms:abstract [ a cms:Text ;
@@ -7846,7 +7861,8 @@ coco:otherMaterials a worksheet:Feature ;
         <urn:costumeCore:ontology:featureSet:jacket>,
         <urn:costumeCore:ontology:featureSet:pants>,
         <urn:costumeCore:ontology:featureSet:skirt>,
-        <urn:costumeCore:ontology:featureSet:top> .
+        <urn:costumeCore:ontology:featureSet:top> ;
+    sh:order 10 .
 
 coco:colorMain a worksheet:Feature ;
     dcterms:abstract [ a cms:Text ;
@@ -7860,7 +7876,8 @@ coco:colorMain a worksheet:Feature ;
         <urn:costumeCore:ontology:featureSet:jacket>,
         <urn:costumeCore:ontology:featureSet:pants>,
         <urn:costumeCore:ontology:featureSet:skirt>,
-        <urn:costumeCore:ontology:featureSet:top> .
+        <urn:costumeCore:ontology:featureSet:top> ;
+    sh:order 4 .
 
 coco:colorSecondary a worksheet:Feature ;
     dcterms:abstract [ a cms:Text ;
@@ -7874,7 +7891,8 @@ coco:colorSecondary a worksheet:Feature ;
         <urn:costumeCore:ontology:featureSet:jacket>,
         <urn:costumeCore:ontology:featureSet:pants>,
         <urn:costumeCore:ontology:featureSet:skirt>,
-        <urn:costumeCore:ontology:featureSet:top> .
+        <urn:costumeCore:ontology:featureSet:top> ;
+    sh:order 5 .
 
 coco:fiber a worksheet:Feature ;
     dcterms:abstract [ a cms:Text ;
@@ -7888,7 +7906,8 @@ coco:fiber a worksheet:Feature ;
         <urn:costumeCore:ontology:featureSet:jacket>,
         <urn:costumeCore:ontology:featureSet:pants>,
         <urn:costumeCore:ontology:featureSet:skirt>,
-        <urn:costumeCore:ontology:featureSet:top> .
+        <urn:costumeCore:ontology:featureSet:top> ;
+    sh:order 7 .
 
 coco:hasTechnique a worksheet:Feature ;
     dcterms:abstract [ a cms:Text ;
@@ -7904,7 +7923,8 @@ Do not include a description of where the technique is in evidence on the garmen
         <urn:costumeCore:ontology:featureSet:jacket>,
         <urn:costumeCore:ontology:featureSet:pants>,
         <urn:costumeCore:ontology:featureSet:skirt>,
-        <urn:costumeCore:ontology:featureSet:top> .
+        <urn:costumeCore:ontology:featureSet:top> ;
+    sh:order 12 .
 
 coco:textileMaterials a worksheet:Feature ;
     dcterms:abstract [ a cms:Text ;
@@ -7918,7 +7938,8 @@ coco:textileMaterials a worksheet:Feature ;
         <urn:costumeCore:ontology:featureSet:jacket>,
         <urn:costumeCore:ontology:featureSet:pants>,
         <urn:costumeCore:ontology:featureSet:skirt>,
-        <urn:costumeCore:ontology:featureSet:top> .
+        <urn:costumeCore:ontology:featureSet:top> ;
+    sh:order 8 .
 
 <http://creativecommons.org/licenses/by-sa/3.0/> a creativecommons:License,
         <http://www.paradicms.org/ns#License>,
