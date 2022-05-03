@@ -191,7 +191,7 @@ class CostumeCoreOntologyAirtableToWorksheetModelsTransformer(Transformer):
                     record_fields=feature_record_fields,
                 ),
                 feature_set_uris=tuple(feature_set_uris),
-                order=int(feature_record_fields["features_sort_order"]),
+                order=int(feature_record_fields["sort_order"]),
                 title=feature_record_fields["display_name_en"],
                 uri=feature_uri,
             )
