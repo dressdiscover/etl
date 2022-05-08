@@ -1028,8 +1028,16 @@ coco:CC00011 a cms:NamedValue ;
     dcterms:title "toggles" ;
     rdf:predicate coco:closure ;
     rdf:value coco:CC00011 ;
-    skos:altLabel "closings, toggle",
-        "toggle closings" ;
+    skos:altLabel "Knebel (Befestigungselement)"@de,
+        "Knebelknopf"@de,
+        "Knebelknöpfe"@de,
+        "closings, toggle"@en,
+        "toggle closings"@en,
+        "prendedor"@es,
+        "prendedores"@es,
+        "bouton en bâtonnet"@fr,
+        "knevel"@nl,
+        "knevels"@nl ;
     skos:prefLabel "toggles" .
 
 coco:CC00018 a cms:NamedValue ;
@@ -1079,6 +1087,23 @@ coco:CC00046 a cms:NamedValue ;
     dcterms:title "shawl" ;
     rdf:predicate coco:workType ;
     rdf:value coco:CC00046 ;
+    skos:altLabel "Schultertuch"@de,
+        "Schultertücher"@de,
+        "σάλι"@el,
+        "chal"@es,
+        "echarpe"@es,
+        "châle"@fr,
+        "châles"@fr,
+        "צעיף"@he,
+        "צעיפים"@he,
+        "של"@he,
+        "שלים"@he,
+        "scialle"@it,
+        "scialli"@it,
+        "omslagdoek"@nl,
+        "omslagdoeken"@nl,
+        "šal"@sr,
+        "šalovi"@sr ;
     skos:prefLabel "shawl" .
 
 coco:CC00055 a cms:NamedValue ;
@@ -1417,10 +1442,34 @@ coco:CC00112 a cms:NamedValue ;
     dcterms:title "jumper" ;
     rdf:predicate coco:dressType ;
     rdf:value coco:CC00112 ;
-    skos:altLabel "jumper (dress)",
-        "jumper dress",
-        "pinafore dress",
-        "pinafore dresses" ;
+    skos:altLabel "Trägerkleid"@de,
+        "Trägerkleider"@de,
+        "πιναφόρ"@el,
+        "jumper (dress)"@en,
+        "jumper dress"@en,
+        "pinafore dress"@en,
+        "pinafore dresses"@en,
+        "dresses, pinafore"@en-gb,
+        "pinafore dress"@en-gb,
+        "pinafore dresses"@en-gb,
+        "jumper (dress)"@en-us,
+        "jumpers (dresses)"@en-us,
+        "jumper (vestido)"@es,
+        "jumpers (vestido)"@es,
+        "pichi"@es,
+        "chasuble (dress)"@fr,
+        "chasubles (dresses)"@fr,
+        "robe chasuble"@fr,
+        "robes chasubles"@fr,
+        "סרפן"@he,
+        "סרפנים"@he,
+        "scamiciati"@it,
+        "scamiciato"@it,
+        "overgooier"@nl,
+        "overgooiers"@nl,
+        "schortjurk"@nl,
+        "schortjurken"@nl,
+        "pinafor haljina"@sr ;
     skos:prefLabel "jumper" .
 
 coco:CC00116 a cms:NamedValue ;
@@ -1442,8 +1491,27 @@ coco:CC00121 a cms:NamedValue ;
     dcterms:title "sheath dress" ;
     rdf:predicate coco:dressType ;
     rdf:value coco:CC00121 ;
-    skos:altLabel "dresses, sheath",
-        "sheaths (dresses)" ;
+    skos:altLabel "Etuikleid"@de,
+        "Etuikleider"@de,
+        "Futteralkleid"@de,
+        "Futteralkleider"@de,
+        "φορέματα εφαρμοστά"@el,
+        "φόρεμα εφαρμοστό"@el,
+        "dresses, sheath"@en,
+        "sheaths (dresses)"@en,
+        "vestido recto"@es,
+        "vestido recto entallado"@es,
+        "vestidos rectos"@es,
+        "fourreau"@fr,
+        "fourreaux"@fr,
+        "robe fourreau"@fr,
+        "robes fourreaux"@fr,
+        "שמלה צמודה"@he,
+        "שמלות צמודות"@he,
+        "kokerjurk"@nl,
+        "kokerjurken"@nl,
+        "etui haljina"@sr,
+        "etui haljine"@sr ;
     skos:prefLabel "sheath dress" .
 
 coco:CC00122 a cms:NamedValue ;
@@ -1472,8 +1540,17 @@ coco:CC00125 a cms:NamedValue ;
     dcterms:title "toga" ;
     rdf:predicate coco:dressType ;
     rdf:value coco:CC00125 ;
-    skos:altLabel "toga (mantle)",
-        "togas (mantles)" ;
+    skos:altLabel "Toga"@de,
+        "Togae"@de,
+        "Togen"@de,
+        "toga (mantle)"@en,
+        "togas (mantles)"@en,
+        "toga (manto)"@es,
+        "togas (mantos)"@es,
+        "toge"@fr,
+        "robes (mantels)"@nl,
+        "toga (Romeins)"@nl,
+        "toga's (Romeins)"@nl ;
     skos:prefLabel "toga" .
 
 coco:CC00126 a cms:NamedValue ;
@@ -1485,6 +1562,22 @@ coco:CC00126 a cms:NamedValue ;
     dcterms:title "tunic" ;
     rdf:predicate coco:dressType ;
     rdf:value coco:CC00126 ;
+    skos:altLabel "Tunika"@de,
+        "Tuniken"@de,
+        "τουνίκα"@el,
+        "τουνίκες"@el,
+        "túnica"@es,
+        "túnicas"@es,
+        "tunique"@fr,
+        "tuniques"@fr,
+        "טוניקה"@he,
+        "טוניקות"@he,
+        "tunica"@it,
+        "tuniche"@it,
+        "tuniek"@nl,
+        "tunieken"@nl,
+        "tunika"@sr,
+        "tunike"@sr ;
     skos:prefLabel "tunic" .
 
 coco:CC00127 a cms:NamedValue ;
@@ -1624,8 +1717,18 @@ coco:CC00150 a cms:NamedValue ;
     dcterms:title "hanging sleeve" ;
     rdf:predicate coco:sleeveType ;
     rdf:value coco:CC00150 ;
-    skos:altLabel "hanging sleeves",
-        "sleeves, hanging" ;
+    skos:altLabel "hanging sleeves"@en,
+        "sleeves, hanging"@en,
+        "hanging sleeve"@es,
+        "hanging sleeves"@es,
+        "hangmouw"@nl,
+        "hangmouwen"@nl,
+        "垂袖"@zh-hant,
+        "天使袖"@zh-hant,
+        "懸飾袖"@zh-hant,
+        "xuán shì xiù"@zh-latn-pinyin-x-hanyu,
+        "xuan shi xiu"@zh-latn-pinyin-x-notone,
+        "hsüan shih hsiu"@zh-latn-wadegile ;
     skos:prefLabel "hanging sleeve" .
 
 coco:CC00151 a cms:NamedValue ;
@@ -1847,8 +1950,18 @@ coco:CC00199 a cms:NamedValue ;
     rdf:predicate coco:material,
         coco:otherMaterials ;
     rdf:value coco:CC00199 ;
-    skos:altLabel "stay (costume component)",
-        "stays (costume components)" ;
+    skos:altLabel "stay (costume component)"@en,
+        "stays (costume components)"@en,
+        "tirante (componente de vestuario)"@es,
+        "tirantes (componente de vestuario)"@es,
+        "balein"@nl,
+        "baleinen"@nl,
+        "拉條"@zh-hant,
+        "撐條"@zh-hant,
+        "束條"@zh-hant,
+        "chēng tiáo"@zh-latn-pinyin-x-hanyu,
+        "cheng tiao"@zh-latn-pinyin-x-notone,
+        "ch'eng t'iao"@zh-latn-wadegile ;
     skos:prefLabel "boning" .
 
 coco:CC00201 a cms:NamedValue ;
@@ -2747,6 +2860,40 @@ coco:CC00323 a cms:NamedValue ;
     dcterms:title "coatdress" ;
     rdf:predicate coco:dressType ;
     rdf:value coco:CC00323 ;
+    skos:altLabel "Mantelkleid"@de,
+        "Mantelkleider"@de,
+        "επενδύτες"@el,
+        "επενδύτης"@el,
+        "coat-dress"@en-gb,
+        "coat-dresses"@en-gb,
+        "coat dresses"@en-us,
+        "coatdress"@en-us,
+        "coatdresses"@en-us,
+        "dresses, coat"@en-us,
+        "traje abrigo"@es,
+        "vestido abrigo"@es,
+        "vestidos abrigo"@es,
+        "robe manteau"@fr,
+        "robe-manteau"@fr,
+        "robes manteaux"@fr,
+        "שמלות מעיל"@he,
+        "שמלת מעיל"@he,
+        "robe manteau"@it,
+        "doorknoopjurk"@nl,
+        "doorknoopjurken"@nl,
+        "jasjurk"@nl,
+        "jasjurken"@nl,
+        "robe manteau"@nl,
+        "robe manteaus"@nl,
+        "kaput-haljina"@sr,
+        "kaput-haljine"@sr,
+        "外套式女裝"@zh-hant,
+        "洋裝大衣"@zh-hant,
+        "洋裝式風衣"@zh-hant,
+        "風衣洋裝"@zh-hant,
+        "yáng zhuāng dà yī"@zh-latn-pinyin-x-hanyu,
+        "yang zhuang da yi"@zh-latn-pinyin-x-notone,
+        "yang chuang ta i"@zh-latn-wadegile ;
     skos:prefLabel "coatdress" .
 
 coco:CC00325 a cms:NamedValue ;
@@ -2778,7 +2925,16 @@ coco:CC00327 a cms:NamedValue ;
     dcterms:title "engageante" ;
     rdf:predicate coco:costumeComponents ;
     rdf:value coco:CC00327 ;
-    skos:altLabel "engageants" ;
+    skos:altLabel "engageants"@en,
+        "engageante"@es,
+        "engageantes"@es,
+        "engageante"@nl,
+        "engageantes"@nl,
+        "皺褶袖口"@zh-hant,
+        "花邊內袖"@zh-hant,
+        "huā biān nèi xiù"@zh-latn-pinyin-x-hanyu,
+        "hua bian nei xiu"@zh-latn-pinyin-x-notone,
+        "hua pien nei hsiu"@zh-latn-wadegile ;
     skos:prefLabel "engageante" .
 
 coco:CC00345 a cms:NamedValue ;
@@ -2792,11 +2948,29 @@ coco:CC00345 a cms:NamedValue ;
         coco:icomType,
         coco:workType ;
     rdf:value coco:CC00345 ;
-    skos:altLabel "underclothes",
-        "underclothing",
-        "undergarments",
-        "underlinens",
-        "underthings" ;
+    skos:altLabel "Unterwäsche"@de,
+        "εσώρουχα"@el,
+        "εσώρουχο"@el,
+        "underclothes"@en,
+        "underclothing"@en,
+        "undergarments"@en,
+        "underlinens"@en,
+        "underthings"@en,
+        "ropa interior"@es,
+        "sous-vêtements"@fr,
+        "תחתונים"@he,
+        "biancheria intima"@it,
+        "ondergoed"@nl,
+        "onderkleding"@nl,
+        "donji veš"@sr,
+        "內著"@zh-hant,
+        "內衣"@zh-hant,
+        "襯衣"@zh-hant,
+        "貼身衣"@zh-hant,
+        "貼身衣服"@zh-hant,
+        "nèi yī"@zh-latn-pinyin-x-hanyu,
+        "nei yi"@zh-latn-pinyin-x-notone,
+        "nei i"@zh-latn-wadegile ;
     skos:prefLabel "underwear" .
 
 coco:CC00348 a cms:NamedValue ;
@@ -2848,7 +3022,12 @@ coco:CC00356 a cms:NamedValue ;
     dcterms:title "oversleeve" ;
     rdf:predicate coco:sleeveType ;
     rdf:value coco:CC00356 ;
-    skos:altLabel "oversleeves" ;
+    skos:altLabel "oversleeves"@en,
+        "oversleeve"@es,
+        "oversleeves"@es,
+        "fausse manche"@fr,
+        "overmouw"@nl,
+        "overmouwen"@nl ;
     skos:prefLabel "oversleeve" .
 
 coco:CC00357 a cms:NamedValue ;
@@ -2860,8 +3039,26 @@ coco:CC00357 a cms:NamedValue ;
     dcterms:title "pagoda sleeve" ;
     rdf:predicate coco:sleeveType ;
     rdf:value coco:CC00357 ;
-    skos:altLabel "pagoda sleeves",
-        "sleeves, pagoda" ;
+    skos:altLabel "μανίκι παγόδα"@el,
+        "μανίκια παγόδα"@el,
+        "pagoda sleeves"@en,
+        "sleeves, pagoda"@en,
+        "pagoda sleeve"@es,
+        "pagoda sleeves"@es,
+        "manche pagode"@fr,
+        "manches pagode"@fr,
+        "שרוול פגודה"@he,
+        "שרוולי פגודה"@he,
+        "manica a pagoda"@it,
+        "maniche a pagoda"@it,
+        "pagodemouw"@nl,
+        "pagodemouwen"@nl,
+        "pagoda rukav"@sr,
+        "pagoda rukavi"@sr,
+        "寶塔袖"@zh-hant,
+        "bǎo tǎ xiù"@zh-latn-pinyin-x-hanyu,
+        "bao ta xiu"@zh-latn-pinyin-x-notone,
+        "pao t'a hsiu"@zh-latn-wadegile ;
     skos:prefLabel "pagoda sleeve" .
 
 coco:CC00362 a cms:NamedValue ;
@@ -2883,8 +3080,17 @@ coco:CC00364 a cms:NamedValue ;
     dcterms:title "womenswear" ;
     rdf:predicate coco:gender ;
     rdf:value coco:CC00364 ;
-    skos:altLabel "ladies' wear",
-        "women's costume" ;
+    skos:altLabel "Damenkleidung"@de,
+        "Frauenkleidung"@de,
+        "γυναι��εία ενδύματα"@el,
+        "ladies' wear"@en,
+        "women's costume"@en,
+        "habillement féminin"@fr,
+        "בגדי נשים"@he,
+        "indumenti da donna"@it,
+        "dameskleding"@nl,
+        "vrouwenkleding"@nl,
+        "ženski kostim"@sr ;
     skos:prefLabel "womenswear" .
 
 coco:CC00365 a cms:NamedValue ;
@@ -2896,7 +3102,16 @@ coco:CC00365 a cms:NamedValue ;
     dcterms:title "menswear" ;
     rdf:predicate coco:gender ;
     rdf:value coco:CC00365 ;
-    skos:altLabel "men's costume" ;
+    skos:altLabel "Herrenkleidung"@de,
+        "Männerkleidung"@de,
+        "ανδρικά ενδύματα"@el,
+        "men's costume"@en,
+        "habillement mascuin"@fr,
+        "בגדי גברים"@he,
+        "indumenti da uomo"@it,
+        "herenkleding"@nl,
+        "mannenkleding"@nl,
+        "muški kostim"@sr ;
     skos:prefLabel "menswear" .
 
 coco:CC00366 a cms:NamedValue ;
@@ -2908,8 +3123,16 @@ coco:CC00366 a cms:NamedValue ;
     dcterms:title "unisex clothing" ;
     rdf:predicate coco:gender ;
     rdf:value coco:CC00366 ;
-    skos:altLabel "clothing, unisex",
-        "unisex costume" ;
+    skos:altLabel "ενδύματα unisex"@el,
+        "ένδυμα unisex"@el,
+        "clothing, unisex"@en,
+        "unisex costume"@en,
+        "costume mixte"@fr,
+        "בגדי יוניסקס"@he,
+        "indumenti unisex"@it,
+        "uniseks kleding"@nl,
+        "unisekskleding"@nl,
+        "uniseks kostim"@sr ;
     skos:prefLabel "unisex clothing" .
 
 coco:CC00367 a cms:NamedValue ;
@@ -2921,11 +3144,27 @@ coco:CC00367 a cms:NamedValue ;
     dcterms:title "undersleeve" ;
     rdf:predicate coco:sleeveType ;
     rdf:value coco:CC00367 ;
-    skos:altLabel "half sleeves",
-        "sleeve supports",
-        "sleeves, half",
-        "under sleeves",
-        "undersleeves" ;
+    skos:altLabel "ενίσχυση μανικιών"@el,
+        "ενισχύσεις μανικιών"@el,
+        "half sleeves"@en,
+        "sleeve supports"@en,
+        "sleeves, half"@en,
+        "under sleeves"@en,
+        "undersleeves"@en,
+        "undersleeve"@es,
+        "undersleeves"@es,
+        "sous-manche"@fr,
+        "sous-manches"@fr,
+        "שרוולים תחתיים"@he,
+        "ondermouw"@nl,
+        "ondermouwen"@nl,
+        "držači za rukave"@sr,
+        "內袖"@zh-hant,
+        "小袖"@zh-hant,
+        "襯袖"@zh-hant,
+        "chèn xiù"@zh-latn-pinyin-x-hanyu,
+        "chen xiu"@zh-latn-pinyin-x-notone,
+        "ch'en hsiu"@zh-latn-wadegile ;
     skos:prefLabel "undersleeve" .
 
 coco:CC00368 a cms:NamedValue ;
@@ -2937,7 +3176,14 @@ coco:CC00368 a cms:NamedValue ;
     dcterms:title "day wear" ;
     rdf:predicate coco:function ;
     rdf:value coco:CC00368 ;
-    skos:altLabel "daywear" ;
+    skos:altLabel "καθημερινά ενδύματα"@el,
+        "καθημερινό ένδυμα"@el,
+        "daywear"@en,
+        "tenue de jour"@fr,
+        "בגדי יום יום"@he,
+        "abbigliamento da giorno"@it,
+        "dagkleding"@nl,
+        "dnevna odeća"@sr ;
     skos:prefLabel "day wear" .
 
 coco:CC00370 a cms:NamedValue ;
@@ -2949,11 +3195,27 @@ coco:CC00370 a cms:NamedValue ;
     dcterms:title "evening dress" ;
     rdf:predicate coco:function ;
     rdf:value coco:CC00370 ;
-    skos:altLabel "clothes, evening",
-        "dress, evening (concept)",
-        "evening clothes",
-        "evening dress (concept)",
-        "evening wear" ;
+    skos:altLabel "βραδινά ενδύματα"@el,
+        "βραδινό ένδυμα"@el,
+        "clothes, evening"@en,
+        "dress, evening (concept)"@en,
+        "evening clothes"@en,
+        "evening dress (concept)"@en,
+        "evening wear"@en,
+        "traje de noche (concepto relacionado con cultura)"@es,
+        "tenue de soirée"@fr,
+        "tenues de soirée"@fr,
+        "ביגוד ערב"@he,
+        "abbigliamento da sera"@it,
+        "avonddracht"@nl,
+        "avonddrachten"@nl,
+        "avondkleding"@nl,
+        "odeća za veče"@sr,
+        "večernja odeća"@sr,
+        "晚禮服"@zh-hant,
+        "wǎn lǐ fú"@zh-latn-pinyin-x-hanyu,
+        "wan li fu"@zh-latn-pinyin-x-notone,
+        "wan li fu"@zh-latn-wadegile ;
     skos:prefLabel "evening dress" .
 
 coco:CC00371 a cms:NamedValue ;
@@ -2965,8 +3227,30 @@ coco:CC00371 a cms:NamedValue ;
     dcterms:title "academic costume" ;
     rdf:predicate coco:function ;
     rdf:value coco:CC00371 ;
-    skos:altLabel "academic apparel",
-        "academic dress" ;
+    skos:altLabel "Talar (akademisch)"@de,
+        "Talare (akademisch)"@de,
+        "Tracht. akademische"@de,
+        "akademische Tracht"@de,
+        "akademische Trachten"@de,
+        "ακαδημαϊκά ενδύματα"@el,
+        "ακαδημαϊκό ένδυμα"@el,
+        "academic apparel"@en,
+        "academic dress"@en,
+        "costume académique"@fr,
+        "costumes universitaires"@fr,
+        "robe universitaire"@fr,
+        "תלבושות אקדמיות"@he,
+        "תלבושת אקדמית"@he,
+        "abbigliamento accademico"@it,
+        "academisch kostuum"@nl,
+        "academische kledij"@nl,
+        "academische toga"@nl,
+        "academische toga's"@nl,
+        "akademska odora"@sr,
+        "學位服"@zh-hant,
+        "xué wèi fú"@zh-latn-pinyin-x-hanyu,
+        "xue wei fu"@zh-latn-pinyin-x-notone,
+        "hsüeh wei fu"@zh-latn-wadegile ;
     skos:prefLabel "academic costume" .
 
 coco:CC00372 a cms:NamedValue ;
@@ -2978,9 +3262,20 @@ coco:CC00372 a cms:NamedValue ;
     dcterms:title "military uniform" ;
     rdf:predicate coco:function ;
     rdf:value coco:CC00372 ;
-    skos:altLabel "costume, military",
-        "military costume",
-        "uniforms, military" ;
+    skos:altLabel "Uniform (Militär)"@de,
+        "Uniformen (Militär)"@de,
+        "costume, military"@en,
+        "military costume"@en,
+        "uniforms, military"@en,
+        "uniforme militar"@es,
+        "uniformes militares"@es,
+        "uniforme militaire"@fr,
+        "militair uniform"@nl,
+        "militaire uniformen"@nl,
+        "軍服"@zh-hant,
+        "jūn fú"@zh-latn-pinyin-x-hanyu,
+        "jun fu"@zh-latn-pinyin-x-notone,
+        "chün fu"@zh-latn-wadegile ;
     skos:prefLabel "military uniform" .
 
 coco:CC00374 a cms:NamedValue ;
@@ -2992,9 +3287,22 @@ coco:CC00374 a cms:NamedValue ;
     dcterms:title "mourning dress" ;
     rdf:predicate coco:function ;
     rdf:value coco:CC00374 ;
-    skos:altLabel "dress, mourning",
-        "mourning clothing",
-        "mourning garments" ;
+    skos:altLabel "Trauerkleidung"@de,
+        "ενδύματα πένθους"@el,
+        "ένδυμα πένθους"@el,
+        "dress, mourning"@en,
+        "mourning clothing"@en,
+        "mourning garments"@en,
+        "tenue de deuil"@fr,
+        "vêtements de deuil"@fr,
+        "בגד אבלות"@he,
+        "בגדי אבלות"@he,
+        "abbigliamento da lutto"@it,
+        "rouwdracht"@nl,
+        "rouwdrachten"@nl,
+        "rouwgoet"@nl,
+        "rouwkleding"@nl,
+        "crnina"@sr ;
     skos:prefLabel "mourning dress" .
 
 coco:CC00376 a cms:NamedValue ;
@@ -3006,6 +3314,18 @@ coco:CC00376 a cms:NamedValue ;
     dcterms:title "school uniform" ;
     rdf:predicate coco:function ;
     rdf:value coco:CC00376 ;
+    skos:altLabel "μαθητικές στολές"@el,
+        "μαθητική στολή"@el,
+        "uniforme d'écolier"@fr,
+        "uniformes d'écolier"@fr,
+        "תלבושות בית ספר"@he,
+        "תלבושת בית ספר"@he,
+        "divisa di scuola"@it,
+        "divise di scuola"@it,
+        "schooluniform"@nl,
+        "schooluniformen"@nl,
+        "školska uniforma"@sr,
+        "školske uniforme"@sr ;
     skos:prefLabel "school uniform" .
 
 coco:CC00378 a cms:NamedValue ;
@@ -3017,7 +3337,33 @@ coco:CC00378 a cms:NamedValue ;
     dcterms:title "uniform" ;
     rdf:predicate coco:function ;
     rdf:value coco:CC00378 ;
-    skos:altLabel "uniform (professional wear)" ;
+    skos:altLabel "Uniform"@de,
+        "Uniformen"@de,
+        "στολές (επαγγελματικά ενδύματα)"@el,
+        "στολή (επαγγελματικό ένδυμα)"@el,
+        "uniform (professional wear)"@en,
+        "uniforme"@es,
+        "uniformes"@es,
+        "uniforme"@fr,
+        "uniformes"@fr,
+        "מדים"@he,
+        "תלבושות אחידות"@he,
+        "תלבושת אחידה"@he,
+        "divisa"@it,
+        "divise"@it,
+        "uniforme (abito da cerimonia)"@it,
+        "uniformi (abiti da cerimonia)"@it,
+        "uniform (ceremoniële kleding)"@nl,
+        "uniformen (ceremoniële kleding)"@nl,
+        "werkuniform"@nl,
+        "werkuniformen"@nl,
+        "ceremonijalna odežda"@sr,
+        "uniforma"@sr,
+        "uniforme"@sr,
+        "制服"@zh-hant,
+        "zhì fú"@zh-latn-pinyin-x-hanyu,
+        "zhi fu"@zh-latn-pinyin-x-notone,
+        "chih fu"@zh-latn-wadegile ;
     skos:prefLabel "uniform" .
 
 coco:CC00379 a cms:NamedValue ;
@@ -3029,12 +3375,39 @@ coco:CC00379 a cms:NamedValue ;
     dcterms:title "wedding dress" ;
     rdf:predicate coco:dressType ;
     rdf:value coco:CC00379 ;
-    skos:altLabel "bridal dresses",
-        "bridal gowns",
-        "dresses, wedding",
-        "wedding costume (gowns)",
-        "wedding gowns",
-        "wedding-gowns" ;
+    skos:altLabel "Brautkleid"@de,
+        "Brautkleider"@de,
+        "Hochzeitskleid"@de,
+        "Hochzeitskleider"@de,
+        "νυφικά"@el,
+        "νυφικό"@el,
+        "bridal dresses"@en,
+        "bridal gowns"@en,
+        "dresses, wedding"@en,
+        "wedding costume (gowns)"@en,
+        "wedding gowns"@en,
+        "wedding-gowns"@en,
+        "vestido de novia"@es,
+        "vestidos de novia"@es,
+        "robe de mariée"@fr,
+        "robe nuptiale"@fr,
+        "robes de mariée"@fr,
+        "שמלות כלה"@he,
+        "שמלת כלה"@he,
+        "vestiti da sposa"@it,
+        "vestito da sposa"@it,
+        "bruidsjapon"@nl,
+        "bruidsjaponnen"@nl,
+        "bruidsjurk"@nl,
+        "bruidsjurken"@nl,
+        "trouwjapon"@nl,
+        "trouwjaponnen"@nl,
+        "trouwjurk"@nl,
+        "trouwjurken"@nl,
+        "venčana haljina"@sr,
+        "venčane haljine"@sr,
+        "venčanica"@sr,
+        "venčanice"@sr ;
     skos:prefLabel "wedding dress" .
 
 coco:CC00380 a cms:NamedValue ;
@@ -3046,8 +3419,9 @@ coco:CC00380 a cms:NamedValue ;
     dcterms:title "work clothes" ;
     rdf:predicate coco:function ;
     rdf:value coco:CC00380 ;
-    skos:altLabel "clothes, work",
-        "workclothes" ;
+    skos:altLabel "clothes, work"@en,
+        "workclothes"@en,
+        "werkkleding"@nl ;
     skos:prefLabel "work clothes" .
 
 coco:CC00382 a cms:NamedValue ;
@@ -3168,8 +3542,28 @@ coco:CC00394 a cms:NamedValue ;
     dcterms:title "cuff" ;
     rdf:predicate coco:costumeComponents ;
     rdf:value coco:CC00394 ;
-    skos:altLabel "cuff (costume component)",
-        "cuffs (costume components)" ;
+    skos:altLabel "Armabschluss"@de,
+        "Armabschlüsse"@de,
+        "Armabschlüß"@de,
+        "Manschette"@de,
+        "Manschetten"@de,
+        "μανσέτα"@el,
+        "μανσέτες"@el,
+        "cuff (costume component)"@en,
+        "cuffs (costume components)"@en,
+        "puño (componente de vestuario)"@es,
+        "puños (componentes de vestuario)"@es,
+        "manchette de chemise"@fr,
+        "poignet"@fr,
+        "poignets"@fr,
+        "חפת"@he,
+        "חפתים"@he,
+        "polsini"@it,
+        "polsino"@it,
+        "manchet (kledingaccessoire)"@nl,
+        "manchetten (kledingaccessoires)"@nl,
+        "manžetna"@sr,
+        "manžetne"@sr ;
     skos:prefLabel "cuff" .
 
 coco:CC00395 a cms:NamedValue ;
@@ -3181,7 +3575,24 @@ coco:CC00395 a cms:NamedValue ;
     dcterms:title "epaulette" ;
     rdf:predicate coco:costumeComponents ;
     rdf:value coco:CC00395 ;
-    skos:altLabel "epaulet" ;
+    skos:altLabel "επωμίδα"@el,
+        "επωμίδες"@el,
+        "epaulet"@en,
+        "epaulette"@en-gb,
+        "epaulettes"@en-gb,
+        "epaulet"@en-us,
+        "epaulets"@en-us,
+        "charretera"@es,
+        "charreteras"@es,
+        "épaulette"@fr,
+        "épaulettes"@fr,
+        "כותפות"@he,
+        "כותפת"@he,
+        "spallina"@it,
+        "spalline"@it,
+        "epaulet"@nl,
+        "epauletten"@nl,
+        "epolete"@sr ;
     skos:prefLabel "epaulette" .
 
 coco:CC00396 a cms:NamedValue ;
@@ -3193,8 +3604,21 @@ coco:CC00396 a cms:NamedValue ;
     dcterms:title "facing" ;
     rdf:predicate coco:costumeComponents ;
     rdf:value coco:CC00396 ;
-    skos:altLabel "facing (costume component)",
-        "facings (costume components)" ;
+    skos:altLabel "facing (costume component)"@en,
+        "facings (costume components)"@en,
+        "forro exterior"@es,
+        "guarniciones"@es,
+        "guarnición"@es,
+        "slijtstuk"@nl,
+        "slijtstukken"@nl,
+        "內貼邊"@zh-hant,
+        "貼條"@zh-hant,
+        "貼邊 (服飾組件)"@zh-hant,
+        "鑲邊"@zh-hant,
+        "鑲邊兒"@zh-hant,
+        "tiē biān"@zh-latn-pinyin-x-hanyu,
+        "tie bian"@zh-latn-pinyin-x-notone,
+        "t'ieh pien"@zh-latn-wadegile ;
     skos:prefLabel "facing" .
 
 coco:CC00397 a cms:NamedValue ;
@@ -3206,8 +3630,28 @@ coco:CC00397 a cms:NamedValue ;
     dcterms:title "pocket" ;
     rdf:predicate coco:costumeComponents ;
     rdf:value coco:CC00397 ;
-    skos:altLabel "pocket (costume component)",
-        "pockets (costume components)" ;
+    skos:altLabel "Tasche (Kleidungsbestandteil)"@de,
+        "Taschen (Kleidungsbestandteil)"@de,
+        "τσέπες"@el,
+        "τσέπη"@el,
+        "pocket (costume component)"@en,
+        "pockets (costume components)"@en,
+        "bolsillo (componente de vestuario)"@es,
+        "bolsillos (componentes de vestuario)"@es,
+        "poche"@fr,
+        "poches"@fr,
+        "כיסים"@he,
+        "tasca"@it,
+        "tasche"@it,
+        "zak (kledingonderdeel)"@nl,
+        "zakken (kledingonderdelen)"@nl,
+        "džep"@sr,
+        "džepovi"@sr,
+        "口袋 (服飾組件)"@zh-hant,
+        "衣袋"@zh-hant,
+        "kǒu dài"@zh-latn-pinyin-x-hanyu,
+        "kou dai"@zh-latn-pinyin-x-notone,
+        "k'ou tai"@zh-latn-wadegile ;
     skos:prefLabel "pocket" .
 
 coco:CC00398 a cms:NamedValue ;
@@ -3219,7 +3663,19 @@ coco:CC00398 a cms:NamedValue ;
     dcterms:title "shoulder pad" ;
     rdf:predicate coco:costumeComponents ;
     rdf:value coco:CC00398 ;
-    skos:altLabel "pads, shoulder" ;
+    skos:altLabel "pads, shoulder"@en,
+        "hombrera (accesorio para los hombros)"@es,
+        "hombreras (accesorio para los hombros)"@es,
+        "épaulière"@fr,
+        "paddings"@nl,
+        "schoudervulling"@nl,
+        "schoudervullingen"@nl,
+        "墊肩"@zh-hant,
+        "肩墊"@zh-hant,
+        "護肩"@zh-hant,
+        "diàn jiān"@zh-latn-pinyin-x-hanyu,
+        "dian jian"@zh-latn-pinyin-x-notone,
+        "tien chien"@zh-latn-wadegile ;
     skos:prefLabel "shoulder pad" .
 
 coco:CC00399 a cms:NamedValue ;
@@ -3231,6 +3687,11 @@ coco:CC00399 a cms:NamedValue ;
     dcterms:title "waistband" ;
     rdf:predicate coco:costumeComponents ;
     rdf:value coco:CC00399 ;
+    skos:altLabel "ceinture (waistband)"@fr,
+        "ceinture montée"@fr,
+        "ceintures (waistbands)"@fr,
+        "tailleband"@nl,
+        "taillebanden"@nl ;
     skos:prefLabel "waistband" .
 
 coco:CC00400 a cms:NamedValue ;
@@ -3242,7 +3703,9 @@ coco:CC00400 a cms:NamedValue ;
     dcterms:title "wristband" ;
     rdf:predicate coco:costumeComponents ;
     rdf:value coco:CC00400 ;
-    skos:altLabel "wrist bands" ;
+    skos:altLabel "wrist bands"@en,
+        "manchet (kledingonderdeel)"@nl,
+        "manchetten (kledingonderdelen)"@nl ;
     skos:prefLabel "wristband" .
 
 coco:CC00401 a cms:NamedValue ;
@@ -3417,111 +3880,264 @@ coco:CC00420 a cms:NamedValue ;
     dcterms:title "bell-bottoms" ;
     rdf:predicate coco:pantsType ;
     rdf:value coco:CC00420 ;
-    skos:altLabel "bell bottoms",
-        "bell-bottom trousers",
-        "bottoms, bell",
-        "trousers, bell-bottom" ;
+    skos:altLabel "Schlaghose"@de,
+        "Schlaghosen"@de,
+        "bell bottoms"@en,
+        "bell-bottom trousers"@en,
+        "bottoms, bell"@en,
+        "trousers, bell-bottom"@en,
+        "pantalón acampanado"@es,
+        "pantalon à pattes d'éléphant"@fr,
+        "bell-bottoms"@nl,
+        "bellbottoms"@nl,
+        "soulbroeken"@nl,
+        "喇叭褲"@zh-hant,
+        "水兵褲子"@zh-hant,
+        "lǎ bā kù"@zh-latn-pinyin-x-hanyu,
+        "la ba ku"@zh-latn-pinyin-x-notone,
+        "la pa k'u"@zh-latn-wadegile ;
     skos:prefLabel "bell-bottoms" .
 
 coco:CC00422 a cms:NamedValue ;
     dcterms:title "breeches" ;
     rdf:predicate coco:pantsType ;
     rdf:value coco:CC00422 ;
-    skos:altLabel "breeches (trousers)",
-        "breeches, knee",
-        "knee breeches" ;
+    skos:altLabel "Kniehose"@de,
+        "Kniehosen"@de,
+        "μπουραζάνα"@el,
+        "μπουραζάνες"@el,
+        "παντελόνι (breeches)"@el,
+        "παντελόνια (breeches)"@el,
+        "breeches (trousers)"@en,
+        "breeches, knee"@en,
+        "knee breeches"@en,
+        "breeche (pantalón)"@es,
+        "calzas"@es,
+        "chausses"@fr,
+        "culotte"@fr,
+        "culottes"@fr,
+        "מכנסי ברך"@he,
+        "kniebroek"@nl,
+        "kniebroeken"@nl,
+        "čakšire"@sr,
+        "半長褲"@zh-hant,
+        "及膝褲"@zh-hant,
+        "馬褲 (褲子)"@zh-hant,
+        "ma kù"@zh-latn-pinyin-x-hanyu,
+        "ma ku"@zh-latn-pinyin-x-notone,
+        "ma k'u"@zh-latn-wadegile ;
     skos:prefLabel "breeches" .
 
 coco:CC00423 a cms:NamedValue ;
     dcterms:title "Capri pants" ;
     rdf:predicate coco:pantsType ;
     rdf:value coco:CC00423 ;
-    skos:altLabel "Capris",
-        "capri pants",
-        "pants, Capri" ;
+    skos:altLabel "Caprihose"@de,
+        "Caprihosen"@de,
+        "Capris"@en,
+        "capri pants"@en,
+        "pants, Capri"@en,
+        "pantalón Capri"@es,
+        "pantalon capri"@fr,
+        "Capribroek"@nl,
+        "Capribroeken"@nl,
+        "七分褲"@zh-hant,
+        "卡布利褲"@zh-hant,
+        "卡布里褲"@zh-hant,
+        "kǎ bù lì kù"@zh-latn-pinyin-x-hanyu,
+        "ka  bu li ku"@zh-latn-pinyin-x-notone,
+        "k'a  pu li k'u"@zh-latn-wadegile ;
     skos:prefLabel "Capri pants" .
 
 coco:CC00424 a cms:NamedValue ;
     dcterms:title "drop-front pants" ;
     rdf:predicate coco:pantsType ;
     rdf:value coco:CC00424 ;
-    skos:altLabel "drop front pants" ;
+    skos:altLabel "drop front pants"@en,
+        "klepbroek"@nl,
+        "klepbroeken"@nl ;
     skos:prefLabel "drop-front pants" .
 
 coco:CC00425 a cms:NamedValue ;
     dcterms:title "hiphuggers" ;
     rdf:predicate coco:pantsType ;
     rdf:value coco:CC00425 ;
-    skos:altLabel "hip huggers (trousers)",
-        "hip-huggers (trousers)",
-        "hiphuggers (trousers)" ;
+    skos:altLabel "Hüfthose"@de,
+        "Hüfthosen"@de,
+        "hip huggers (trousers)"@en,
+        "hip-huggers (trousers)"@en,
+        "hiphuggers (trousers)"@en,
+        "pantalón de tiro corto"@es,
+        "pantalon serré aux hanches"@fr,
+        "heupbroek"@nl,
+        "heupbroeken"@nl ;
     skos:prefLabel "hiphuggers" .
 
 coco:CC00426 a cms:NamedValue ;
     dcterms:title "jeans" ;
     rdf:predicate coco:pantsType ;
     rdf:value coco:CC00426 ;
-    skos:altLabel "blue jeans",
-        "jeans, blue" ;
+    skos:altLabel "Bluejeans"@de,
+        "Jeans"@de,
+        "παντελόνι τζην"@el,
+        "παντελόνια τζην"@el,
+        "blue jeans"@en,
+        "jeans, blue"@en,
+        "jeans"@es,
+        "pantalón tejano"@es,
+        "pantalón vaquero"@es,
+        "jean"@fr,
+        "jeans"@fr,
+        "ג'ינס"@he,
+        "ג'ינסים"@he,
+        "jeans"@it,
+        "jeans"@nl,
+        "jeansbroek"@nl,
+        "jeansbroeken"@nl,
+        "spijkerbroek"@nl,
+        "spijkerbroeken"@nl,
+        "džins"@sr,
+        "斜紋布工作褲"@zh-hant,
+        "牛仔褲"@zh-hant,
+        "粗斜紋棉布褲"@zh-hant,
+        "粗斜紋藍布褲"@zh-hant,
+        "niú zǎi kù"@zh-latn-pinyin-x-hanyu,
+        "niu zai ku"@zh-latn-pinyin-x-notone,
+        "niu tsai k'u"@zh-latn-wadegile ;
     skos:prefLabel "jeans" .
 
 coco:CC00427 a cms:NamedValue ;
     dcterms:title "jodhpurs" ;
     rdf:predicate coco:pantsType ;
     rdf:value coco:CC00427 ;
-    skos:altLabel "breeches, jodhpur",
-        "jodhpur (trousers)",
-        "jodhpur breeches",
-        "jodhpurs (trousers)",
-        "jodphurs (trousers)" ;
+    skos:altLabel "Jodhpurhose"@de,
+        "Jodhpurhosen"@de,
+        "breeches, jodhpur"@en,
+        "jodhpur (trousers)"@en,
+        "jodhpur breeches"@en,
+        "jodhpurs (trousers)"@en,
+        "jodphurs (trousers)"@en,
+        "jodhpur"@es,
+        "pantalón bombacho"@es,
+        "jodhpurs"@fr,
+        "jodhpur (broek)"@nl,
+        "jodhpurs (broeken)"@nl,
+        "傑得普騎馬褲"@zh-hant,
+        "馬褲 (褲子)"@zh-hant,
+        "騎馬褲"@zh-hant,
+        "ma kù"@zh-latn-pinyin-x-hanyu,
+        "ma ku"@zh-latn-pinyin-x-notone,
+        "ma k'u"@zh-latn-wadegile ;
     skos:prefLabel "jodhpurs" .
 
 coco:CC00429 a cms:NamedValue ;
     dcterms:title "overtrousers" ;
     rdf:predicate coco:pantsType ;
     rdf:value coco:CC00429 ;
+    skos:altLabel "buitenbroek"@nl,
+        "buitenbroeken"@nl ;
     skos:prefLabel "overtrousers" .
 
 coco:CC00432 a cms:NamedValue ;
     dcterms:title "puffed pants" ;
     rdf:predicate coco:pantsType ;
     rdf:value coco:CC00432 ;
+    skos:altLabel "pofbroek"@nl,
+        "pofbroeken"@nl ;
     skos:prefLabel "puffed pants" .
 
 coco:CC00433 a cms:NamedValue ;
     dcterms:title "riding breeches" ;
     rdf:predicate coco:pantsType ;
     rdf:value coco:CC00433 ;
-    skos:altLabel "breeches, riding" ;
+    skos:altLabel "Reithose"@de,
+        "Reithosen"@de,
+        "breeches, riding"@en,
+        "pantalón de montar"@es,
+        "culotte d'équitation"@fr,
+        "ballonbroek"@nl,
+        "ballonbroeken"@nl,
+        "rijbroek"@nl,
+        "rijbroeken"@nl ;
     skos:prefLabel "riding breeches" .
 
 coco:CC00434 a cms:NamedValue ;
     dcterms:title "shalwar" ;
     rdf:predicate coco:pantsType ;
     rdf:value coco:CC00434 ;
-    skos:altLabel "balloon pants",
-        "chalwar",
-        "harem pants",
-        "salvar",
-        "salwar",
-        "shalvar",
-        "shulwar",
-        "shulwaur",
-        "turkish trousers" ;
+    skos:altLabel "balloon pants"@en,
+        "chalwar"@en,
+        "harem pants"@en,
+        "salvar"@en,
+        "salwar"@en,
+        "shalvar"@en,
+        "shulwar"@en,
+        "shulwaur"@en,
+        "turkish trousers"@en,
+        "pantalón harén"@es,
+        "pantalón turco"@es,
+        "shalwar"@fr,
+        "shalwar"@nl,
+        "沙瓦褲"@zh-hant,
+        "莎爾瓦"@zh-hant,
+        "莎瓦"@zh-hant,
+        "shā ěr wǎ"@zh-latn-pinyin-x-hanyu,
+        "sha er wa"@zh-latn-pinyin-x-notone,
+        "sha erh wa"@zh-latn-wadegile ;
     skos:prefLabel "shalwar" .
 
 coco:CC00435 a cms:NamedValue ;
     dcterms:title "slacks" ;
     rdf:predicate coco:pantsType ;
     rdf:value coco:CC00435 ;
+    skos:altLabel "pantalón informal"@es,
+        "pantalon tout aller"@fr,
+        "slack"@nl,
+        "slacks"@nl,
+        "便褲"@zh-hant,
+        "家居便褲"@zh-hant,
+        "家常褲"@zh-hant,
+        "寬鬆長褲"@zh-hant,
+        "biàn  kù"@zh-latn-pinyin-x-hanyu,
+        "bian  ku"@zh-latn-pinyin-x-notone,
+        "pien  k'u"@zh-latn-wadegile ;
     skos:prefLabel "slacks" .
 
 coco:CC00436 a cms:NamedValue ;
     dcterms:title "sweat pants" ;
     rdf:predicate coco:pantsType ;
     rdf:value coco:CC00436 ;
-    skos:altLabel "sweatpants",
-        "track suit trousers" ;
+    skos:altLabel "παντελόνι γυμναστικής"@el,
+        "παντελόνια γυμναστικής"@el,
+        "sweatpants"@en,
+        "track suit trousers"@en,
+        "track trousers"@en-gb,
+        "trousers, track"@en-gb,
+        "pants, sweat"@en-us,
+        "sweat pants"@en-us,
+        "sweatpants"@en-us,
+        "pantalón de entrenamiento"@es,
+        "pantalon de survêtement"@fr,
+        "pantalon en molleton"@fr,
+        "pantalons de survêtement"@fr,
+        "מכנסי אימונית"@he,
+        "מכנסי טרנינג"@he,
+        "pantalone da ginnastica"@it,
+        "pantaloni da ginnastica"@it,
+        "joggingbroek"@nl,
+        "joggingbroeken"@nl,
+        "sportbroek"@nl,
+        "trainingsbroek"@nl,
+        "trainingsbroeken"@nl,
+        "donji delovi trenerke"@sr,
+        "donji deo trenerke"@sr,
+        "棉織厚長褲"@zh-hant,
+        "運動褲"@zh-hant,
+        "運動長褲"@zh-hant,
+        "長運動褲"@zh-hant,
+        "cháng yùn dòng kù"@zh-latn-pinyin-x-hanyu,
+        "chang yun dong ku"@zh-latn-pinyin-x-notone,
+        "ch'ang yün tung k'u"@zh-latn-wadegile ;
     skos:prefLabel "sweat pants" .
 
 coco:CC00441 a cms:NamedValue ;
@@ -3561,7 +4177,15 @@ coco:CC00444 a cms:NamedValue ;
     dcterms:title "cassocks (liturgical costume)" ;
     rdf:predicate coco:liturgicalType ;
     rdf:value coco:CC00444 ;
-    skos:altLabel "cassock (liturgical costume)" ;
+    skos:altLabel "Soutane"@de,
+        "Soutanen"@de,
+        "cassock (liturgical costume)"@en,
+        "balandrán"@es,
+        "sotana"@es,
+        "sotanas"@es,
+        "soutane"@fr,
+        "soutane"@nl,
+        "soutanes"@nl ;
     skos:prefLabel "cassocks (liturgical costume)" .
 
 coco:CC00445 a cms:NamedValue ;
@@ -3573,8 +4197,14 @@ coco:CC00445 a cms:NamedValue ;
     dcterms:title "chasubles (liturgical vestments)" ;
     rdf:predicate coco:liturgicalType ;
     rdf:value coco:CC00445 ;
-    skos:altLabel "chasuble (liturgical vestment)",
-        "planeta" ;
+    skos:altLabel "chasuble (liturgical vestment)"@en,
+        "planeta"@en,
+        "casulla"@es,
+        "guitarra (vestidura sacerdotal)"@es,
+        "chasuble"@fr,
+        "chasubles"@fr,
+        "kazuifel"@nl,
+        "kazuifels"@nl ;
     skos:prefLabel "chasubles (liturgical vestments)" .
 
 coco:CC00446 a cms:NamedValue ;
@@ -3608,6 +4238,17 @@ coco:CC00448 a cms:NamedValue ;
     dcterms:title "copes" ;
     rdf:predicate coco:liturgicalType ;
     rdf:value coco:CC00448 ;
+    skos:altLabel "capa consistorial"@es,
+        "capa magna"@es,
+        "capa pluvial"@es,
+        "chape"@fr,
+        "piviale"@it,
+        "piviali"@it,
+        "koorkap"@nl,
+        "koorkappen"@nl,
+        "koormantels"@nl,
+        "pluviale"@nl,
+        "pluviales"@nl ;
     skos:prefLabel "copes" .
 
 coco:CC00449 a cms:NamedValue ;
@@ -3619,9 +4260,15 @@ coco:CC00449 a cms:NamedValue ;
     dcterms:title "dalmatics" ;
     rdf:predicate coco:liturgicalType ;
     rdf:value coco:CC00449 ;
-    skos:altLabel "alba dalmatica",
-        "dalmatica",
-        "dalmaticas" ;
+    skos:altLabel "alba dalmatica"@en,
+        "dalmatica"@en,
+        "dalmaticas"@en,
+        "dalmática"@es,
+        "dalmáticas"@es,
+        "dalmaticelle"@fr,
+        "dalmatique"@fr,
+        "dalmatiek"@nl,
+        "dalmatieken"@nl ;
     skos:prefLabel "dalmatics" .
 
 coco:CC00450 a cms:NamedValue ;
@@ -3633,7 +4280,16 @@ coco:CC00450 a cms:NamedValue ;
     dcterms:title "stoles (vestments)" ;
     rdf:predicate coco:liturgicalType ;
     rdf:value coco:CC00450 ;
-    skos:altLabel "stole (vestment)" ;
+    skos:altLabel "stole (vestment)"@en,
+        "estola (vestidura sacerdotal)"@es,
+        "estolas (vestidura sacerdotal)"@es,
+        "étole"@fr,
+        "stola"@it,
+        "stole"@it,
+        "ceremoniestola"@nl,
+        "ceremoniestola's"@nl,
+        "stola (liturgische kleding)"@nl,
+        "stolen (liturgische kleding)"@nl ;
     skos:prefLabel "stoles (vestments)" .
 
 coco:CC00451 a cms:NamedValue ;
@@ -3656,6 +4312,10 @@ coco:CC00452 a cms:NamedValue ;
     dcterms:title "tunicles" ;
     rdf:predicate coco:liturgicalType ;
     rdf:value coco:CC00452 ;
+    skos:altLabel "tunicela"@es,
+        "tunicelas"@es,
+        "tunica"@nl,
+        "tunica's"@nl ;
     skos:prefLabel "tunicles" .
 
 coco:CC00453 a cms:NamedValue ;
@@ -3703,6 +4363,19 @@ coco:CC00458 a cms:NamedValue ;
     rdf:predicate coco:function,
         coco:icomType ;
     rdf:value coco:CC00458 ;
+    skos:altLabel "Überkleid (Oberbekleidung)"@de,
+        "Überkleider (Oberbekleidungen)"@de,
+        "εξωτερικά ενδύματα"@el,
+        "εξωτερικό ένδυμα"@el,
+        "prenda exterior"@es,
+        "ropa exterior"@es,
+        "vêtements d'extérieur"@fr,
+        "vêtements de dessus"@fr,
+        "הלבשה עליונה"@he,
+        "capispalla"@it,
+        "capospalla"@it,
+        "overkleding"@nl,
+        "odeća za nošenje van kuće"@sr ;
     skos:prefLabel "outerwear" .
 
 coco:CC00459 a cms:NamedValue ;
@@ -3714,7 +4387,15 @@ coco:CC00459 a cms:NamedValue ;
     dcterms:title "protective wear" ;
     rdf:predicate coco:icomType ;
     rdf:value coco:CC00459 ;
-    skos:altLabel "wear, protective" ;
+    skos:altLabel "wear, protective"@en,
+        "ropa de protección"@es,
+        "vêtements de protection"@fr,
+        "beschermende kleding"@nl,
+        "防護性穿著"@zh-hant,
+        "防護性衣著"@zh-hant,
+        "fáng hù xìng yī zhāo"@zh-latn-pinyin-x-hanyu,
+        "fang hu xing yi zhao"@zh-latn-pinyin-x-notone,
+        "fang hu hsing i chao"@zh-latn-wadegile ;
     skos:prefLabel "protective wear" .
 
 coco:CC00461 a cms:NamedValue ;
@@ -3743,8 +4424,16 @@ coco:CC00463 a cms:NamedValue ;
     dcterms:title "worn costume accessories" ;
     rdf:predicate coco:icomType ;
     rdf:value coco:CC00463 ;
-    skos:altLabel "costume accessories worn",
-        "costume accessories, worn" ;
+    skos:altLabel "αξεσουάρ που φοριέται"@el,
+        "αξεσουάρ που φοριούνται"@el,
+        "costume accessories worn"@en,
+        "costume accessories, worn"@en,
+        "accesorios de vestir"@es,
+        "accessoires de vêtements portés"@fr,
+        "אביזרי תלבושת נלבשים"@he,
+        "gedragen kledingaccessoires"@nl,
+        "op het lichaam gedragen kledingaccessoires"@nl,
+        "aksesoar koji se nosi na telu"@sr ;
     skos:prefLabel "worn costume accessories" .
 
 coco:CC00464 a cms:NamedValue ;
@@ -3756,8 +4445,18 @@ coco:CC00464 a cms:NamedValue ;
     dcterms:title "accessories by location on the head" ;
     rdf:predicate coco:icomType ;
     rdf:value coco:CC00464 ;
-    skos:altLabel "<accessories by location on the head>",
-        "<accessories worn on the head>" ;
+    skos:altLabel "<auf dem Kopf getragene Accessoires>"@de,
+        "<αξεσουάρ για το κεφάλι>"@el,
+        "<accessories by location on the head>"@en,
+        "<accessories worn on the head>"@en,
+        "<accesorios para la cabeza>"@es,
+        "<accessoires de tête>"@fr,
+        "<אביזרים שלובשים על הראש>"@he,
+        "<accessori da indossare sulla testa>"@it,
+        "<accessoire die op het hoofd wordt gedragen>"@nl,
+        "<accessoires die op het hoofd worden gedragen>"@nl,
+        "<accessoires gedragen op het hoofd>"@nl,
+        "<aksesoar koji se nosi na glavi>"@sr ;
     skos:prefLabel "accessories by location on the head" .
 
 coco:CC00465 a cms:NamedValue ;
@@ -3769,7 +4468,20 @@ coco:CC00465 a cms:NamedValue ;
     dcterms:title "hair accessories" ;
     rdf:predicate coco:icomType ;
     rdf:value coco:CC00465 ;
-    skos:altLabel "accessories, hair" ;
+    skos:altLabel "Haaraccessoires"@de,
+        "αξεσουάρ μαλλιών"@el,
+        "accessories, hair"@en,
+        "accesorios para el cabello"@es,
+        "accessoire de cheveux"@fr,
+        "accessoires de cheveux"@fr,
+        "accessoires pour cheveux"@fr,
+        "אביזר שיער"@he,
+        "אביזרי שיער"@he,
+        "accessori per capelli"@it,
+        "haaraccessoire"@nl,
+        "haaraccessoires"@nl,
+        "ukras za kosu"@sr,
+        "ukrasi za kosu"@sr ;
     skos:prefLabel "hair accessories" .
 
 coco:CC00466 a cms:NamedValue ;
@@ -3787,8 +4499,19 @@ coco:CC00467 a cms:NamedValue ;
     dcterms:title "accessories by location above the waist" ;
     rdf:predicate coco:icomType ;
     rdf:value coco:CC00467 ;
-    skos:altLabel "<accessories by location above the waist>",
-        "<accessories worn above the waist>" ;
+    skos:altLabel "<oberhalb der Taille getragene Accessoires>"@de,
+        "<αξεσουάρ για τα μπούστα>"@el,
+        "<αξεσουάρ για το μπούστο>"@el,
+        "<accessories by location above the waist>"@en,
+        "<accessories worn above the waist>"@en,
+        "<accesorios usados encima de la cintura>"@es,
+        "<accessoires portés au dessus de la taille>"@fr,
+        "<אביזרים שלובשים מעל המותניים>"@he,
+        "<accessori indossati sopra la vita>"@it,
+        "<accessoire die boven het middel gedragen wordt>"@nl,
+        "<accessoires die boven het middel gedragen worden>"@nl,
+        "<accessoires gedragen boven het middel>"@nl,
+        "<aksesoar koji se nosi iznad pojasa>"@sr ;
     skos:prefLabel "accessories by location above the waist" .
 
 coco:CC00468 a cms:NamedValue ;
@@ -3800,8 +4523,18 @@ coco:CC00468 a cms:NamedValue ;
     dcterms:title "accessories by location at the waist or below" ;
     rdf:predicate coco:icomType ;
     rdf:value coco:CC00468 ;
-    skos:altLabel "<accessories by location at the waist or below>",
-        "<accessories worn at the waist or below>" ;
+    skos:altLabel "<In oder unterhalb der Taille getragene Accessoires>"@de,
+        "<αξεσουάρ μέσης και κάτω>"@el,
+        "<accessories by location at the waist or below>"@en,
+        "<accessories worn at the waist or below>"@en,
+        "<accesorios usados en o debajo de la cintura>"@es,
+        "<accessoires portés à la taille et en dessous>"@fr,
+        "<אביזרים למותניים או נמוך מהם>"@he,
+        "<accessori indossati dalla vita in giù>"@it,
+        "<accessoire die om het middel of daaronder gedragen wordt>"@nl,
+        "<accessoires die om het middel of daaronder gedragen worden>"@nl,
+        "<accessoires gedragen in of onder het middel>"@nl,
+        "<aksesoar koji se nosi na struku ili ispod struka>"@sr ;
     skos:prefLabel "accessories by location at the waist or below" .
 
 coco:CC00469 a cms:NamedValue ;
@@ -3813,8 +4546,17 @@ coco:CC00469 a cms:NamedValue ;
     dcterms:title "accessories by location on arms or hands" ;
     rdf:predicate coco:icomType ;
     rdf:value coco:CC00469 ;
-    skos:altLabel "<accessories by location on arms or hands>",
-        "<accessories worn on arms or hands>" ;
+    skos:altLabel "<Accessoires, an Arm oder Hand zu tragen>"@de,
+        "<αξεσουάρ άνω άκρων>"@el,
+        "<accessories by location on arms or hands>"@en,
+        "<accessories worn on arms or hands>"@en,
+        "<accesorios usados en brazos y manos>"@es,
+        "<accessoires portés sur les bras et sur les mains>"@fr,
+        "<אביזרים שלובשים על הידיים או הזרועות>"@he,
+        "<accessori indossati sulle braccia o sulle mani>"@it,
+        "<accessoires gedragen aan armen of handen>"@nl,
+        "<arm- of handaccessoires>"@nl,
+        "<aksesoar koji se nosi na rukama i šakama>"@sr ;
     skos:prefLabel "accessories by location on arms or hands" .
 
 coco:CC00470 a cms:NamedValue ;
@@ -3826,8 +4568,18 @@ coco:CC00470 a cms:NamedValue ;
     dcterms:title "accessories by location on the legs or feet" ;
     rdf:predicate coco:icomType ;
     rdf:value coco:CC00470 ;
-    skos:altLabel "<accessories by location on the legs or feet>",
-        "<accessories worn on the legs or feet>" ;
+    skos:altLabel "<Accessoires, am Bein oder Fuß zu tragen>"@de,
+        "<am Bein oder Fuß zu tragen Accessoires>"@de,
+        "<αξεσουάρ κάτω άκρων>"@el,
+        "<accessories by location on the legs or feet>"@en,
+        "<accessories worn on the legs or feet>"@en,
+        "<accesorios usados en piernas o pies>"@es,
+        "<accessoires portés sur les jambes ou sur les pieds>"@fr,
+        "<אביזרים שלובשים על הרגליים או כפות הרגליים>"@he,
+        "<accessori indossati sulle gambe o sui piedi>"@it,
+        "<accessoires gedragen aan benen of voeten>"@nl,
+        "<been- of voetaccessoires>"@nl,
+        "<aksesoar koji se nosi na nogama i stopalima>"@sr ;
     skos:prefLabel "accessories by location on the legs or feet" .
 
 coco:CC00471 a cms:NamedValue ;
@@ -3839,8 +4591,18 @@ coco:CC00471 a cms:NamedValue ;
     dcterms:title "costume accessories carried" ;
     rdf:predicate coco:icomType ;
     rdf:value coco:CC00471 ;
-    skos:altLabel "carried, costume accessories",
-        "costume accessory carried" ;
+    skos:altLabel "αξεσουάρ χειρός"@el,
+        "carried, costume accessories"@en,
+        "costume accessory carried"@en,
+        "accesorios de mano"@es,
+        "accessoires de costume portés"@fr,
+        "אביזרי תלבושות"@he,
+        "accessori non attaccati all'abito"@it,
+        "draagmiddel"@nl,
+        "draagmiddelen"@nl,
+        "meegedragen kledingaccessoire"@nl,
+        "meegedragen kledingaccessoires"@nl,
+        "aksesoar koji se nosi u ruci"@sr ;
     skos:prefLabel "costume accessories carried" .
 
 coco:CC00472 a cms:NamedValue ;
@@ -3893,12 +4655,26 @@ coco:CC00478 a cms:NamedValue ;
     dcterms:title "sports clothing" ;
     rdf:predicate coco:function ;
     rdf:value coco:CC00478 ;
-    skos:altLabel "clothes, sports",
-        "clothing, sports",
-        "sport clothes",
-        "sports and leisurewear",
-        "sports clothes",
-        "sportswear" ;
+    skos:altLabel "Sportkleidung"@de,
+        "ένδυμα σπορ και αναψυχής"@el,
+        "ενδύματα σπορ και αναψυχής"@el,
+        "clothes, sports"@en,
+        "clothing, sports"@en,
+        "sport clothes"@en,
+        "sports and leisurewear"@en,
+        "sports clothes"@en,
+        "sportswear"@en,
+        "ropa deportiva"@es,
+        "vêtements de sport et loisirs"@fr,
+        "בגדי ספורט"@he,
+        "abbiglio sportivo e per il tempo libero"@it,
+        "sport- en vrijetijdskleding"@nl,
+        "sportkleding"@nl,
+        "odeća za sport i rekreaciju"@sr,
+        "運動服"@zh-hant,
+        "yùn dòng fú"@zh-latn-pinyin-x-hanyu,
+        "yun dong fu"@zh-latn-pinyin-x-notone,
+        "yün tung fu"@zh-latn-wadegile ;
     skos:prefLabel "sports clothing" .
 
 coco:CC00479 a cms:NamedValue ;
@@ -3910,8 +4686,9 @@ coco:CC00479 a cms:NamedValue ;
     dcterms:title "boys' wear" ;
     rdf:predicate coco:gender ;
     rdf:value coco:CC00479 ;
-    skos:altLabel "boy's clothing",
-        "wear, boys'" ;
+    skos:altLabel "boy's clothing"@en,
+        "wear, boys'"@en,
+        "jongenskleding"@nl ;
     skos:prefLabel "boys' wear" .
 
 coco:CC00480 a cms:NamedValue ;
@@ -3923,8 +4700,9 @@ coco:CC00480 a cms:NamedValue ;
     dcterms:title "girls' wear" ;
     rdf:predicate coco:gender ;
     rdf:value coco:CC00480 ;
-    skos:altLabel "girls' clothing",
-        "wear, girls'" ;
+    skos:altLabel "girls' clothing"@en,
+        "wear, girls'"@en,
+        "meisjeskleding"@nl ;
     skos:prefLabel "girls' wear" .
 
 coco:CC00482 a cms:NamedValue ;
@@ -3987,7 +4765,29 @@ coco:CC00493 a cms:NamedValue ;
     dcterms:title "stomacher" ;
     rdf:predicate coco:costumeComponents ;
     rdf:value coco:CC00493 ;
-    skos:altLabel "placards (costume accessories)" ;
+    skos:altLabel "Bruststecker"@de,
+        "Stecker (Kleidungszubehör)"@de,
+        "Vorstecker"@de,
+        "στομαχικά"@el,
+        "στομαχικό"@el,
+        "placards (costume accessories)"@en,
+        "estomaguero"@es,
+        "pechera"@es,
+        "stomacher"@es,
+        "pièce d'estomac"@fr,
+        "pièces d'estomac"@fr,
+        "מחוך"@he,
+        "מחוכים"@he,
+        "pettorina"@it,
+        "pettorine"@it,
+        "borstlap"@nl,
+        "borstlappen"@nl,
+        "borststuk"@nl,
+        "borststukken"@nl,
+        "maagstuk"@nl,
+        "maagstukken"@nl,
+        "šteker"@sr,
+        "štekeri"@sr ;
     skos:prefLabel "stomacher" .
 
 coco:CC00494 a cms:NamedValue ;
@@ -4019,8 +4819,15 @@ coco:CC00501 a cms:NamedValue ;
     dcterms:title "muumuu" ;
     rdf:predicate coco:dressType ;
     rdf:value coco:CC00501 ;
-    skos:altLabel "muu-muu",
-        "muu-muus" ;
+    skos:altLabel "Muumuu"@de,
+        "Muumuus"@de,
+        "muu-muu"@en,
+        "muu-muus"@en,
+        "muumuu"@es,
+        "muumuus"@es,
+        "muumuu"@fr,
+        "muu-muu"@nl,
+        "muu-muu's"@nl ;
     skos:prefLabel "muumuu" .
 
 coco:CC00502 a cms:NamedValue ;
@@ -4042,8 +4849,16 @@ coco:CC00507 a cms:NamedValue ;
     dcterms:title "maternity clothes" ;
     rdf:predicate coco:function ;
     rdf:value coco:CC00507 ;
-    skos:altLabel "maternity clothing",
-        "maternity wear" ;
+    skos:altLabel "ένδυμα εγκυμοσύνης"@el,
+        "ενδύματα εγκυμοσύνης"@el,
+        "maternity clothing"@en,
+        "maternity wear"@en,
+        "vêtements de grossesse"@fr,
+        "בגדי הריון"@he,
+        "abbigliamento per gestanti"@it,
+        "positiekleding"@nl,
+        "zwangerschapskleding"@nl,
+        "odeća za trudnice"@sr ;
     skos:prefLabel "maternity clothes" .
 
 coco:CC00509 a cms:NamedValue ;
@@ -4055,8 +4870,9 @@ coco:CC00509 a cms:NamedValue ;
     dcterms:title "wedding clothes" ;
     rdf:predicate coco:function ;
     rdf:value coco:CC00509 ;
-    skos:altLabel "clothes, wedding",
-        "wedding garments" ;
+    skos:altLabel "clothes, wedding"@en,
+        "wedding garments"@en,
+        "trouwkleding"@nl ;
     skos:prefLabel "wedding clothes" .
 
 coco:CC00510 a cms:NamedValue ;
@@ -4108,10 +4924,19 @@ coco:CC00514 a cms:NamedValue ;
     dcterms:title "slashing" ;
     rdf:predicate coco:hasTechnique ;
     rdf:value coco:CC00514 ;
-    skos:altLabel "chique-tades",
-        "creves (costume components)",
-        "scissoring",
-        "slashes" ;
+    skos:altLabel "chique-tades"@en,
+        "creves (costume components)"@en,
+        "scissoring"@en,
+        "slashes"@en,
+        "encolado"@es,
+        "split"@nl,
+        "splitten"@nl,
+        "切縫"@zh-hant,
+        "長嵌縫"@zh-hant,
+        "長衩"@zh-hant,
+        "zhǎng qiān fèng"@zh-latn-pinyin-x-hanyu,
+        "zhang qian feng"@zh-latn-pinyin-x-notone,
+        "chang ch'ien feng"@zh-latn-wadegile ;
     skos:prefLabel "slashing" .
 
 coco:CC00517 a cms:NamedValue ;
@@ -4123,7 +4948,14 @@ coco:CC00517 a cms:NamedValue ;
     dcterms:title "knickerbockers" ;
     rdf:predicate coco:pantsType ;
     rdf:value coco:CC00517 ;
-    skos:altLabel "knickers (breeches)" ;
+    skos:altLabel "Knickerbocker"@de,
+        "Knickerbockers"@de,
+        "knickers (breeches)"@en,
+        "knickerbocker"@es,
+        "plus four"@es,
+        "knickerbockers"@fr,
+        "knickerbocker"@nl,
+        "knickerbockers"@nl ;
     skos:prefLabel "knickerbockers" .
 
 coco:CC00519 a cms:NamedValue ;
@@ -4135,6 +4967,9 @@ coco:CC00519 a cms:NamedValue ;
     dcterms:title "nightwear" ;
     rdf:predicate coco:function ;
     rdf:value coco:CC00519 ;
+    skos:altLabel "lencería"@es,
+        "nacht- en ochtendkleding"@nl,
+        "nachtkleding"@nl ;
     skos:prefLabel "nightwear" .
 
 coco:CC00520 a cms:NamedValue ;
@@ -4167,6 +5002,15 @@ coco:CC00524 a cms:NamedValue ;
     dcterms:title "bloomers" ;
     rdf:predicate coco:pantsType ;
     rdf:value coco:CC00524 ;
+    skos:altLabel "Bloomers"@de,
+        "Pumphose (Unterwäsche)"@de,
+        "Pumphosen (Unterwäsche)"@de,
+        "knickers (drawers)"@en-gb,
+        "bloomers"@en-us,
+        "bloomer"@es,
+        "short-culotte"@fr,
+        "directoire"@nl,
+        "directoires"@nl ;
     skos:prefLabel "bloomers" .
 
 coco:CC00527 a cms:NamedValue ;
@@ -4708,8 +5552,14 @@ coco:CC00580 a cms:NamedValue ;
     dcterms:title "gusset" ;
     rdf:predicate coco:costumeComponents ;
     rdf:value coco:CC00580 ;
-    skos:altLabel "gusset (costume component)",
-        "gussets (costume components)" ;
+    skos:altLabel "gusset (costume component)"@en,
+        "gussets (costume components)"@en,
+        "escudete (componente de vestuario)"@es,
+        "escudetes (componentes de vestuario)"@es,
+        "nesga"@es,
+        "figuurnaden"@nl,
+        "spie"@nl,
+        "spieën"@nl ;
     skos:prefLabel "gusset" .
 
 coco:CC00581 a cms:NamedValue ;
@@ -4951,8 +5801,28 @@ coco:CC00602 a cms:NamedValue ;
     dcterms:title "cape" ;
     rdf:predicate coco:workType ;
     rdf:value coco:CC00602 ;
-    skos:altLabel "cape (outerwear)",
-        "capes (outerwear)" ;
+    skos:altLabel "Cape"@de,
+        "Capes"@de,
+        "κάπα"@el,
+        "κάπες"@el,
+        "μπέρτα"@el,
+        "μπέρτες"@el,
+        "cape (outerwear)"@en,
+        "capes (outerwear)"@en,
+        "capa corta (prenda exterior)"@es,
+        "capas cortas (prendas exterior)"@es,
+        "cape"@fr,
+        "capes"@fr,
+        "שכמיה"@he,
+        "שכמיות"@he,
+        "cappa"@it,
+        "cappe"@it,
+        "cape"@nl,
+        "capes"@nl,
+        "schoudermantel"@nl,
+        "schoudermantels"@nl,
+        "ogrtač"@sr,
+        "ogrtači"@sr ;
     skos:prefLabel "cape" .
 
 coco:CC00603 a cms:NamedValue ;
@@ -4964,7 +5834,17 @@ coco:CC00603 a cms:NamedValue ;
     dcterms:title "footwear" ;
     rdf:predicate coco:workType ;
     rdf:value coco:CC00603 ;
-    skos:altLabel "foot wear" ;
+    skos:altLabel "Fußbekleidung"@de,
+        "Fußbekleidungen"@de,
+        "υποδήματα"@el,
+        "υπόδημα"@el,
+        "foot wear"@en,
+        "calzado"@es,
+        "chaussures"@fr,
+        "הנעלה"@he,
+        "calzature"@it,
+        "schoeisel"@nl,
+        "obuća"@sr ;
     skos:prefLabel "footwear" .
 
 coco:CC00604 a cms:NamedValue ;
@@ -4976,8 +5856,31 @@ coco:CC00604 a cms:NamedValue ;
     dcterms:title "robe" ;
     rdf:predicate coco:workType ;
     rdf:value coco:CC00604 ;
-    skos:altLabel "robe (main garment)",
-        "robes (main garments)" ;
+    skos:altLabel "Gewand"@de,
+        "Gewänder"@de,
+        "Robe"@de,
+        "Roben"@de,
+        "κελεμπία"@el,
+        "κελεμπίες"@el,
+        "τήβεννοι"@el,
+        "τήβεννος"@el,
+        "robe (main garment)"@en,
+        "robes (main garments)"@en,
+        "toga (prenda principal)"@es,
+        "togas (prenda principal)"@es,
+        "robe extérieure"@fr,
+        "toge"@fr,
+        "toges"@fr,
+        "חלוק"@he,
+        "חלוקים"@he,
+        "toga"@it,
+        "toghe"@it,
+        "gewaad"@nl,
+        "gewaden"@nl,
+        "toga"@nl,
+        "toga's"@nl,
+        "odora"@sr,
+        "odore"@sr ;
     skos:prefLabel "robe" .
 
 coco:CC00605 a cms:NamedValue ;
@@ -4989,8 +5892,20 @@ coco:CC00605 a cms:NamedValue ;
     dcterms:title "legwear" ;
     rdf:predicate coco:workType ;
     rdf:value coco:CC00605 ;
-    skos:altLabel "hose (hosiery)",
-        "hosiery" ;
+    skos:altLabel "Strumpf"@de,
+        "Strumpfware"@de,
+        "Strumpfwaren"@de,
+        "Strümpfe"@de,
+        "hose (hosiery)"@en,
+        "hosiery"@en,
+        "calcetería"@es,
+        "calcetría"@es,
+        "articles chaussants"@fr,
+        "bonneterie"@fr,
+        "גרביים וגרביונים"@he,
+        "calzetteria"@it,
+        "kousen en sokken"@nl,
+        "čarape"@sr ;
     skos:prefLabel "legwear" .
 
 coco:CC00608 a cms:NamedValue ;
@@ -5002,9 +5917,31 @@ coco:CC00608 a cms:NamedValue ;
     dcterms:title "headwear" ;
     rdf:predicate coco:workType ;
     rdf:value coco:CC00608 ;
-    skos:altLabel "head-pieces (headgear)",
-        "headgear",
-        "headpieces (headgear)" ;
+    skos:altLabel "Kopfbedeckung"@de,
+        "Kopfbedeckungen"@de,
+        "προστατευτικά κεφαλιού"@el,
+        "προστατευτικό κεφαλιού"@el,
+        "head-pieces (headgear)"@en,
+        "headgear"@en,
+        "headpieces (headgear)"@en,
+        "accesorio para la cabeza"@es,
+        "coiffures"@fr,
+        "couvre chef"@fr,
+        "couvre-chefs"@fr,
+        "כיסוי ראש"@he,
+        "כיסויי ראש"@he,
+        "capricapi"@it,
+        "copricapo"@it,
+        "hoofdbedekking"@nl,
+        "hoofddeksel"@nl,
+        "hoofddeksels"@nl,
+        "oglavlja"@sr,
+        "帽"@zh-hant,
+        "頭上戴的東西"@zh-hant,
+        "頭飾"@zh-hant,
+        "tóu shì"@zh-latn-pinyin-x-hanyu,
+        "tou shi"@zh-latn-pinyin-x-notone,
+        "t'ou shih"@zh-latn-wadegile ;
     skos:prefLabel "headwear" .
 
 coco:CC00610 a cms:NamedValue ;
@@ -5016,6 +5953,30 @@ coco:CC00610 a cms:NamedValue ;
     dcterms:title "jewelry" ;
     rdf:predicate coco:workType ;
     rdf:value coco:CC00610 ;
+    skos:altLabel "Schmuck"@de,
+        "Schmucke"@de,
+        "κοσμήματα"@el,
+        "κόσμημα"@el,
+        "jewellery"@en-gb,
+        "jewelry"@en-us,
+        "joya"@es,
+        "bijou"@fr,
+        "bijoux"@fr,
+        "תכשיטים"@he,
+        "gioielli"@it,
+        "gioiello"@it,
+        "juweel"@nl,
+        "juwelen (sieraden)"@nl,
+        "sieraad"@nl,
+        "sieraden"@nl,
+        "jóia"@pt,
+        "jóias"@pt,
+        "nakit"@sr,
+        "珠寶"@zh-hant,
+        "首飾"@zh-hant,
+        "shǒu shì"@zh-latn-pinyin-x-hanyu,
+        "shou shi"@zh-latn-pinyin-x-notone,
+        "shou shih"@zh-latn-wadegile ;
     skos:prefLabel "jewelry" .
 
 coco:CC00611 a cms:NamedValue ;
@@ -6320,8 +7281,30 @@ coco:CC00001 a cms:NamedValue ;
     dcterms:title "buckle" ;
     rdf:predicate coco:closure ;
     rdf:value coco:CC00001 ;
-    skos:altLabel "buckle (strap accessory)",
-        "buckles (strap accessories)" ;
+    skos:altLabel "Schließe (Verschluss)"@de,
+        "Schließen (Verschlüsse)"@de,
+        "Schnalle (Verschluss)"@de,
+        "Schnallen (Verschlüsse)"@de,
+        "αγκράφα"@el,
+        "αγκράφες"@el,
+        "πόρπες"@el,
+        "πόρπη"@el,
+        "buckle (strap accessory)"@en,
+        "buckles (strap accessories)"@en,
+        "abrazadera"@es,
+        "argolla"@es,
+        "hebilla (accesorios para sujetar)"@es,
+        "hebillas (accesorios para sujetar)"@es,
+        "boucle"@fr,
+        "boucles"@fr,
+        "אבזם"@he,
+        "אבזמים"@he,
+        "fibbia"@it,
+        "fibbie"@it,
+        "gesp (bevestigingsmiddel)"@nl,
+        "gespen (bevestigingsmiddelen)"@nl,
+        "kopča"@sr,
+        "kopče"@sr ;
     skos:prefLabel "buckle" .
 
 coco:CC00002 a cms:NamedValue ;
@@ -6333,8 +7316,24 @@ coco:CC00002 a cms:NamedValue ;
     dcterms:title "buttons" ;
     rdf:predicate coco:closure ;
     rdf:value coco:CC00002 ;
-    skos:altLabel "button (fastener)",
-        "buttons (fasteners)" ;
+    skos:altLabel "Knopf (Befestigungselement)"@de,
+        "Knöpfe (Befestigungselemente)"@de,
+        "κουμπί"@el,
+        "κουμπιά"@el,
+        "button (fastener)"@en,
+        "buttons (fasteners)"@en,
+        "botones (sujetador)"@es,
+        "botón (sujetador)"@es,
+        "bouton"@fr,
+        "boutons"@fr,
+        "כפתור"@he,
+        "כפתורים"@he,
+        "bottone"@it,
+        "bottoni"@it,
+        "knoop (bevestigingsmiddel)"@nl,
+        "knopen (bevestigingsmiddelen)"@nl,
+        "dugmad"@sr,
+        "dugme"@sr ;
     skos:prefLabel "buttons" .
 
 coco:CC00003 a cms:NamedValue ;
@@ -6346,8 +7345,26 @@ coco:CC00003 a cms:NamedValue ;
     dcterms:title "frogs" ;
     rdf:predicate coco:closure ;
     rdf:value coco:CC00003 ;
-    skos:altLabel "frog (fastener)",
-        "frogs (fasteners)" ;
+    skos:altLabel "Posamentenverschluss"@de,
+        "Posamentenverschlüsse"@de,
+        "Posamentverschluss"@de,
+        "Posamentverschlüsse"@de,
+        "frog (fastener)"@en,
+        "frogs (fasteners)"@en,
+        "horquilla (sujetador)"@es,
+        "horquillas (sujetador)"@es,
+        "brandebourg"@fr,
+        "brandebourgs"@fr,
+        "לולאה סינית"@he,
+        "לולאות סיניות"@he,
+        "alamari"@it,
+        "alamaro"@it,
+        "brandebourg (bevestigingsmiddel)"@nl,
+        "brandebourgs (bevestigingsmiddelen)"@nl,
+        "pervaz od gajtana ili širita"@sr,
+        "pervazi od gajtana ili širita"@sr,
+        "ukrasna kopča"@sr,
+        "ukrasne kopče"@sr ;
     skos:prefLabel "frogs" .
 
 coco:CC00004 a cms:NamedValue ;
@@ -6359,8 +7376,16 @@ coco:CC00004 a cms:NamedValue ;
     dcterms:title "hooks and eyes" ;
     rdf:predicate coco:closure ;
     rdf:value coco:CC00004 ;
-    skos:altLabel "hook and eye",
-        "hooks-and-eyes" ;
+    skos:altLabel "Haftel"@de,
+        "Haken und Öse"@de,
+        "Haken und Ösen"@de,
+        "hook and eye"@en,
+        "hooks-and-eyes"@en,
+        "gancho y ojo"@es,
+        "ganchos y ojos"@es,
+        "hembrilla-aldabilla"@es,
+        "haak en oog"@nl,
+        "haken en ogen"@nl ;
     skos:prefLabel "hooks and eyes" .
 
 coco:CC00005 a cms:NamedValue ;
@@ -6393,7 +7418,19 @@ coco:CC00007 a cms:NamedValue ;
     dcterms:title "wrap dress" ;
     rdf:predicate coco:dressType ;
     rdf:value coco:CC00007 ;
-    skos:altLabel "wrap-dress" ;
+    skos:altLabel "φορέματα κρουαζέ"@el,
+        "φόρεμα κρουαζέ"@el,
+        "wrap-dress"@en,
+        "robe portefeuille"@fr,
+        "robes portefeuilles"@fr,
+        "שמלות מעטפת"@he,
+        "שמלת מעטפת"@he,
+        "abiti a portafoglio"@it,
+        "abito a portafoglio"@it,
+        "wikkeljurk"@nl,
+        "wikkeljurken"@nl,
+        "haljina na preklop"@sr,
+        "haljine na preklop"@sr ;
     skos:prefLabel "wrap dress" .
 
 coco:CC00008 a cms:NamedValue ;
@@ -6405,6 +7442,15 @@ coco:CC00008 a cms:NamedValue ;
     dcterms:title "snaps" ;
     rdf:predicate coco:closure ;
     rdf:value coco:CC00008 ;
+    skos:altLabel "Druckknopf"@de,
+        "Druckknöpfe"@de,
+        "boterola"@es,
+        "buterola"@es,
+        "buterolas"@es,
+        "doile"@es,
+        "bouton-pression"@fr,
+        "drukknop"@nl,
+        "drukknopen"@nl ;
     skos:prefLabel "snaps" .
 
 coco:CC00009 a cms:NamedValue ;
@@ -6469,11 +7515,27 @@ coco:CC00016 a cms:NamedValue ;
     dcterms:title "halterneck" ;
     rdf:predicate coco:neckline ;
     rdf:value coco:CC00016 ;
-    skos:altLabel "halter (main garment)",
-        "halter top",
-        "halter tops",
-        "halters (main garments)",
-        "tops, halter" ;
+    skos:altLabel "halter (main garment)"@en,
+        "halter top"@en,
+        "halter tops"@en,
+        "halters (main garments)"@en,
+        "tops, halter"@en,
+        "camiseta sin espalda"@es,
+        "camisolín"@es,
+        "camisolínes"@es,
+        "corsage bain-de-soleil"@fr,
+        "halterlijfje"@nl,
+        "halterlijfjes"@nl,
+        "haltertop"@nl,
+        "haltertops"@nl,
+        "三角背心"@zh-hant,
+        "坦肩露背上裝"@zh-hant,
+        "肚兜"@zh-hant,
+        "軛圈領露背女裝"@zh-hant,
+        "露背背心"@zh-hant,
+        "è quān lǐng lòu bèi nǚ zhuāng"@zh-latn-pinyin-x-hanyu,
+        "e quan ling lou bei nü zhuang"@zh-latn-pinyin-x-notone,
+        "e ch'üan ling lou pei nü chuang"@zh-latn-wadegile ;
     skos:prefLabel "halterneck" .
 
 coco:CC00017 a cms:NamedValue ;
@@ -6523,9 +7585,30 @@ coco:CC00029 a cms:NamedValue ;
     dcterms:title "band collar" ;
     rdf:predicate coco:collar ;
     rdf:value coco:CC00029 ;
-    skos:altLabel "band (collar)",
-        "band-collar",
-        "bands (collars)" ;
+    skos:altLabel "όρθιοι γιακάδες"@el,
+        "όρθιος γιακάς"@el,
+        "band (collar)"@en,
+        "band-collar"@en,
+        "bands (collars)"@en,
+        "cinta (cuello)"@es,
+        "cintas (cuello)"@es,
+        "pied de col"@fr,
+        "pieds de col"@fr,
+        "צווארון עומד"@he,
+        "צווארונים עומדים"@he,
+        "colleti alla coreana"@it,
+        "colletto alla coreana"@it,
+        "boord (kledingonderdeel)"@nl,
+        "boorden (kledingonderdelen)"@nl,
+        "opstaande kraag"@nl,
+        "opstaande kragen"@nl,
+        "ruska kragna"@sr,
+        "ruske kragne"@sr,
+        "寬幅白領 (衣領)"@zh-hant,
+        "領圈"@zh-hant,
+        "kuān fú bái lǐng"@zh-latn-pinyin-x-hanyu,
+        "kuan fu bai ling"@zh-latn-pinyin-x-notone,
+        "k'uan fu pai ling"@zh-latn-wadegile ;
     skos:prefLabel "band collar" .
 
 coco:CC00037 a cms:NamedValue ;
@@ -6864,8 +7947,24 @@ coco:CC00106 a cms:NamedValue ;
     dcterms:title "coat" ;
     rdf:predicate coco:workType ;
     rdf:value coco:CC00106 ;
-    skos:altLabel "coat (garment)",
-        "coats (garments)" ;
+    skos:altLabel "παλτά"@el,
+        "παλτό"@el,
+        "coat (garment)"@en,
+        "coats (garments)"@en,
+        "americana"@es,
+        "cazadora"@es,
+        "chaqueta"@es,
+        "chaquetas"@es,
+        "manteau"@fr,
+        "manteaux"@fr,
+        "מעיל"@he,
+        "מעילים"@he,
+        "cappotti"@it,
+        "cappotto"@it,
+        "jas"@nl,
+        "jassen"@nl,
+        "kaput"@sr,
+        "kaputi"@sr ;
     skos:prefLabel "coat" .
 
 coco:CC00114 a cms:NamedValue ;
@@ -6877,6 +7976,26 @@ coco:CC00114 a cms:NamedValue ;
     dcterms:title "pinafore" ;
     rdf:predicate coco:dressType ;
     rdf:value coco:CC00114 ;
+    skos:altLabel "πιναφόρ"@el,
+        "pinnies"@en-gb,
+        "pinny"@en-gb,
+        "pinafore"@en-us,
+        "pinafores"@en-us,
+        "pintora"@es,
+        "pintoras"@es,
+        "devanteau"@fr,
+        "robe tablier"@fr,
+        "robes tabliers"@fr,
+        "סרפן"@he,
+        "סרפנים"@he,
+        "kinderschort"@nl,
+        "kinderschorten"@nl,
+        "schort met borststuk"@nl,
+        "schorten met borststuk"@nl,
+        "schortjurk"@nl,
+        "schortjurken"@nl,
+        "kecelja"@sr,
+        "kecelje"@sr ;
     skos:prefLabel "pinafore" .
 
 coco:CC00119 a cms:NamedValue ;
@@ -6898,8 +8017,26 @@ coco:CC00123 a cms:NamedValue ;
     dcterms:title "slip dress" ;
     rdf:predicate coco:dressType ;
     rdf:value coco:CC00123 ;
-    skos:altLabel "slip (underwear)",
-        "slips (underwear)" ;
+    skos:altLabel "Unterrock"@de,
+        "Unterröcke"@de,
+        "κομπινεζόν"@el,
+        "slip (underwear)"@en,
+        "slips (underwear)"@en,
+        "viso (ropa interior)"@es,
+        "visos (ropa interior)"@es,
+        "combinaison"@fr,
+        "combinaison-jupon"@fr,
+        "combinaisons"@fr,
+        "תחתוניות"@he,
+        "תחתונית"@he,
+        "sottoveste"@it,
+        "sottovesti"@it,
+        "onderjurk (ondergoed)"@nl,
+        "onderjurken (ondergoed)"@nl,
+        "kombinezon"@sr,
+        "kombinezoni"@sr,
+        "podsuknja"@sr,
+        "podsuknje"@sr ;
     skos:prefLabel "slip dress" .
 
 coco:CC00128 a cms:NamedValue ;
@@ -6962,6 +8099,26 @@ coco:CC00176 a cms:NamedValue ;
     dcterms:title "peplum" ;
     rdf:predicate coco:costumeComponents ;
     rdf:value coco:CC00176 ;
+    skos:altLabel "μπάσκα"@el,
+        "μπάσκες"@el,
+        "peplo"@es,
+        "peplos"@es,
+        "basque"@fr,
+        "basques"@fr,
+        "בד מתנפנף"@he,
+        "פפלום"@he,
+        "pepli"@it,
+        "peplo"@it,
+        "schootje"@nl,
+        "schootjes"@nl,
+        "peplum"@sr,
+        "peplumi"@sr,
+        "裙狀短襬"@zh-hant,
+        "裙腰剪接片"@zh-hant,
+        "裝飾性褶襞"@zh-hant,
+        "qún yāo jiǎn jiē piàn"@zh-latn-pinyin-x-hanyu,
+        "qun yao jian jie pian"@zh-latn-pinyin-x-notone,
+        "ch'ün yao chien chieh p'ien"@zh-latn-wadegile ;
     skos:prefLabel "peplum" .
 
 coco:CC00177 a cms:NamedValue ;
@@ -6983,6 +8140,20 @@ coco:CC00179 a cms:NamedValue ;
     dcterms:title "sarong" ;
     rdf:predicate coco:skirtType ;
     rdf:value coco:CC00179 ;
+    skos:altLabel "Sarong"@de,
+        "Sarongs"@de,
+        "σαρόνγκ"@el,
+        "sarong"@es,
+        "sarongs"@es,
+        "sarong"@fr,
+        "sarongs"@fr,
+        "סארונג"@he,
+        "סארונגים"@he,
+        "sarong"@it,
+        "sarong"@nl,
+        "sarongs"@nl,
+        "sarong"@sr,
+        "saronzi"@sr ;
     skos:prefLabel "sarong" .
 
 coco:CC00180 a cms:NamedValue ;
@@ -6994,6 +8165,19 @@ coco:CC00180 a cms:NamedValue ;
     dcterms:title "pencil skirt" ;
     rdf:predicate coco:skirtType ;
     rdf:value coco:CC00180 ;
+    skos:altLabel "φούστα pencil"@el,
+        "φούστες pencil"@el,
+        "jupe crayon"@fr,
+        "jupe fourreau"@fr,
+        "jupes crayons"@fr,
+        "חצאיות עיפרון"@he,
+        "חצאית עיפרון"@he,
+        "gonna a tubo"@it,
+        "gonne a tubo"@it,
+        "kokerrok"@nl,
+        "kokerrokken"@nl,
+        "pencil suknja"@sr,
+        "pencil suknje"@sr ;
     skos:prefLabel "pencil skirt" .
 
 coco:CC00186 a cms:NamedValue ;
@@ -7023,8 +8207,28 @@ coco:CC00194 a cms:NamedValue ;
     dcterms:title "train" ;
     rdf:predicate coco:length ;
     rdf:value coco:CC00194 ;
-    skos:altLabel "train (costume component)",
-        "trains (costume components)" ;
+    skos:altLabel "Schleppe"@de,
+        "Schleppen"@de,
+        "ουρά φορέματος"@el,
+        "ουρές φορεμάτων"@el,
+        "train (costume component)"@en,
+        "trains (costume components)"@en,
+        "traîne"@fr,
+        "traînes"@fr,
+        "שובל"@he,
+        "שובלים"@he,
+        "strascici"@it,
+        "strascico"@it,
+        "sleep"@nl,
+        "slepen (kledingonderdelen)"@nl,
+        "šlep"@sr,
+        "šlepovi"@sr,
+        "拖裙"@zh-hant,
+        "裙裾"@zh-hant,
+        "裙襬"@zh-hant,
+        "qún jū"@zh-latn-pinyin-x-hanyu,
+        "qun ju"@zh-latn-pinyin-x-notone,
+        "ch'ün chü"@zh-latn-wadegile ;
     skos:prefLabel "train" .
 
 coco:CC00197 a cms:NamedValue ;
@@ -7368,8 +8572,36 @@ coco:CC00335 a cms:NamedValue ;
     dcterms:title "dress" ;
     rdf:predicate coco:workType ;
     rdf:value coco:CC00335 ;
-    skos:altLabel "dress (garment)",
-        "dresses (garments)" ;
+    skos:altLabel "Kleid (Kleidungsstück)"@de,
+        "Kleider (Kleidungsstücke)"@de,
+        "φορέματα"@el,
+        "φόρεμα"@el,
+        "dress (garment)"@en,
+        "dresses (garments)"@en,
+        "vestido"@es,
+        "vestidos"@es,
+        "robe (dress)"@fr,
+        "robes (dresses)"@fr,
+        "שמלה"@he,
+        "שמלות"@he,
+        "abiti (dresses)"@it,
+        "abito (dress)"@it,
+        "japon"@nl,
+        "japonnen"@nl,
+        "jurk"@nl,
+        "jurken"@nl,
+        "kleden (japonnen)"@nl,
+        "klederen (japonnen)"@nl,
+        "kleed (japon)"@nl,
+        "haljina"@sr,
+        "haljine"@sr,
+        "洋裝"@zh-hant,
+        "連衣裙 (服裝)"@zh-hant,
+        "連裙裝"@zh-hant,
+        "連身裙"@zh-hant,
+        "lián yī qún"@zh-latn-pinyin-x-hanyu,
+        "lian yi qun"@zh-latn-pinyin-x-notone,
+        "lien i ch'ün"@zh-latn-wadegile ;
     skos:prefLabel "dress" .
 
 coco:CC00339 a cms:NamedValue ;
@@ -7381,9 +8613,35 @@ coco:CC00339 a cms:NamedValue ;
     dcterms:title "jacket" ;
     rdf:predicate coco:workType ;
     rdf:value coco:CC00339 ;
-    skos:altLabel "jacket (short coat)",
-        "jackets (short coats)",
-        "jacks (jackets)" ;
+    skos:altLabel "Jacke"@de,
+        "Jacken"@de,
+        "ζακέτα"@el,
+        "ζακέτες"@el,
+        "σακάκι"@el,
+        "σακάκια"@el,
+        "jacket (short coat)"@en,
+        "jackets (short coats)"@en,
+        "jacks (jackets)"@en,
+        "jacket (garment)"@en-us,
+        "johns (jackets)"@en-us,
+        "chaqueta"@es,
+        "chaquetas"@es,
+        "veste"@fr,
+        "vestes"@fr,
+        "veston"@fr,
+        "vestons"@fr,
+        "מעיל קצר"@he,
+        "מעילים קצרים"@he,
+        "giacca"@it,
+        "giacche"@it,
+        "jack"@nl,
+        "jacks"@nl,
+        "jasje"@nl,
+        "jasjes"@nl,
+        "jakna"@sr,
+        "jakne"@sr,
+        "sako"@sr,
+        "sakoi"@sr ;
     skos:prefLabel "jacket" .
 
 coco:CC00341 a cms:NamedValue ;
@@ -7395,8 +8653,25 @@ coco:CC00341 a cms:NamedValue ;
     dcterms:title "skirt" ;
     rdf:predicate coco:workType ;
     rdf:value coco:CC00341 ;
-    skos:altLabel "skirt (garment)",
-        "skirts (garments)" ;
+    skos:altLabel "Rock"@de,
+        "Röcke"@de,
+        "φούστα"@el,
+        "φούστες"@el,
+        "skirt (garment)"@en,
+        "skirts (garments)"@en,
+        "falda (prenda principal)"@es,
+        "pollera"@es,
+        "saya"@es,
+        "jupe (garment)"@fr,
+        "jupes (garments)"@fr,
+        "חצאיות"@he,
+        "חצאית"@he,
+        "gonna"@it,
+        "gonne"@it,
+        "rok"@nl,
+        "rokken"@nl,
+        "suknja"@sr,
+        "suknje"@sr ;
     skos:prefLabel "skirt" .
 
 coco:CC00342 a cms:NamedValue ;
@@ -7408,8 +8683,34 @@ coco:CC00342 a cms:NamedValue ;
     dcterms:title "suit" ;
     rdf:predicate coco:workType ;
     rdf:value coco:CC00342 ;
-    skos:altLabel "suit (main garment)",
-        "suits (main garments)" ;
+    skos:altLabel "κοστούμι"@el,
+        "κοστούμια"@el,
+        "suit (main garment)"@en,
+        "suits (main garments)"@en,
+        "traje"@es,
+        "traje sastre"@es,
+        "trajes"@es,
+        "costume"@fr,
+        "costumes"@fr,
+        "חליפה"@he,
+        "חליפות"@he,
+        "completi"@it,
+        "completo (da uomo)"@it,
+        "kostuum"@nl,
+        "kostuums"@nl,
+        "pak (kleding)"@nl,
+        "pakken (kleding)"@nl,
+        "kostim"@sr,
+        "kostimi"@sr,
+        "odela"@sr,
+        "odelo"@sr,
+        "套裝 (主要服裝)"@zh-hant,
+        "正式服裝"@zh-hant,
+        "西服"@zh-hant,
+        "西裝"@zh-hant,
+        "tào zhuāng"@zh-latn-pinyin-x-hanyu,
+        "tao zhuang"@zh-latn-pinyin-x-notone,
+        "t'ao chuang"@zh-latn-wadegile ;
     skos:prefLabel "suit" .
 
 coco:CC00343 a cms:NamedValue ;
@@ -7421,6 +8722,32 @@ coco:CC00343 a cms:NamedValue ;
     dcterms:title "sweater" ;
     rdf:predicate coco:workType ;
     rdf:value coco:CC00343 ;
+    skos:altLabel "Jumper"@de,
+        "Sweater"@de,
+        "μπλούζα με μανίκια"@el,
+        "μπλούζες με μανίκια"@el,
+        "φούτερ"@el,
+        "jumpers (sweaters)"@en-gb,
+        "sweater"@en-us,
+        "sweaters"@en-us,
+        "chomba"@es,
+        "chompa"@es,
+        "jersey"@es,
+        "suéter"@es,
+        "suéters"@es,
+        "chandail"@fr,
+        "sweater"@fr,
+        "sweaters"@fr,
+        "אפודה"@he,
+        "אפודות"@he,
+        "jumper"@nl,
+        "jumpers"@nl,
+        "sweater"@nl,
+        "sweaters"@nl,
+        "trui"@nl,
+        "truien"@nl,
+        "džemper"@sr,
+        "džemperi"@sr ;
     skos:prefLabel "sweater" .
 
 coco:CC00344 a cms:NamedValue ;
@@ -7432,8 +8759,21 @@ coco:CC00344 a cms:NamedValue ;
     dcterms:title "pants" ;
     rdf:predicate coco:workType ;
     rdf:value coco:CC00344 ;
-    skos:altLabel "pants (trousers)",
-        "trousers" ;
+    skos:altLabel "Hose"@de,
+        "Hosen"@de,
+        "παντελόνι"@el,
+        "παντελόνια"@el,
+        "pants (trousers)"@en,
+        "trousers"@en,
+        "pantalón"@es,
+        "pantalon"@fr,
+        "pantalons"@fr,
+        "מכנסיים"@he,
+        "pantalone"@it,
+        "pantaloni"@it,
+        "broek"@nl,
+        "broeken"@nl,
+        "pantalone"@sr ;
     skos:prefLabel "pants" .
 
 coco:CC00346 a cms:NamedValue ;
@@ -7445,6 +8785,16 @@ coco:CC00346 a cms:NamedValue ;
     dcterms:title "vest" ;
     rdf:predicate coco:workType ;
     rdf:value coco:CC00346 ;
+    skos:altLabel "Top"@de,
+        "Tops"@de,
+        "vest (garment)"@en-us,
+        "vests (garments)"@en-us,
+        "justillo (prenda principal)"@es,
+        "justillos (prenda principal)"@es,
+        "gilet habillé"@fr,
+        "אפודה"@he,
+        "vest (kleding)"@nl,
+        "vesten (kleding)"@nl ;
     skos:prefLabel "vest" .
 
 coco:CC00349 a cms:NamedValue ;
@@ -7472,8 +8822,13 @@ coco:CC00428 a cms:NamedValue ;
     dcterms:title "overalls" ;
     rdf:predicate coco:workType ;
     rdf:value coco:CC00428 ;
-    skos:altLabel "overalls (trousers)",
-        "overhauls" ;
+    skos:altLabel "Überhose"@de,
+        "Überhosen"@de,
+        "overalls (trousers)"@en,
+        "overhauls"@en,
+        "pantalón con peto"@es,
+        "cavaleristenbroek"@nl,
+        "cavaleristenbroeken"@nl ;
     skos:prefLabel "overalls" .
 
 coco:CC00515 a cms:NamedValue ;
@@ -7496,7 +8851,23 @@ coco:CC00525 a cms:NamedValue ;
     dcterms:title "shorts" ;
     rdf:predicate coco:workType ;
     rdf:value coco:CC00525 ;
-    skos:altLabel "shorts (garments)" ;
+    skos:altLabel "Shorts (Kleidung)"@de,
+        "σορτς"@el,
+        "shorts (garments)"@en,
+        "pantalón corto"@es,
+        "short"@es,
+        "short"@fr,
+        "shorts"@fr,
+        "מכנסיים קצרים, מכנסונים"@he,
+        "pantalone corto"@it,
+        "pantaloni corti"@it,
+        "korte broek"@nl,
+        "korte broeken"@nl,
+        "shorts"@nl,
+        "šorc"@sr,
+        "šorcevi"@sr,
+        "šorts"@sr,
+        "šortsevi"@sr ;
     skos:prefLabel "shorts" .
 
 coco:CC00606 a cms:NamedValue ;
@@ -7508,6 +8879,27 @@ coco:CC00606 a cms:NamedValue ;
     dcterms:title "gloves" ;
     rdf:predicate coco:workType ;
     rdf:value coco:CC00606 ;
+    skos:altLabel "Handschuh"@de,
+        "Handschuhe"@de,
+        "γάντι"@el,
+        "γάντια"@el,
+        "guante"@es,
+        "guantes"@es,
+        "gant"@fr,
+        "gants"@fr,
+        "כסיות"@he,
+        "כפפה"@he,
+        "כפפות"@he,
+        "guanti"@it,
+        "guanto"@it,
+        "handschoen"@nl,
+        "handschoenen"@nl,
+        "rukavica"@sr,
+        "rukavice"@sr,
+        "手套"@zh-hant,
+        "shǒu tào"@zh-latn-pinyin-x-hanyu,
+        "shou tao"@zh-latn-pinyin-x-notone,
+        "shou t'ao"@zh-latn-wadegile ;
     skos:prefLabel "gloves" .
 
 coco:CC00607 a cms:NamedValue ;
@@ -7519,8 +8911,19 @@ coco:CC00607 a cms:NamedValue ;
     dcterms:title "top" ;
     rdf:predicate coco:workType ;
     rdf:value coco:CC00607 ;
-    skos:altLabel "top (garment, general)",
-        "tops (garments, general)" ;
+    skos:altLabel "τοπ"@el,
+        "top (garment, general)"@en,
+        "tops (garments, general)"@en,
+        "haut"@fr,
+        "hauts"@fr,
+        "וסט"@he,
+        "וסטים"@he,
+        "top"@nl,
+        "topje"@nl,
+        "topjes"@nl,
+        "tops"@nl,
+        "top"@sr,
+        "topovi"@sr ;
     skos:prefLabel "top" .
 
 coco:CC00628 a cms:NamedValue ;

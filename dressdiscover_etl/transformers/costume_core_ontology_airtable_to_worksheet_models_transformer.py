@@ -17,7 +17,7 @@ from paradicms_etl.models.text import Text
 from paradicms_etl.models.worksheet_feature import WorksheetFeature
 from paradicms_etl.models.worksheet_feature_set import WorksheetFeatureSet
 from paradicms_etl.transformer import Transformer
-from rdflib import Graph, URIRef
+from rdflib import Graph, URIRef, Literal
 
 from dressdiscover_etl.models.costume_core_term import CostumeCoreTerm
 from dressdiscover_etl.namespaces import COCO
@@ -242,8 +242,6 @@ class CostumeCoreOntologyAirtableToWorksheetModelsTransformer(Transformer):
 
         variant_term_records_by_feature_value_id: Dict[str, List[Any]] = {}
         for variant_term_record in variant_term_records:
-            if variant_term_record["fields"]["xml-lang"] != "en":
-                continue
             assert len(variant_term_record["fields"]["feature_values_id"]) == 1
             variant_term_records_by_feature_value_id.setdefault(
                 variant_term_record["fields"]["feature_values_id"][0], []
@@ -283,30 +281,35 @@ class CostumeCoreOntologyAirtableToWorksheetModelsTransformer(Transformer):
                 feature_value_id, []
             ):
                 variant_term = variant_term_record["fields"]["term"]
-                if variant_term == pref_label:
-                    self._logger.debug(
-                        "feature value %s has variant term that is the same as the preferred label: %s",
-                        feature_value_id,
-                        pref_label,
+                if variant_term_record["fields"]["xml-lang"] == "en":
+                    if variant_term == pref_label:
+                        self._logger.debug(
+                            "feature value %s has variant term that is the same as the preferred label: %s",
+                            feature_value_id,
+                            pref_label,
+                        )
+                        continue
+                    elif inflector.singularize(variant_term) == pref_label:
+                        self._logger.debug(
+                            "feature value %s has variant term (%s) that is the the plural of the preferred label (%s)",
+                            feature_value_id,
+                            variant_term,
+                            pref_label,
+                        )
+                        continue
+                    elif inflector.pluralize(variant_term) == pref_label:
+                        self._logger.debug(
+                            "feature value %s has variant term (%s) that is the the singular of the preferred label (%s)",
+                            feature_value_id,
+                            variant_term,
+                            pref_label,
+                        )
+                        continue
+                alt_labels.add(
+                    Literal(
+                        variant_term, lang=variant_term_record["fields"]["xml-lang"]
                     )
-                    continue
-                elif inflector.singularize(variant_term) == pref_label:
-                    self._logger.debug(
-                        "feature value %s has variant term (%s) that is the the plural of the preferred label (%s)",
-                        feature_value_id,
-                        variant_term,
-                        pref_label,
-                    )
-                    continue
-                elif inflector.pluralize(variant_term) == pref_label:
-                    self._logger.debug(
-                        "feature value %s has variant term (%s) that is the the singular of the preferred label (%s)",
-                        feature_value_id,
-                        variant_term,
-                        pref_label,
-                    )
-                    continue
-                alt_labels.add(variant_term)
+                )
 
             feature_value_uri = COCO[feature_value_id]
             feature_value = NamedValue.from_fields(
